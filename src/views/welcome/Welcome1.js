@@ -17,6 +17,16 @@ const welcome1 = () => {
     setShowRealApp(true);
   };
 
+  const keyExtractor = item => item.title;
+
+  const slides = [
+    {
+      title: 'Welcome',
+      text: 'Description.\nSay something cool',
+      image: require('../../assets/images/ImageWelcome1.png'),
+    },
+  ];
+
   const renderDoneButton = () => {
     return (
       <View>
@@ -27,13 +37,6 @@ const welcome1 = () => {
     );
   };
 
-  const slides = [
-    {
-      title: 'Welcome',
-      text: 'Description.\nSay something cool',
-      image: require('../../assets/images/ImageWelcome1.png'),
-    },
-  ];
   const renderItem = ({item}) => {
     return (
       <View>
@@ -45,8 +48,6 @@ const welcome1 = () => {
       </View>
     );
   };
-
-  const keyExtractor = item => item.title;
 
   if (showRealApp) {
     return (
