@@ -31,7 +31,7 @@ const welcome1 = () => {
     return (
       <View>
         <TouchableOpacity style={styles.button} onPress={onDone}>
-          <Text>Press Here</Text>
+          <Text style={styles.button_text}>내 위치로 시작</Text>
         </TouchableOpacity>
       </View>
     );
@@ -61,7 +61,6 @@ const welcome1 = () => {
         <AppIntroSlider
           renderItem={renderItem}
           data={slides}
-          onDone={onDone}
           renderDoneButton={renderDoneButton}
           keyExtractor={keyExtractor}
         />
@@ -78,8 +77,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 347,
     height: 350,
-    top: 40,
-    left: 20,
+    top: 231,
+    left: 14,
   },
   text_title: {
     position: 'absolute',
@@ -87,7 +86,7 @@ const styles = StyleSheet.create({
     width: 80,
     left: '37.22%',
     right: '36.89%',
-    top: 420,
+    top: 106,
 
     fontFamily: 'SF Pro Text',
     fontStyle: 'normal',
@@ -124,9 +123,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#504DE5',
     height: 50,
     width: 347,
-    left: 0,
-    top: 0,
-    borderRadius: 0,
+    borderRadius: 25,
+  },
+  button_text: {
+    position: 'absolute',
+    height: 14,
+    left: 133,
+    right: 134,
+    top: 18,
+
+    fontFamily: 'SF Pro Text',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 12,
+    lineHeight: 14,
+    textAlign: 'center',
+    letterSpacing: 1,
+
+    color: '#FFFFFF',
   },
 });
 
