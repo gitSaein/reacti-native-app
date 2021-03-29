@@ -1,14 +1,8 @@
-import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  Button,
-} from 'react-native';
+import React, {useState, useCallback} from 'react';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
+import SignIn1 from '../auth/signIn1.js';
+import Button1 from '../../components/buttons/button1';
 
 const welcome1 = () => {
   const [showRealApp, setShowRealApp] = useState(false);
@@ -30,9 +24,7 @@ const welcome1 = () => {
   const renderDoneButton = () => {
     return (
       <View>
-        <TouchableOpacity style={styles.button} onPress={onDone}>
-          <Text style={styles.button_text}>내 위치로 시작</Text>
-        </TouchableOpacity>
+        <Button1 onDone={onDone} text="내 위치로 시작" />
       </View>
     );
   };
@@ -52,7 +44,7 @@ const welcome1 = () => {
   if (showRealApp) {
     return (
       <View style={styles.container}>
-        <Text>HJ</Text>
+        <SignIn1 />
       </View>
     );
   } else {
@@ -129,7 +121,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: 14,
     left: 133,
-    right: 134,
     top: 18,
 
     fontFamily: 'SF Pro Text',
