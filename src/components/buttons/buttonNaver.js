@@ -1,9 +1,13 @@
 import React, {useState} from 'react';
-import {Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
-const button2 = ({text, onDone}) => {
+const buttonNaver = ({text}) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onDone}>
+    <TouchableOpacity style={styles.button}>
+      <Image
+        style={styles.image}
+        source={require('../../assets/images/login/naver_login_small.png')}
+      />
       <Text style={styles.button_text}>{text}</Text>
     </TouchableOpacity>
   );
@@ -23,6 +27,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: 14,
     top: 18,
+    paddingLeft: 50,
 
     fontFamily: 'SF Pro Text',
     fontStyle: 'normal',
@@ -34,5 +39,9 @@ const styles = StyleSheet.create({
 
     color: '#504DE5',
   },
+  image: {
+    height: 25,
+    width: 25,
+  },
 });
-export default button2;
+export default buttonNaver;

@@ -1,16 +1,9 @@
 import React, {useState, useCallback} from 'react';
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import SignIn1 from '../auth/signIn1.js';
 import Button1 from '../../components/buttons/button1';
 
-const welcome1 = () => {
-  const [showRealApp, setShowRealApp] = useState(false);
-
-  const onDone = () => {
-    setShowRealApp(true);
-  };
-
+const Welcome1 = ({navigation}) => {
   const keyExtractor = item => item.title;
 
   const slides = [
@@ -24,7 +17,10 @@ const welcome1 = () => {
   const renderDoneButton = () => {
     return (
       <View>
-        <Button1 onDone={onDone} text="내 위치로 시작" />
+        <Button1
+          text={'내 위치로 시작하기'}
+          onPress={() => navigation.navigate('SignIn1')}
+        />
       </View>
     );
   };
@@ -35,30 +31,20 @@ const welcome1 = () => {
         <Image style={styles.image} source={item.image} />
         <View>
           <Text style={styles.text_title}>{item.title}</Text>
-          <Text style={styles.text_contents}>{item.text}</Text>
         </View>
       </View>
     );
   };
-
-  if (showRealApp) {
-    return (
-      <View style={styles.container}>
-        <SignIn1 />
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        <AppIntroSlider
-          renderItem={renderItem}
-          data={slides}
-          renderDoneButton={renderDoneButton}
-          keyExtractor={keyExtractor}
-        />
-      </View>
-    );
-  }
+  return (
+    <View style={styles.container}>
+      <AppIntroSlider
+        renderItem={renderItem}
+        data={slides}
+        renderDoneButton={renderDoneButton}
+        keyExtractor={keyExtractor}
+      />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -92,47 +78,6 @@ const styles = StyleSheet.create({
 
     color: '#3B566E',
   },
-  text_contents: {
-    position: 'absolute',
-    left: '0%',
-    right: '0%',
-    top: 10,
-    bottom: '0%',
-
-    fontFamily: 'SF Pro Text',
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    fontSize: 14,
-    lineHeight: 26,
-    /* or 186% */
-
-    textAlign: 'center',
-    letterSpacing: 0.5,
-
-    color: '#6F8BA4',
-  },
-  button: {
-    backgroundColor: '#504DE5',
-    height: 50,
-    width: 347,
-    borderRadius: 25,
-  },
-  button_text: {
-    position: 'absolute',
-    height: 14,
-    left: 133,
-    top: 18,
-
-    fontFamily: 'SF Pro Text',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    fontSize: 12,
-    lineHeight: 14,
-    textAlign: 'center',
-    letterSpacing: 1,
-
-    color: '#FFFFFF',
-  },
 });
 
-export default welcome1;
+export default Welcome1;

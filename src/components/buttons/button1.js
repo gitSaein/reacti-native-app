@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-const button1 = ({text, onDone}) => {
+const button1 = ({text, onPress}) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onDone}>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
       <Text style={styles.button_text}>{text}</Text>
     </TouchableOpacity>
   );
@@ -19,8 +19,9 @@ const styles = StyleSheet.create({
   button_text: {
     position: 'absolute',
     height: 14,
-    left: '44%',
-    top: 18,
+    marginLeft: 133,
+    marginRight: 134,
+    marginTop: 18,
 
     fontFamily: 'SF Pro Text',
     fontStyle: 'normal',

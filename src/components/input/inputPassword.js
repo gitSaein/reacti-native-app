@@ -1,15 +1,8 @@
 import React, {useState} from 'react';
-import {Input} from 'react-native-elements';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, TextInput} from 'react-native';
 
 const inputPassword = ({placeholder}) => {
-  return (
-    <Input
-      placeholder={placeholder}
-      secureTextEntry={true}
-      containerStyle={styles.input1}
-    />
-  );
+  return <TextInput placeholder={placeholder} style={styles.input1} />;
 };
 
 const styles = StyleSheet.create({

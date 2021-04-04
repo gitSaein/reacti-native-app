@@ -5,22 +5,23 @@ import Input1 from '../../components/input/input1.js';
 import InputPassword from '../../components/input/inputPassword.js';
 import Text1 from '../../components/text/text1.js';
 import Button1 from '../../components/buttons/button1';
-import Button2 from '../../components/buttons/button2';
+import ButtonNaver from '../../components/buttons/buttonNaver';
+import ButtonKakao from '../../components/buttons/buttonKakao';
 
 import {Divider} from 'react-native-elements';
 
-const signIn1 = () => {
+const SignIn1 = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Header1 title={'로그인'} />
       <View style={styles.input1}>
-        <Input1 placeholder={'email'} keyboardType={'email-address'} />
+        <Input1 placeholder={'email'} autoCompleteType={'email'} />
       </View>
       <View style={styles.input2}>
         <InputPassword placeholder={'password'} />
       </View>
       <View style={styles.text1}>
-        <Text1 text={'비밀번호 찾기'} />
+        <Text1 text={'비밀번호를 잊으셨나요?'} />
       </View>
       <View style={styles.button1}>
         <Button1 text={'시작하기'} />
@@ -29,10 +30,16 @@ const signIn1 = () => {
         <Divider />
       </View>
       <View style={styles.button2}>
-        <Button1 text={'회원가입'} />
+        <Button1
+          text={'회원가입'}
+          onPress={() => navigation.navigate('SignUp')}
+        />
       </View>
-      <View style={styles.button2}>
-        <Button2 text={'카카오로 시작하기'} />
+      <View style={styles.button3}>
+        <ButtonKakao text={'카카오로 시작하기'} />
+      </View>
+      <View style={styles.button4}>
+        <ButtonNaver text={'네이버로 시작하기'} />
       </View>
     </View>
   );
@@ -52,7 +59,7 @@ const styles = StyleSheet.create({
   },
   text1: {
     top: '28%',
-    left: '75%',
+    left: '62%',
   },
   button1: {
     top: '30%',
@@ -65,5 +72,15 @@ const styles = StyleSheet.create({
     top: '40%',
     left: '6%',
   },
+  button3: {
+    top: '45%',
+    left: '6%',
+    flex: 1,
+  },
+  button4: {
+    top: '45%',
+    left: '50%',
+    flex: 300,
+  },
 });
-export default signIn1;
+export default SignIn1;
