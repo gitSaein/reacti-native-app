@@ -3,8 +3,8 @@ import {View, StyleSheet} from 'react-native';
 import Header1 from '../../components/common/header1.js';
 import Input1 from '../../components/input/input1.js';
 import InputPassword from '../../components/input/inputPassword.js';
-import Text1 from '../../components/text/text1.js';
 import Button1 from '../../components/buttons/button1';
+import ButtonNoLine from '../../components/buttons/buttonNoLine';
 import ButtonNaver from '../../components/buttons/buttonNaver';
 import ButtonKakao from '../../components/buttons/buttonKakao';
 
@@ -14,16 +14,15 @@ const SignIn1 = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Header1 title={'로그인'} />
-      <View style={styles.input1}>
+      <View style={styles.form}>
         <Input1 placeholder={'email'} autoCompleteType={'email'} />
-      </View>
-      <View style={styles.input2}>
         <InputPassword placeholder={'password'} />
       </View>
-      <View style={styles.text1}>
-        <Text1 text={'비밀번호를 잊으셨나요?'} />
-      </View>
-      <View style={styles.button1}>
+      <View style={styles.forgot_password}>
+        <ButtonNoLine
+          text={'비밀번호를 잊으셨나요?'}
+          onPress={() => navigation.navigate('ForgotPassword')}
+        />
         <Button1 text={'시작하기'} />
       </View>
       <View style={styles.divider}>
@@ -34,11 +33,7 @@ const SignIn1 = ({navigation}) => {
           text={'회원가입'}
           onPress={() => navigation.navigate('SignUp')}
         />
-      </View>
-      <View style={styles.button3}>
         <ButtonKakao text={'카카오로 시작하기'} />
-      </View>
-      <View style={styles.button4}>
         <ButtonNaver text={'네이버로 시작하기'} />
       </View>
     </View>
@@ -47,40 +42,23 @@ const SignIn1 = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'center',
     flex: 1,
   },
-  input1: {
-    top: '25%',
-    left: '6%',
+  form: {
+    top: '20%',
   },
-  input2: {
-    top: '26%',
-    left: '6%',
-  },
-  text1: {
-    top: '28%',
-    left: '62%',
-  },
-  button1: {
-    top: '30%',
-    left: '6%',
+  forgot_password: {
+    top: '20%',
+    alignSelf: 'flex-end',
+    marginRight: 40,
   },
   divider: {
-    top: '35%',
+    top: '25%',
   },
   button2: {
-    top: '40%',
-    left: '6%',
-  },
-  button3: {
-    top: '45%',
-    left: '6%',
-    flex: 1,
-  },
-  button4: {
-    top: '45%',
-    left: '50%',
-    flex: 300,
+    top: '30%',
+    alignItems: 'center',
   },
 });
 export default SignIn1;

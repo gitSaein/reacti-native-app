@@ -15,20 +15,19 @@ const styles = StyleSheet.create({
     height: 50,
     width: 347,
     borderRadius: 25,
+    marginTop: 20,
   },
   button_text: {
     position: 'absolute',
     height: 14,
-    marginLeft: 133,
-    marginRight: 134,
-    marginTop: 18,
+    marginTop: 16,
+    alignSelf: 'center',
 
     fontFamily: 'SF Pro Text',
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: 12,
     lineHeight: 14,
-    textAlign: 'center',
     letterSpacing: 1,
 
     color: '#FFFFFF',

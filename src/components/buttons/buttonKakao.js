@@ -18,16 +18,14 @@ const styles = StyleSheet.create({
     borderColor: '#504DE5',
     borderWidth: 1,
     height: 50,
-    width: 162,
+    width: 347,
     borderRadius: 25,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
+    margin: 10,
   },
   button_text: {
     position: 'absolute',
-    height: 14,
-    top: 18,
-    paddingLeft: 50,
+    padding: 17,
+    alignSelf: 'center',
 
     fontFamily: 'SF Pro Text',
     fontStyle: 'normal',
@@ -42,6 +40,8 @@ const styles = StyleSheet.create({
   image: {
     height: 25,
     width: 25,
+    left: 54,
+    marginTop: 11,
   },
 });
 export default buttonKakao;

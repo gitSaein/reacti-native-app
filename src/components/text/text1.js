@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#504DE5',
     lineHeight: 14.32,
+    alignSelf: 'flex-end',
+
+    fontWeight: 'bold',
   },
 });
 
