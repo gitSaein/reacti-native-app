@@ -18,6 +18,8 @@ import SignIn1 from './src/screens/auth/SignIn1';
 import SignUp from './src/screens/auth/SignUp';
 import ForgotPassword from './src/screens/auth/ForgotPassword';
 import ResetPassword from './src/screens/auth/ResetPassword';
+import SmsCode from './src/screens/auth/SmsCode';
+import SmsPhoneNumber from './src/screens/auth/SmsPhoneNumber';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +34,8 @@ const App = () => {
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         <Stack.Screen name="ResetPassword" component={ResetPassword} />
+        <Stack.Screen name="SmsPhoneNumber" component={SmsPhoneNumber} />
+        <Stack.Screen name="SmsCode" component={SmsCode} />
       </Stack.Navigator>
     </NavigationContainer>
   );

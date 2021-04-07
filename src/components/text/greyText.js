@@ -2,20 +2,17 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Text} from 'react-native-elements';
 
-const text1 = ({text}) => {
+const greyText = ({text}) => {
   return <Text style={styles.text}>{text}</Text>;
 };
 
 const styles = StyleSheet.create({
   text: {
     fontFamily: 'SF Pro Text',
+    fontStyle: 'normal',
     fontSize: 12,
-    color: '#504DE5',
-    lineHeight: 14.32,
-    alignSelf: 'flex-end',
-
-    fontWeight: 'bold',
+    color: '#6F8BA4',
   },
 });
 
-export default text1;
+export default greyText;

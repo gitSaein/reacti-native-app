@@ -1,8 +1,16 @@
 import React, {useState} from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 
-const inputPassword = ({placeholder}) => {
-  return <TextInput placeholder={placeholder} style={styles.input1} />;
+const inputPassword = props => {
+  return (
+    <TextInput
+      secureTextEntry={true}
+      placeholder={props.placeholder}
+      style={styles.input1}
+      onChange={props.onChange}
+      value={props.value}
+    />
+  );
 };
 
 const styles = StyleSheet.create({

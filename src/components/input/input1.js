@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 
-const input1 = ({placeholder, autoCompleteType}) => {
+const input1 = props => {
   return (
     <TextInput
-      placeholder={placeholder}
-      autoCompleteType={autoCompleteType}
+      placeholder={props.placeholder}
+      keyboardType={props.keyboardType}
       style={styles.input1}
+      onChange={props.onChange}
+      value={props.value}
     />
   );
 };

@@ -9,14 +9,12 @@ const SignUp = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Header1 title={'비밀번호 재설정'} />
-      <View style={styles.form}>
-        <InputPassword placeholder={'password'} />
-        <InputPassword placeholder={'password'} />
-        <Button1
-          text={'비밀번호 재설정하기'}
-          onPress={() => navigation.navigate('SignIn1')}
-        />
-      </View>
+      <InputPassword placeholder={'password'} />
+      <InputPassword placeholder={'password'} />
+      <Button1
+        text={'비밀번호 재설정하기'}
+        onPress={() => navigation.navigate('SignIn1')}
+      />
     </View>
   );
 };
@@ -24,10 +22,8 @@ const SignUp = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-  },
-  form: {
-    top: '25%',
+    justifyContent: 'center', //세로
+    alignItems: 'center', //가로
   },
   button: {
     top: '25%',
