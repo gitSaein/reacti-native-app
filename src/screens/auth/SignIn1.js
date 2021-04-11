@@ -23,7 +23,7 @@ const SignIn1 = ({navigation}) => {
           onPress={() => navigation.navigate('ForgotPassword')}
         />
       </View>
-      <Button1 text={'시작하기'} />
+      <Button1 text={'시작하기'} onPress={() => navigation.navigate('Home')} />
       <View style={styles.or}>
         <GreyText text={'OR'} />
       </View>

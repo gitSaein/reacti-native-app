@@ -89,7 +89,7 @@ const smsCode = ({navigation}) => {
           onEndEditing={onChangeCode4}
         />
       </View>
-      <Button1 text={'다음'} onPress={() => navigation.navigate('Welcome1')} />
+      <Button1 text={'다음'} onPress={() => navigation.navigate('Home')} />
     </View>
   );
 };

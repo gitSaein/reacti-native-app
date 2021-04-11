@@ -12,6 +12,7 @@ import {StyleSheet} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Welcome1 from './src/screens/welcome/Welcome1';
 import SignIn1 from './src/screens/auth/SignIn1';
@@ -21,7 +22,21 @@ import ResetPassword from './src/screens/auth/ResetPassword';
 import SmsCode from './src/screens/auth/SmsCode';
 import SmsPhoneNumber from './src/screens/auth/SmsPhoneNumber';
 
+import Home from './src/screens/main/home';
+import Chat from './src/screens/main/chat';
+
 const Stack = createStackNavigator();
+
+const Tab = createBottomTabNavigator();
+
+const HomeStackScreen = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Chat" component={Chat} />
+    </Tab.Navigator>
+  );
+};
 
 const App = () => {
   return (
@@ -36,22 +51,10 @@ const App = () => {
         <Stack.Screen name="ResetPassword" component={ResetPassword} />
         <Stack.Screen name="SmsPhoneNumber" component={SmsPhoneNumber} />
         <Stack.Screen name="SmsCode" component={SmsCode} />
+        <Stack.Screen name="Home" component={HomeStackScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  containerStyle: {
-    position: 'absolute',
-    left: '0%',
-    right: '0%',
-    top: '0%',
-    bottom: '90.47%',
-
-    backgroundColor: '#504DE5',
-    borderRadius: 16,
-  },
-});
 
 export default App;
