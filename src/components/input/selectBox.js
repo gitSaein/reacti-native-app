@@ -1,24 +1,30 @@
 import React from 'react';
-import {Picker, StyleSheet} from 'react-native';
+import {StyleSheet, Picker} from 'react-native';
+// import {Picker} from '@react-native-picker/picker';
 
-const selectBox = prop => {
+const selectBox = props => {
   return (
     <Picker
-      mode="dropdown"
-      selectedValue={prop.selectedValue}
-      style={style.boxWithShadow}
-      onValueChange={itemValue => prop.onValueChange(itemValue)}>
-      {prop.items.map((item, key) => (
-        <Picker.Item key={key} label={item.label} value={item.value} />
+      mode={'dropdown'}
+      selectedValue={props.selectedValue}
+      style={styles.boxWithShadow}
+      onValueChange={itemValue => props.onValueChange(itemValue)}>
+      {props.items.map((item, key) => (
+        <Picker.Item
+          key={key}
+          label={item.label}
+          value={item.value}
+          style={styles.item}
+        />
       ))}
     </Picker>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   boxWithShadow: {
-    height: 60,
-    width: 148,
+    height: 50,
+    width: 150,
     borderRadius: 14,
     paddingTop: 5,
     paddingBottom: 5,
@@ -30,6 +36,9 @@ const style = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     elevation: 5,
+  },
+  item: {
+    fontSize: 10,
   },
 });
 

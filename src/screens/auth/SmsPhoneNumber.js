@@ -58,7 +58,7 @@ const smsPhoneNumber = ({navigation}) => {
         />
         <SmallPhoneNumInput
           placeholder={'핸드폰 번호'}
-          keyboardType={'numeric'}
+          keyboardType={'number-pad'}
           onEndEditing={onValueChangePhoneNo}
         />
       </View>

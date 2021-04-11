@@ -4,6 +4,7 @@ import {StyleSheet, TextInput} from 'react-native';
 const input1 = props => {
   return (
     <TextInput
+      {...props}
       placeholder={props.placeholder}
       keyboardType={props.keyboardType}
       style={styles.input1}

@@ -4,6 +4,7 @@ import {StyleSheet, TextInput} from 'react-native';
 const smallPhoneNumInput = props => {
   return (
     <TextInput
+      {...props}
       placeholder={props.placeholder}
       keyboardType={props.keyboardType}
       style={styles.boxWithShadow}

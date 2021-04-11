@@ -53,16 +53,18 @@ const smsCode = ({navigation}) => {
           maxLength={1}
           borderBottomWidth={1}
           placeholder={''}
-          keyboardType={'numeric'}
           value={sms.n1}
           onEndEditing={onChangeCode1}
+          returnKeyType="done"
+          keyboardType={'number-pad'}
         />
         <CustomInput
           multiline
           maxLength={1}
           borderBottomWidth={1}
           placeholder={''}
-          keyboardType={'numeric'}
+          keyboardType={'number-pad'}
+          returnKeyType="done"
           value={sms.n2}
           onEndEditing={onChangeCode2}
         />
@@ -71,7 +73,8 @@ const smsCode = ({navigation}) => {
           maxLength={1}
           borderBottomWidth={1}
           placeholder={''}
-          keyboardType={'numeric'}
+          keyboardType={'number-pad'}
+          returnKeyType="done"
           value={sms.n3}
           onEndEditing={onChangeCode3}
         />
@@ -80,12 +83,13 @@ const smsCode = ({navigation}) => {
           maxLength={1}
           borderBottomWidth={1}
           placeholder={''}
-          keyboardType={'numeric'}
+          keyboardType={'number-pad'}
+          returnKeyType="done"
           value={sms.n4}
           onEndEditing={onChangeCode4}
         />
       </View>
-      <Button1 text={'다음'} onPress={() => navigation.navigate('SmsCode')} />
+      <Button1 text={'다음'} onPress={() => navigation.navigate('Welcome1')} />
     </View>
   );
 };

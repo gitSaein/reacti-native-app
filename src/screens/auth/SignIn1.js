@@ -43,6 +43,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center', //세로
     alignItems: 'center', //가로
   },
+  form: {
+    marginTop: 120,
+  },
   or: {
     paddingTop: 30,
     paddingBottom: 20,
