@@ -1,23 +1,91 @@
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 
-import Input1 from '../../components/input/input1.js';
-import InputPassword from '../../components/input/inputPassword.js';
 import Button1 from '../../components/buttons/button1';
-
+import GreyTitle from '../../components/text/greyTitle';
+import CustomInput from '../../components/input/customInput';
 const smsCode = ({navigation}) => {
+  const [sms, setSelectedInfo] = useState(
+    {
+      n1: 0,
+      n2: 0,
+      n3: 0,
+      n4: 0,
+    },
+    [],
+  );
+  const onChangeCode1 = e => {
+    const {text} = e.nativeEvent;
+    setSelectedInfo(prevState => ({
+      ...prevState,
+      n1: text,
+    }));
+  };
+  const onChangeCode2 = e => {
+    const {text} = e.nativeEvent;
+    setSelectedInfo(prevState => ({
+      ...prevState,
+      n2: text,
+    }));
+  };
+  const onChangeCode3 = e => {
+    const {text} = e.nativeEvent;
+    setSelectedInfo(prevState => ({
+      ...prevState,
+      n3: text,
+    }));
+  };
+  const onChangeCode4 = e => {
+    const {text} = e.nativeEvent;
+    setSelectedInfo(prevState => ({
+      ...prevState,
+      n4: text,
+    }));
+  };
   return (
     <View style={styles.container}>
-      <View style={styles.form}>
-        <Input1 placeholder={'이름'} autoCompleteType={'email'} />
-        <Input1 placeholder={'email'} autoCompleteType={'email'} />
-        <InputPassword placeholder={'password'} />
-        <InputPassword placeholder={'confirm password'} />
-        <Button1
-          text={'회원가입'}
-          onPress={() => navigation.navigate('Welcome1')}
+      <View style={styles.input}>
+        <GreyTitle text={'SMS로 전송된 인증번호 4자리를 입력하세요.'} />
+      </View>
+      <View style={styles.input}>
+        <CustomInput
+          multiline
+          maxLength={1}
+          borderBottomWidth={1}
+          placeholder={''}
+          keyboardType={'numeric'}
+          value={sms.n1}
+          onEndEditing={onChangeCode1}
+        />
+        <CustomInput
+          multiline
+          maxLength={1}
+          borderBottomWidth={1}
+          placeholder={''}
+          keyboardType={'numeric'}
+          value={sms.n2}
+          onEndEditing={onChangeCode2}
+        />
+        <CustomInput
+          multiline
+          maxLength={1}
+          borderBottomWidth={1}
+          placeholder={''}
+          keyboardType={'numeric'}
+          value={sms.n3}
+          onEndEditing={onChangeCode3}
+        />
+        <CustomInput
+          multiline
+          maxLength={1}
+          borderBottomWidth={1}
+          placeholder={''}
+          keyboardType={'numeric'}
+          value={sms.n4}
+          onEndEditing={onChangeCode4}
         />
       </View>
+      <Button1 text={'다음'} onPress={() => navigation.navigate('SmsCode')} />
     </View>
   );
 };
@@ -27,12 +95,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center', //세로
     alignItems: 'center', //가로
+    backgroundColor: '#ffffff',
   },
-  form: {
-    top: '25%',
-  },
-  button: {
-    top: '25%',
+  input: {
+    flexDirection: 'row',
+    marginBottom: 40,
   },
 });
 export default smsCode;

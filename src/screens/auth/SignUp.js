@@ -37,20 +37,20 @@ const SignUp = ({navigation}) => {
           id="name"
           placeholder={'이름'}
           keyboardType={'default'}
-          onChange={handleChangeName}
+          onEndEditing={handleChangeName}
           value={userInfo.name}
         />
         <Input1
           id="email"
           placeholder={'email'}
           keyboardType={'email-address'}
-          onChange={handleChangeEmail}
+          onEndEditing={handleChangeEmail}
           value={userInfo.email}
         />
         <InputPassword
           id="password"
           placeholder={'password'}
-          onChange={handleChangePassword}
+          onEndEditing={handleChangePassword}
           value={userInfo.password}
         />
         <InputPassword placeholder={'confirm password'} onChange={null} />

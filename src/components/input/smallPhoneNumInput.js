@@ -1,22 +1,32 @@
 import React, {useState} from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 
-const smallPhoneNumInput = ({placeholder, autoCompleteType}) => {
+const smallPhoneNumInput = props => {
   return (
     <TextInput
-      placeholder={placeholder}
-      autoCompleteType={autoCompleteType}
-      style={styles.input1}
+      placeholder={props.placeholder}
+      keyboardType={props.keyboardType}
+      style={styles.boxWithShadow}
+      onEndEditing={props.onEndEditing}
     />
   );
 };
 
 const styles = StyleSheet.create({
-  input1: {
-    width: 212,
-    height: 50,
-    shadowRadius: 14,
-    shadowColor: '#DCDBFF',
+  boxWithShadow: {
+    width: 190,
+    height: 60,
+    paddingTop: 5,
+    paddingBottom: 5,
+    backgroundColor: '#ffffff',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    borderRadius: 14,
+    elevation: 5,
   },
 });
 

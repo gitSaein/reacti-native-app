@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 
 const inputPassword = props => {
@@ -7,7 +7,7 @@ const inputPassword = props => {
       secureTextEntry={true}
       placeholder={props.placeholder}
       style={styles.input1}
-      onChange={props.onChange}
+      onEndEditing={props.onEndEditing}
       value={props.value}
     />
   );
