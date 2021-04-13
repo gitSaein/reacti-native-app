@@ -66,7 +66,11 @@ const tabButtonRoutes = [
 
 const HomeStackScreen = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      initialRouteName="Home"
+      tabBarOptions={{
+        style: {height: 60},
+      }}>
       {tabButtonRoutes.map(route => (
         <Tab.Screen
           key={`s-${route.name}`}
