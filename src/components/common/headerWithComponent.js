@@ -2,19 +2,10 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 
 import {Header} from 'react-native-elements';
+import ButtonAdd from '../buttons/buttonAdd';
 
-const header1 = props => {
-  return (
-    <Header
-      {...props}
-      placement="center"
-      centerComponent={{
-        text: props.title,
-        style: {color: '#fff'},
-      }}
-      containerStyle={styles.containerStyle}
-    />
-  );
+const headerWithComponent = props => {
+  return <Header {...props} containerStyle={styles.containerStyle} />;
 };
 
 const styles = StyleSheet.create({
@@ -24,9 +15,10 @@ const styles = StyleSheet.create({
     right: '0%',
     top: '0%',
     bottom: '90.47%',
+    height: 10 * 10,
 
     backgroundColor: '#504DE5',
     borderRadius: 16,
   },
 });
-export default header1;
+export default headerWithComponent;
