@@ -8,7 +8,7 @@
 
 import React from 'react';
 import 'react-native-gesture-handler';
-import {Image} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -69,7 +69,7 @@ const HomeStackScreen = () => {
     <Tab.Navigator
       initialRouteName="Home"
       tabBarOptions={{
-        style: {height: 60},
+        style: styles.base,
       }}>
       {tabButtonRoutes.map(route => (
         <Tab.Screen
@@ -141,5 +141,26 @@ const App = () => {
     </NavigationContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  base: {
+    height: 60,
+    width: 355,
+    borderRadius: 20,
+
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowColor: 'rgba(0, 0, 0, 0.16)',
+    shadowRadius: 15,
+    margin: 20,
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+});
 
 export default App;
