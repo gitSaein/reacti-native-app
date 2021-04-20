@@ -1,14 +1,10 @@
-import React, {useState, useCallback} from 'react';
+import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import Button1 from '../../components/buttons/button1';
 
 const chat = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Image
-        style={{margin: 60}}
-        source={require('../../assets/images/ImageWelcome1.png')}
-      />
       <Text style={styles.text_title}>Welcome</Text>
       <Button1 text={'chat'} onPress={() => navigation.navigate('SignIn1')} />
     </View>

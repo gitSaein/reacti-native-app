@@ -5,10 +5,6 @@ import Button1 from '../../components/buttons/button1';
 const community = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Image
-        style={{margin: 60}}
-        source={require('../../assets/images/ImageWelcome1.png')}
-      />
       <Text style={styles.text_title}>Welcome</Text>
       <Button1
         text={'Community'}
