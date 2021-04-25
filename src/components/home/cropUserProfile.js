@@ -25,18 +25,13 @@ const styles = StyleSheet.create({
     margin: 2,
   },
   image: {
-    flex: 1,
     width: 220,
     height: 150,
     borderRadius: 18,
   },
   user: {
-    flex: 1,
-    width: 130,
-    height: 30,
     flexDirection: 'row',
     alignSelf: 'flex-start',
-    marginTop: 10,
   },
 });
 export default cropUserProfile;
