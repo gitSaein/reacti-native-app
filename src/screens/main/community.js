@@ -1,14 +1,20 @@
 import React, {useState, useCallback} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
-import Button1 from '../../components/buttons/button1';
+import {View, StyleSheet} from 'react-native';
+
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 
 const community = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text_title}>Welcome</Text>
-      <Button1
-        text={'Community'}
-        onPress={() => navigation.navigate('SignIn1')}
+      <MapView
+        provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+        style={styles.map}
+        region={{
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.015,
+          longitudeDelta: 0.0121,
+        }}
       />
     </View>
   );
@@ -16,33 +22,14 @@ const community = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    ...StyleSheet.absoluteFillObject,
+    height: 1000,
+    width: 400,
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  image: {
-    position: 'absolute',
-    width: 347,
-    height: 350,
-    top: 231,
-    left: 14,
-  },
-  text_title: {
-    position: 'absolute',
-    height: 19,
-    width: 80,
-    marginTop: '115%',
-
-    fontFamily: 'SF Pro Text',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    fontSize: 16,
-    lineHeight: 19,
-    /* identical to box height */
-
-    textAlign: 'center',
-    letterSpacing: 1,
-
-    color: '#3B566E',
+  map: {
+    ...StyleSheet.absoluteFillObject,
   },
 });
 
