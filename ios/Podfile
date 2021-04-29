@@ -12,6 +12,8 @@ target 'MyNativeApp2021_1' do
     :hermes_enabled => false
   )
 
+  pod 'react-native-location', :path => '../node_modules/react-native-location'
+
   target 'MyNativeApp2021_1Tests' do
     inherit! :complete
     # Pods for testing

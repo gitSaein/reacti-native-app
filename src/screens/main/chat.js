@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, Platform} from 'react-native';
 import Button1 from '../../components/buttons/button1';
 
 const chat = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text_title}>Welcome</Text>
+      <Text style={styles.text_title}>{Platform.OS}</Text>
+      <Text style={styles.text_title}>{Platform.Version}</Text>
       <Button1 text={'chat'} onPress={() => navigation.navigate('SignIn1')} />
     </View>
   );

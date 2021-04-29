@@ -6,13 +6,14 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import 'react-native-gesture-handler';
-import {Image, StyleSheet} from 'react-native';
+import {Image, StyleSheet, Platform, PermissionsAndroid} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Geolocation from 'react-native-geolocation-service';
 
 import Welcome1 from './src/screens/welcome/Welcome1';
 import SignIn1 from './src/screens/auth/SignIn1';
@@ -123,8 +124,46 @@ const tabNavRoutes = [
     component: HomeStackScreen,
   },
 ];
+/* 현재 위치 함수 */
+const requestPermission = async () => {
+  try {
+    if (Platform.OS === 'android') {
+      return await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: '현재 위치 사용 동의',
+          message: '현재 위치 사용에 동의하시겠습니까.',
+          buttonPositive: '예',
+          buttonNegative: '아니오',
+        },
+      );
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};
 
 const App = () => {
+  const [location, setLocation] = useState();
+  useEffect(() => {
+    if (requestPermission === PermissionsAndroid.RESULTS.GRANTED) {
+      Geolocation.getCurrentPosition(
+        position => {
+          setLocation(position.coords);
+        },
+        error => {
+          console.error(error);
+        },
+        {
+          enableHighAccuracy: true,
+          showLocationDialog: true,
+          timeout: 15000,
+          maximumAge: 10000,
+        },
+      );
+    }
+  }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator
