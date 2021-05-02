@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import {Platform, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 // remove PROVIDER_GOOGLE import if not using Google Maps
 
 /* 현재 위치 함수 */
@@ -34,6 +34,38 @@ const hasLocationPermission = async () => {
 
 const community = ({navigation}) => {
   const [location, setLocation] = useState();
+  const [marks, setMarks] = useState([
+    {
+      coordinate: {latitude: 37.0, longitude: -122.0},
+      title: 'hi 100',
+      description: 'description 100',
+    },
+    {
+      coordinate: {latitude: 38, longitude: -122.08395287867834},
+      title: 'hi 2',
+      description: 'description 2',
+    },
+    {
+      coordinate: {latitude: 37.42342342342342, longitude: -122.08395287867832},
+      title: 'hi 3',
+      description: 'description 3',
+    },
+    {
+      coordinate: {latitude: 37.42342342342342, longitude: -122.08395287867832},
+      title: 'hi 4',
+      description: 'description 4',
+    },
+    {
+      coordinate: {latitude: 37.42342342342342, longitude: -122.08395287867832},
+      title: 'hi 5',
+      description: 'description 5',
+    },
+    {
+      coordinate: {latitude: 37.42342342342342, longitude: -122.08395287867832},
+      title: 'hi 6',
+      description: 'description 6',
+    },
+  ]);
 
   useEffect(() => {
     hasLocationPermission().then(result => {
@@ -41,15 +73,6 @@ const community = ({navigation}) => {
       if (result === PermissionsAndroid.RESULTS.GRANTED) {
         Geolocation.getCurrentPosition(
           position => {
-            console.log('start ==');
-            console.log(position.coords);
-            const {latitude, longitude} = position.coords;
-            console.log(
-              'location: ' +
-                position.coords.latitude +
-                ', ' +
-                position.coords.longitude,
-            );
             setLocation(position.coords);
           },
           error => {
@@ -75,7 +98,7 @@ const community = ({navigation}) => {
           region={{
             latitude: 37.392018,
             longitude: 127.090389,
-            latitudeDelta: 0.005,
+            latitudeDelta: 0.05,
             longitudeDelta: 0.001,
           }}
         />
@@ -83,9 +106,6 @@ const community = ({navigation}) => {
     );
   }
   //https://blog.logrocket.com/react-native-geolocation-a-complete-tutorial/
-  console.log(' = = = = = = = = =');
-  console.log(location);
-
   return (
     <View style={styles.container}>
       <MapView
@@ -94,10 +114,28 @@ const community = ({navigation}) => {
         region={{
           latitude: location.latitude,
           longitude: location.longitude,
-          latitudeDelta: 0.005,
+          latitudeDelta: 5,
           longitudeDelta: 0.001,
-        }}
-      />
+        }}>
+        {marks.map((item, key) => (
+          <Marker
+            coordinate={item.coordinate}
+            key={key}
+            title={item.title}
+            description={item.description}>
+            <Text style={styles.marks}>
+              {
+                marks.filter(e => {
+                  return (
+                    e.coordinate.latitude === item.coordinate.latitude &&
+                    e.coordinate.longitude === item.coordinate.longitude
+                  );
+                }).length
+              }
+            </Text>
+          </Marker>
+        ))}
+      </MapView>
     </View>
   );
 };
@@ -112,6 +150,17 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+  },
+  marks: {
+    flex: 1,
+    textAlignVertical: 'center',
+    textAlign: 'center',
+    width: 46,
+    height: 46,
+    borderRadius: 75,
+    backgroundColor: '#B3B2FF',
+    fontSize: 16,
+    opacity: 0.7,
   },
 });
 
