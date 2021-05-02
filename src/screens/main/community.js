@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, StatusBar} from 'react-native';
 import {Platform, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
+import HeaderSearchInputWhite from '../../components/input/headerSearchInputWhite';
 
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 // remove PROVIDER_GOOGLE import if not using Google Maps
@@ -33,7 +34,12 @@ const hasLocationPermission = async () => {
 };
 
 const community = ({navigation}) => {
-  const [location, setLocation] = useState();
+  const [location, setLocation] = useState({
+    latitude: 37.392018,
+    longitude: 127.090389,
+    latitudeDelta: 0.05,
+    longitudeDelta: 0.001,
+  });
   const [marks, setMarks] = useState([
     {
       coordinate: {latitude: 37.0, longitude: -122.0},
@@ -73,7 +79,11 @@ const community = ({navigation}) => {
       if (result === PermissionsAndroid.RESULTS.GRANTED) {
         Geolocation.getCurrentPosition(
           position => {
-            setLocation(position.coords);
+            setLocation({
+              ...location,
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            });
           },
           error => {
             console.error(error);
@@ -89,23 +99,6 @@ const community = ({navigation}) => {
     });
   }, []);
 
-  if (!location) {
-    return (
-      <View style={styles.container}>
-        <MapView
-          provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-          style={styles.map}
-          region={{
-            latitude: 37.392018,
-            longitude: 127.090389,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.001,
-          }}
-        />
-      </View>
-    );
-  }
-  //https://blog.logrocket.com/react-native-geolocation-a-complete-tutorial/
   return (
     <View style={styles.container}>
       <MapView
@@ -114,8 +107,8 @@ const community = ({navigation}) => {
         region={{
           latitude: location.latitude,
           longitude: location.longitude,
-          latitudeDelta: 5,
-          longitudeDelta: 0.001,
+          latitudeDelta: location.latitudeDelta,
+          longitudeDelta: location.longitudeDelta,
         }}>
         {marks.map((item, key) => (
           <Marker
@@ -136,6 +129,9 @@ const community = ({navigation}) => {
           </Marker>
         ))}
       </MapView>
+      <View style={styles.search}>
+        <HeaderSearchInputWhite placeholder={'Search'} />
+      </View>
     </View>
   );
 };
@@ -147,6 +143,7 @@ const styles = StyleSheet.create({
     width: 400,
     justifyContent: 'flex-end',
     alignItems: 'center',
+    paddingTop: StatusBar.currentHeight,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
@@ -161,6 +158,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#B3B2FF',
     fontSize: 16,
     opacity: 0.7,
+  },
+  search: {
+    flex: 2,
   },
 });
 

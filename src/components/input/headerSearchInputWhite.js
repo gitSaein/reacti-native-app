@@ -2,14 +2,13 @@ import React from 'react';
 import {StyleSheet, Image} from 'react-native';
 import {Input} from 'react-native-elements';
 
-const headerSearchInput = props => {
+const headerSearchInputWhite = props => {
   return (
     <Input
       placeholder={props.placeholder}
-      placeholderTextColor={'#FFFFFF'}
       rightIcon={
         <Image
-          source={require('../../assets/images/icon/Search.png')}
+          source={require('../../assets/images/icon/searchGray.png')}
           style={styles.image}
         />
       }
@@ -20,15 +19,15 @@ const headerSearchInput = props => {
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: '#4946DA',
+    backgroundColor: '#fff',
     borderRadius: 16,
-    width: 260,
+    width: 298,
     height: 40,
-    borderColor: '#4946DA',
-    marginTop: 24,
+    borderColor: '#fff',
+    marginTop: 15,
     marginHorizontal: 5,
   },
   image: {marginRight: 10, marginTop: 4},
 });
 
-export default headerSearchInput;
+export default headerSearchInputWhite;
