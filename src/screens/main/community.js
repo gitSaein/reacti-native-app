@@ -7,6 +7,7 @@ import {
   Animated,
   Dimensions,
   ImageBackground,
+  Image,
 } from 'react-native';
 import {Platform, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
@@ -14,6 +15,10 @@ import HeaderSearchInputWhite from '../../components/input/headerSearchInputWhit
 
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 // remove PROVIDER_GOOGLE import if not using Google Maps
+/*  */
+const {width, height} = Dimensions.get('window');
+const CARD_HEIGHT = height / 4;
+const CARD_WIDTH = CARD_HEIGHT - 50;
 
 /* 현재 위치 함수 */
 const hasLocationPermission = async () => {
@@ -43,12 +48,7 @@ const hasLocationPermission = async () => {
 
 const community = ({navigation}) => {
   const [index, setIndex] = useState(0);
-
-  const scrollX = useRef(new Animated.Value(0)).current;
-
-  const {width, height} = Dimensions.get('window');
-  const CARD_HEIGHT = height / 4;
-  const CARD_WIDTH = CARD_HEIGHT - 50;
+  const [animation, setAnimation] = useState(() => new Animated.Value(0));
 
   const [location, setLocation] = useState({
     latitude: 37.392018,
@@ -102,6 +102,28 @@ const community = ({navigation}) => {
     },
   ]);
 
+  /* image mapped with marking place */
+  const interpolations = marks.map((marker, idx) => {
+    const inputRange = [
+      (idx - 1) * CARD_WIDTH,
+      idx * CARD_WIDTH,
+      (idx + 1) * CARD_WIDTH,
+    ];
+    const scale = animation.interpolate({
+      inputRange,
+      outputRange: [1, 2.5, 1],
+      extrapolate: 'clamp',
+    });
+    const opacity = animation.interpolate({
+      inputRange,
+      outputRange: [0.35, 1, 0.35],
+      extrapolate: 'clamp',
+    });
+    return {scale, opacity};
+  });
+
+  /** */
+
   useEffect(() => {
     hasLocationPermission().then(result => {
       if (result === PermissionsAndroid.RESULTS.GRANTED) {
@@ -138,27 +160,39 @@ const community = ({navigation}) => {
           latitudeDelta: location.latitudeDelta,
           longitudeDelta: location.longitudeDelta,
         }}>
-        {marks.map((item, key) => (
-          <Marker
-            coordinate={item.coordinate}
-            key={key}
-            title={item.title}
-            description={item.description}>
-            <Animated.View style={[styles.markerWrap]}>
-              <Animated.View style={[styles.ring]} />
-              <Text style={styles.marks}>
-                {
-                  marks.filter(e => {
-                    return (
-                      e.coordinate.latitude === item.coordinate.latitude &&
-                      e.coordinate.longitude === item.coordinate.longitude
-                    );
-                  }).length
-                }
-              </Text>
-            </Animated.View>
-          </Marker>
-        ))}
+        {marks.map((item, key) => {
+          const scaleStyle = {
+            transform: [
+              {
+                scale: interpolations[index].scale,
+              },
+            ],
+          };
+          const opacityStyle = {
+            opacity: interpolations[index].opacity,
+          };
+          return (
+            <Marker
+              coordinate={item.coordinate}
+              key={key}
+              title={item.title}
+              description={item.description}>
+              <Animated.View style={[styles.markerWrap, opacityStyle]}>
+                <Animated.View style={[styles.ring, scaleStyle]} />
+                <Text style={styles.marks}>
+                  {
+                    marks.filter(e => {
+                      return (
+                        e.coordinate.latitude === item.coordinate.latitude &&
+                        e.coordinate.longitude === item.coordinate.longitude
+                      );
+                    }).length
+                  }
+                </Text>
+              </Animated.View>
+            </Marker>
+          );
+        })}
       </MapView>
       <View style={styles.search}>
         <HeaderSearchInputWhite placeholder={'Search'} />
@@ -168,27 +202,32 @@ const community = ({navigation}) => {
         pagingEnabled
         snapToInterval={CARD_WIDTH}
         scrollEventThrottle={1}
+        contentContainerStyle={styles.endPadding}
         onScroll={Animated.event(
           [
             {
               nativeEvent: {
                 contentOffset: {
-                  x: scrollX,
+                  x: animation,
                 },
               },
             },
           ],
           {useNativeDriver: true},
         )}>
-        {marks.map((item, imageIndex) => (
+        {marks.map((mark, imageIndex) => (
           <View key={imageIndex} style={styles.card}>
-            <ImageBackground source={item.image} style={styles.card} />
+            <Image
+              source={mark.image}
+              style={styles.cardImage}
+              resizeMode="cover"
+            />
             <View style={styles.textContent}>
               <Text numberOfLines={1} style={styles.cardtitle}>
-                {item.title}
+                {mark.title}
               </Text>
               <Text numberOfLines={1} style={styles.cardDescription}>
-                {item.description}
+                {mark.description}
               </Text>
             </View>
           </View>
@@ -231,16 +270,28 @@ const styles = StyleSheet.create({
     right: 0,
     paddingVertical: 10,
   },
+  endPadding: {
+    paddingRight: width - CARD_WIDTH,
+  },
   card: {
-    marginVertical: 4,
-    marginHorizontal: 16,
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 10,
+    elevation: 2,
+    backgroundColor: '#FFF',
+    marginHorizontal: 10,
+    shadowColor: '#000',
+    shadowRadius: 5,
+    shadowOpacity: 0.3,
+    shadowOffset: {x: 2, y: -2},
+    height: CARD_HEIGHT,
+    width: CARD_WIDTH,
+    overflow: 'hidden',
+    marginBottom: 200,
+  },
+  cardImage: {
     flex: 3,
-    width: 150,
-    height: 200,
-    marginBottom: 220,
+    width: '100%',
+    height: '100%',
+    alignSelf: 'center',
   },
   cardtitle: {
     fontSize: 12,
