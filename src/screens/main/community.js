@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, createRef, useCallback} from 'react';
 import {
   View,
   StyleSheet,
@@ -13,12 +13,16 @@ import {Platform, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import HeaderSearchInputWhite from '../../components/input/headerSearchInputWhite';
 
-import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
+import MapView, {
+  PROVIDER_GOOGLE,
+  Marker,
+  AnimatedRegion,
+} from 'react-native-maps';
 // remove PROVIDER_GOOGLE import if not using Google Maps
 /*  */
 const {width, height} = Dimensions.get('window');
 const CARD_HEIGHT = height / 4;
-const CARD_WIDTH = CARD_HEIGHT - 50;
+const CARD_WIDTH = width * 0.8;
 
 /* 현재 위치 함수 */
 const hasLocationPermission = async () => {
@@ -48,7 +52,9 @@ const hasLocationPermission = async () => {
 
 const community = ({navigation}) => {
   const [index, setIndex] = useState(0);
-  const [animation, setAnimation] = useState(() => new Animated.Value(0));
+  const animation = new Animated.Value(0);
+  const map = createRef(null);
+  const [scrollX, setScrollX] = useState(0);
 
   const [location, setLocation] = useState({
     latitude: 37.392018,
@@ -56,6 +62,9 @@ const community = ({navigation}) => {
     latitudeDelta: 1,
     longitudeDelta: 1,
   });
+  const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
+  console.log('======== START ++++++++++++');
+  console.log(SPACING_FOR_CARD_INSET);
 
   const Images = [
     {uri: 'https://i.imgur.com/sNam9iJ.jpg'},
@@ -100,31 +109,31 @@ const community = ({navigation}) => {
       description: 'description 6',
       image: Images[5],
     },
+    {
+      coordinate: {latitude: 37.3939, longitude: 127.1172},
+      title: 'hi 7',
+      description: 'description 7',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.3983623777127, longitude: 127.11751651604328},
+      title: 'hi 8',
+      description: 'description 8',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
   ]);
 
   /* image mapped with marking place */
-  const interpolations = marks.map((marker, idx) => {
-    const inputRange = [
-      (idx - 1) * CARD_WIDTH,
-      idx * CARD_WIDTH,
-      (idx + 1) * CARD_WIDTH,
-    ];
-    const scale = animation.interpolate({
-      inputRange,
-      outputRange: [1, 2.5, 1],
-      extrapolate: 'clamp',
-    });
-    const opacity = animation.interpolate({
-      inputRange,
-      outputRange: [0.35, 1, 0.35],
-      extrapolate: 'clamp',
-    });
-    return {scale, opacity};
-  });
 
-  /** */
-
+  /** map position setting */
   useEffect(() => {
+    console.log('########### 1 ###########');
     hasLocationPermission().then(result => {
       if (result === PermissionsAndroid.RESULTS.GRANTED) {
         Geolocation.getCurrentPosition(
@@ -149,36 +158,62 @@ const community = ({navigation}) => {
     });
   }, []);
 
+  /** image  */
+  useEffect(() => {
+    console.log('scroll render');
+    console.log(scrollX);
+  }, [scrollX]);
+
+  const handleScroll = useCallback(event => {
+    setScrollX(
+      Math.floor(
+        event.nativeEvent.contentOffset.x / (Math.floor(CARD_WIDTH) + 10),
+      ),
+    );
+    console.log('----------------scrollX + ' + scrollX);
+    console.log(marks[scrollX].coordinate);
+    setLocation({
+      ...location,
+      latitude: marks[scrollX].coordinate.latitude,
+      longitude: marks[scrollX].coordinate.longitude,
+    });
+
+    return Animated.event(
+      [
+        {
+          nativeEvent: {
+            contentOffset: {
+              x: animation,
+            },
+          },
+        },
+      ],
+      {useNativeDriver: true},
+    );
+  });
+
+  const onChanged = region => {
+    console.log(region);
+  };
+
   return (
     <View style={styles.container}>
       <MapView
+        ref={map}
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
         style={styles.map}
-        region={{
-          latitude: location.latitude,
-          longitude: location.longitude,
-          latitudeDelta: location.latitudeDelta,
-          longitudeDelta: location.longitudeDelta,
-        }}>
+        onRegionChange={onChanged}
+        region={location}>
         {marks.map((item, key) => {
-          const scaleStyle = {
-            transform: [
-              {
-                scale: interpolations[index].scale,
-              },
-            ],
-          };
-          const opacityStyle = {
-            opacity: interpolations[index].opacity,
-          };
+          console.log(key);
           return (
             <Marker
               coordinate={item.coordinate}
               key={key}
               title={item.title}
               description={item.description}>
-              <Animated.View style={[styles.markerWrap, opacityStyle]}>
-                <Animated.View style={[styles.ring, scaleStyle]} />
+              <Animated.View style={[styles.markerWrap]}>
+                <Animated.View style={[styles.ring]} />
                 <Text style={styles.marks}>
                   {
                     marks.filter(e => {
@@ -200,21 +235,15 @@ const community = ({navigation}) => {
       <Animated.ScrollView
         horizontal={true}
         pagingEnabled
-        snapToInterval={CARD_WIDTH}
+        snapToAlignment="center"
+        snapToInterval={CARD_WIDTH + 10}
         scrollEventThrottle={1}
-        contentContainerStyle={styles.endPadding}
-        onScroll={Animated.event(
-          [
-            {
-              nativeEvent: {
-                contentOffset: {
-                  x: animation,
-                },
-              },
-            },
-          ],
-          {useNativeDriver: true},
-        )}>
+        onMomentumScrollEnd={handleScroll}
+        contentContainerStyle={{
+          // contentInset alternative for Android
+          paddingHorizontal:
+            Platform.OS === 'android' ? SPACING_FOR_CARD_INSET : 0, // Horizontal spacing before and after the ScrollView
+        }}>
         {marks.map((mark, imageIndex) => (
           <View key={imageIndex} style={styles.card}>
             <Image
@@ -270,11 +299,11 @@ const styles = StyleSheet.create({
     right: 0,
     paddingVertical: 10,
   },
-  endPadding: {
-    paddingRight: width - CARD_WIDTH,
-  },
+  endPadding: {},
   card: {
-    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 5,
     elevation: 2,
     backgroundColor: '#FFF',
     marginHorizontal: 10,
@@ -285,7 +314,6 @@ const styles = StyleSheet.create({
     height: CARD_HEIGHT,
     width: CARD_WIDTH,
     overflow: 'hidden',
-    marginBottom: 200,
   },
   cardImage: {
     flex: 3,
