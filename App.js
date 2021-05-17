@@ -71,6 +71,7 @@ const HomeStackScreen = () => {
       initialRouteName="Home"
       tabBarOptions={{
         style: styles.base,
+        keyboardHidesTabBar: true,
       }}>
       {tabButtonRoutes.map(route => (
         <Tab.Screen
@@ -79,6 +80,7 @@ const HomeStackScreen = () => {
           component={route.component}
           options={{
             // tabBarBadge: 3,
+            // tabBarVisible: false,
             tabBarLabel: route.name,
             tabBarIcon: ({focused}) => {
               return <Image source={focused ? route.active : route.inactive} />;

@@ -1,4 +1,5 @@
-import React, {useState, useEffect, createRef, useCallback} from 'react';
+import React from 'react';
+import {useState, useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -6,23 +7,17 @@ import {
   StatusBar,
   Animated,
   Dimensions,
-  ImageBackground,
-  Image,
+  TouchableOpacity,
+  Platform,
+  PermissionsAndroid,
 } from 'react-native';
-import {Platform, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import HeaderSearchInputWhite from '../../components/input/headerSearchInputWhite';
-
-import MapView, {
-  PROVIDER_GOOGLE,
-  Marker,
-  AnimatedRegion,
-} from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 // remove PROVIDER_GOOGLE import if not using Google Maps
 /*  */
 const {width, height} = Dimensions.get('window');
-const CARD_HEIGHT = height / 4;
-const CARD_WIDTH = width * 0.8;
+const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
 /* 현재 위치 함수 */
 const hasLocationPermission = async () => {
@@ -51,18 +46,19 @@ const hasLocationPermission = async () => {
 };
 
 const community = ({navigation}) => {
-  const [index, setIndex] = useState(0);
-  const animation = new Animated.Value(0);
-  const map = createRef(null);
-  const [scrollX, setScrollX] = useState(0);
-
+  const [markedList, setMarkedList] = useState([{}]);
   const [location, setLocation] = useState({
     latitude: 37.392018,
     longitude: 127.090389,
     latitudeDelta: 1,
     longitudeDelta: 1,
   });
-  const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
+  const [markViewY, setMarkViewY] = useState(1);
+
+  // const checkMark = useCallback(() => {
+  //   markRef.current();
+  // }, []);
+
   console.log('======== START ++++++++++++');
   console.log(SPACING_FOR_CARD_INSET);
 
@@ -127,6 +123,296 @@ const community = ({navigation}) => {
       description: 'description 9',
       image: Images[5],
     },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
+    {
+      coordinate: {latitude: 37.550582, longitude: 127.001091},
+      title: 'hi 9',
+      description: 'description 9',
+      image: Images[5],
+    },
   ]);
 
   /* image mapped with marking place */
@@ -158,62 +444,46 @@ const community = ({navigation}) => {
     });
   }, []);
 
-  /** image  */
-  useEffect(() => {
-    console.log('scroll render');
-    console.log(scrollX);
-  }, [scrollX]);
+  const onRegionChangeComplete = region => {
+    console.log('---------- region changed --------');
+    // setLocation(region);
+    console.log(region);
+  };
 
-  const handleScroll = useCallback(event => {
-    setScrollX(
-      Math.floor(
-        event.nativeEvent.contentOffset.x / (Math.floor(CARD_WIDTH) + 10),
-      ),
+  const onPressMark = item => {
+    setMarkedList(
+      marks.filter(e => {
+        return (
+          e.coordinate.latitude === item.latitude &&
+          e.coordinate.longitude === item.longitude
+        );
+      }),
     );
-    console.log('----------------scrollX + ' + scrollX);
-    console.log(marks[scrollX].coordinate);
     setLocation({
       ...location,
-      latitude: marks[scrollX].coordinate.latitude,
-      longitude: marks[scrollX].coordinate.longitude,
+      latitude: item.latitude,
+      longitude: item.longitude,
     });
-
-    return Animated.event(
-      [
-        {
-          nativeEvent: {
-            contentOffset: {
-              x: animation,
-            },
-          },
-        },
-      ],
-      {useNativeDriver: true},
-    );
-  });
-
-  const onChanged = region => {
-    console.log(region);
+    setMarkViewY(300);
   };
 
   return (
     <View style={styles.container}>
       <MapView
-        ref={map}
+        // ref={map}
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
         style={styles.map}
-        onRegionChange={onChanged}
+        onRegionChangeComplete={onRegionChangeComplete}
         region={location}>
         {marks.map((item, key) => {
-          console.log(key);
           return (
             <Marker
+              // ref={markRef}
               coordinate={item.coordinate}
               key={key}
-              title={item.title}
-              description={item.description}>
-              <Animated.View style={[styles.markerWrap]}>
-                <Animated.View style={[styles.ring]} />
+              onPress={() => onPressMark(item.coordinate)}>
+              <View style={styles.markerWrap}>
+                <View style={[styles.ring]} />
                 <Text style={styles.marks}>
                   {
                     marks.filter(e => {
@@ -224,7 +494,7 @@ const community = ({navigation}) => {
                     }).length
                   }
                 </Text>
-              </Animated.View>
+              </View>
             </Marker>
           );
         })}
@@ -233,34 +503,20 @@ const community = ({navigation}) => {
         <HeaderSearchInputWhite placeholder={'Search'} />
       </View>
       <Animated.ScrollView
-        horizontal={true}
-        pagingEnabled
-        snapToAlignment="center"
-        snapToInterval={CARD_WIDTH + 10}
-        scrollEventThrottle={1}
-        onMomentumScrollEnd={handleScroll}
-        contentContainerStyle={{
-          // contentInset alternative for Android
-          paddingHorizontal:
-            Platform.OS === 'android' ? SPACING_FOR_CARD_INSET : 0, // Horizontal spacing before and after the ScrollView
+        style={{
+          backgroundColor: 'orange',
+          width: width - 20,
+          alignSelf: 'center',
+          height: markViewY,
         }}>
-        {marks.map((mark, imageIndex) => (
-          <View key={imageIndex} style={styles.card}>
-            <Image
-              source={mark.image}
-              style={styles.cardImage}
-              resizeMode="cover"
-            />
-            <View style={styles.textContent}>
-              <Text numberOfLines={1} style={styles.cardtitle}>
-                {mark.title}
-              </Text>
-              <Text numberOfLines={1} style={styles.cardDescription}>
-                {mark.description}
-              </Text>
-            </View>
-          </View>
-        ))}
+        <Text>list</Text>
+        {markedList.map((markItem, key) => {
+          return (
+            <TouchableOpacity key={key}>
+              <Text>{markItem.title}</Text>
+            </TouchableOpacity>
+          );
+        })}
       </Animated.ScrollView>
     </View>
   );
@@ -269,7 +525,8 @@ const community = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
-    height: 1000,
+    flex: 1,
+    height: height + 48,
     width: 400,
     justifyContent: 'flex-end',
     alignItems: 'center',
@@ -282,66 +539,71 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlignVertical: 'center',
     textAlign: 'center',
-    width: 46,
-    height: 46,
+    width: 45,
+    height: 45,
     borderRadius: 75,
     backgroundColor: '#B3B2FF',
     fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
     opacity: 0.7,
   },
   search: {
     flex: 2,
   },
-  ScrollView: {
-    position: 'absolute',
-    bottom: 30,
-    left: 0,
-    right: 0,
-    paddingVertical: 10,
-  },
-  endPadding: {},
-  card: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 5,
-    elevation: 2,
-    backgroundColor: '#FFF',
-    marginHorizontal: 10,
-    shadowColor: '#000',
-    shadowRadius: 5,
-    shadowOpacity: 0.3,
-    shadowOffset: {x: 2, y: -2},
-    height: CARD_HEIGHT,
-    width: CARD_WIDTH,
-    overflow: 'hidden',
-  },
-  cardImage: {
-    flex: 3,
-    width: '100%',
-    height: '100%',
-    alignSelf: 'center',
-  },
-  cardtitle: {
-    fontSize: 12,
-    marginTop: 5,
-    fontWeight: 'bold',
-  },
-  cardDescription: {
-    fontSize: 12,
-    color: '#444',
+  scrollView: {
+    paddingHorizontal: Platform.OS === 'android' ? SPACING_FOR_CARD_INSET : 0, // Horizontal spacing before and after the ScrollView
   },
   markerWrap: {
     alignItems: 'center',
     justifyContent: 'center',
   },
   ring: {
-    width: 24,
-    height: 24,
+    width: 30,
+    height: 30,
     borderRadius: 12,
     backgroundColor: 'rgba(130,4,150, 0.3)',
     position: 'absolute',
-    borderWidth: 1,
-    borderColor: 'rgba(130,4,150, 0.5)',
+  },
+  calloutButton: {
+    width: 'auto',
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    paddingHorizontal: 6,
+    paddingVertical: 6,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginHorizontal: 10,
+    marginVertical: 10,
+  },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    width: 1400,
+    marginVertical: 20,
+    backgroundColor: 'transparent',
+  },
+  bubble: {
+    flex: 1,
+    width: 1400,
+
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    borderRadius: 20,
+  },
+  sheet: {
+    position: 'absolute',
+    top: Dimensions.get('window').height,
+    left: 0,
+    right: 0,
+    height: '100%',
+    justifyContent: 'flex-end',
+  },
+  popup: {
+    backgroundColor: 'orange',
+    width: width - 20,
+    alignItems: 'center',
+    alignSelf: 'center',
   },
 });
 
