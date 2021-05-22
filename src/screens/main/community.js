@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import {
   View,
   StyleSheet,
@@ -17,7 +17,6 @@ import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 // remove PROVIDER_GOOGLE import if not using Google Maps
 /*  */
 const {width, height} = Dimensions.get('window');
-const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
 /* 현재 위치 함수 */
 const hasLocationPermission = async () => {
@@ -46,21 +45,14 @@ const hasLocationPermission = async () => {
 };
 
 const community = ({navigation}) => {
-  const [markedList, setMarkedList] = useState([{}]);
+  const [markedList, setMarkedList] = useState([]);
   const [location, setLocation] = useState({
     latitude: 37.392018,
     longitude: 127.090389,
     latitudeDelta: 1,
     longitudeDelta: 1,
   });
-  const [markViewY, setMarkViewY] = useState(1);
-
-  // const checkMark = useCallback(() => {
-  //   markRef.current();
-  // }, []);
-
-  console.log('======== START ++++++++++++');
-  console.log(SPACING_FOR_CARD_INSET);
+  const scrollA = useRef(new Animated.Value(0)).current;
 
   const Images = [
     {uri: 'https://i.imgur.com/sNam9iJ.jpg'},
@@ -419,7 +411,6 @@ const community = ({navigation}) => {
 
   /** map position setting */
   useEffect(() => {
-    console.log('########### 1 ###########');
     hasLocationPermission().then(result => {
       if (result === PermissionsAndroid.RESULTS.GRANTED) {
         Geolocation.getCurrentPosition(
@@ -464,8 +455,15 @@ const community = ({navigation}) => {
       latitude: item.latitude,
       longitude: item.longitude,
     });
-    setMarkViewY(300);
   };
+
+  const event = e => {
+    console.log(e.nativeEvent.contentOffset);
+    Animated.event([{nativeEvent: {contentOffset: {y: scrollY}}}], {
+      useNativeDriver: true,
+    });
+  };
+  const onPressClose = () => {};
 
   return (
     <View style={styles.container}>
@@ -502,27 +500,48 @@ const community = ({navigation}) => {
       <View style={styles.search}>
         <HeaderSearchInputWhite placeholder={'Search'} />
       </View>
-      <Animated.ScrollView
-        style={{
-          backgroundColor: 'orange',
-          width: width - 20,
-          alignSelf: 'center',
-          height: markViewY,
-        }}>
-        <Text>list</Text>
-        {markedList.map((markItem, key) => {
-          return (
-            <TouchableOpacity key={key}>
-              <Text>{markItem.title}</Text>
-            </TouchableOpacity>
-          );
-        })}
-      </Animated.ScrollView>
+      <View style={styles.scrollView}>
+        <TouchableOpacity style={styles.titleText} onPress={onPressClose}>
+          <View
+            style={{
+              marginTop: 10,
+              width: 40,
+              height: 5,
+              backgroundColor: '#C8D4DF',
+              borderRadius: 7,
+              shadowColor: '#40000000',
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+            }}
+          />
+        </TouchableOpacity>
+        <Animated.ScrollView onScroll={event}>
+          <Animated.View style={styles.bannerContainer}>
+            {markedList.map((markItem, key) => {
+              if (markItem !== undefined) {
+                return (
+                  <TouchableOpacity key={key} style={{height: 48, width: 347}}>
+                    <Text
+                      style={{
+                        fontFamily: 'SF Pro Text',
+                        fontWeight: '400',
+                        fontSize: 14,
+                      }}>{`${key} - ${markItem.title}`}</Text>
+                  </TouchableOpacity>
+                );
+              }
+            })}
+          </Animated.View>
+        </Animated.ScrollView>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  bannerContainer: {},
   container: {
     ...StyleSheet.absoluteFillObject,
     flex: 1,
@@ -552,7 +571,21 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   scrollView: {
-    paddingHorizontal: Platform.OS === 'android' ? SPACING_FOR_CARD_INSET : 0, // Horizontal spacing before and after the ScrollView
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+
+    height: 274,
+    width: 375,
+    borderTopLeftRadius: 22,
+    borderTopRightRadius: 22,
+  },
+  titleText: {
+    fontSize: 14,
+    lineHeight: 24,
+    fontWeight: 'bold',
+    backgroundColor: 'white',
   },
   markerWrap: {
     alignItems: 'center',
