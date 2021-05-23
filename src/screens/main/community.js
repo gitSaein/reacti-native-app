@@ -52,7 +52,11 @@ const community = ({navigation}) => {
     latitudeDelta: 1,
     longitudeDelta: 1,
   });
-  const scrollA = useRef(new Animated.Value(0)).current;
+  const [scrollStatus, setScrollStatus] = useState({
+    isOpen: false,
+    itemCount: 0,
+  });
+  const scrollY = useRef(new Animated.Value(235)).current;
 
   const Images = [
     {uri: 'https://i.imgur.com/sNam9iJ.jpg'},
@@ -62,131 +66,112 @@ const community = ({navigation}) => {
   ];
   const [marks, setMarks] = useState([
     {
+      index: 0,
       coordinate: {latitude: 37.0, longitude: -122.0},
       title: 'hi 100',
       description: 'description 100',
       image: Images[0],
     },
     {
+      index: 1,
       coordinate: {latitude: 38, longitude: -122.08395287867834},
       title: 'hi 2',
       description: 'description 2',
       image: Images[1],
     },
     {
+      index: 2,
       coordinate: {latitude: 37.42342342342342, longitude: -122.08395287867832},
       title: 'hi 3',
       description: 'description 3',
       image: Images[2],
     },
     {
+      index: 3,
       coordinate: {latitude: 37.42342342342342, longitude: -122.08395287867832},
       title: 'hi 4',
       description: 'description 4',
       image: Images[3],
     },
     {
+      index: 4,
       coordinate: {latitude: 37.42342342342342, longitude: -122.08395287867832},
       title: 'hi 5',
       description: 'description 5',
       image: Images[4],
     },
     {
+      index: 5,
       coordinate: {latitude: 37.42342342342342, longitude: -122.08395287867832},
       title: 'hi 6',
       description: 'description 6',
       image: Images[5],
     },
     {
+      index: 6,
       coordinate: {latitude: 37.3939, longitude: 127.1172},
       title: 'hi 7',
       description: 'description 7',
       image: Images[5],
     },
     {
+      index: 7,
       coordinate: {latitude: 37.3983623777127, longitude: 127.11751651604328},
       title: 'hi 8',
       description: 'description 8',
       image: Images[5],
     },
     {
+      index: 8,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
       description: 'description 9',
       image: Images[5],
     },
     {
+      index: 9,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
       description: 'description 9',
       image: Images[5],
     },
     {
+      index: 10,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
       description: 'description 9',
       image: Images[5],
     },
     {
+      index: 11,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
       description: 'description 9',
       image: Images[5],
     },
     {
+      index: 12,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
       description: 'description 9',
       image: Images[5],
     },
     {
+      index: 13,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
       description: 'description 9',
       image: Images[5],
     },
     {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-
-      image: Images[5],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
+      index: 14,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
       description: 'description 9',
       image: Images[5],
     },
     {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-
-    {
+      index: 15,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
       description: 'description 9',
@@ -194,47 +179,14 @@ const community = ({navigation}) => {
       image: Images[5],
     },
     {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
+      index: 16,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
       description: 'description 9',
       image: Images[5],
     },
     {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-
-      image: Images[5],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
+      index: 17,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
 
       title: 'hi 9',
@@ -242,166 +194,44 @@ const community = ({navigation}) => {
       image: Images[5],
     },
     {
+      index: 18,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
       description: 'description 9',
       image: Images[5],
     },
     {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-
-      image: Images[5],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
+      index: 19,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
       description: 'description 9',
       image: Images[5],
     },
     {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-
-      image: Images[5],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
+      index: 20,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
       description: 'description 9',
       image: Images[5],
     },
     {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-
-      image: Images[5],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
+      index: 21,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
       description: 'description 9',
       image: Images[5],
     },
     {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-
-      image: Images[5],
-    },
-    {
+      index: 23,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
       description: 'description 9',
       image: Images[5],
     },
     {
+      index: 24,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
+      title: 'hi 090909090909',
       description: 'description 9',
       image: Images[5],
     },
@@ -436,12 +266,11 @@ const community = ({navigation}) => {
   }, []);
 
   const onRegionChangeComplete = region => {
-    console.log('---------- region changed --------');
-    // setLocation(region);
     console.log(region);
   };
 
   const onPressMark = item => {
+    console.log('ok');
     setMarkedList(
       marks.filter(e => {
         return (
@@ -455,15 +284,34 @@ const community = ({navigation}) => {
       latitude: item.latitude,
       longitude: item.longitude,
     });
-  };
-
-  const event = e => {
-    console.log(e.nativeEvent.contentOffset);
-    Animated.event([{nativeEvent: {contentOffset: {y: scrollY}}}], {
+    Animated.spring(scrollY, {
+      toValue: 0,
+      velocity: 3,
+      tension: 2,
+      friction: 8,
       useNativeDriver: true,
-    });
+    }).start();
   };
-  const onPressClose = () => {};
+  const onPressScroll = () => {
+    if (scrollStatus.isOpen) {
+      Animated.spring(scrollY, {
+        toValue: 235,
+        velocity: 3,
+        tension: 2,
+        friction: 8,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.spring(scrollY, {
+        toValue: 0,
+        velocity: 3,
+        tension: 2,
+        friction: 8,
+        useNativeDriver: true,
+      }).start();
+    }
+    setScrollStatus({...scrollStatus, isOpen: !scrollStatus.isOpen});
+  };
 
   return (
     <View style={styles.container}>
@@ -479,7 +327,9 @@ const community = ({navigation}) => {
               // ref={markRef}
               coordinate={item.coordinate}
               key={key}
-              onPress={() => onPressMark(item.coordinate)}>
+              onPress={() => {
+                onPressMark(item.coordinate);
+              }}>
               <View style={styles.markerWrap}>
                 <View style={[styles.ring]} />
                 <Text style={styles.marks}>
@@ -500,42 +350,32 @@ const community = ({navigation}) => {
       <View style={styles.search}>
         <HeaderSearchInputWhite placeholder={'Search'} />
       </View>
-      <View style={styles.scrollView}>
-        <TouchableOpacity style={styles.titleText} onPress={onPressClose}>
-          <View
-            style={{
-              marginTop: 10,
-              width: 40,
-              height: 5,
-              backgroundColor: '#C8D4DF',
-              borderRadius: 7,
-              shadowColor: '#40000000',
-              shadowOffset: {
-                width: 0,
-                height: 4,
-              },
-            }}
-          />
+      <Animated.ScrollView
+        style={[
+          styles.bottomPopupMenu,
+          {backgroundColor: 'white'},
+          {transform: [{translateY: scrollY}]},
+        ]}>
+        <TouchableOpacity onPress={onPressScroll}>
+          <Text style={{alignSelf: 'center'}}>{scrollStatus.itemCount}</Text>
         </TouchableOpacity>
-        <Animated.ScrollView onScroll={event}>
-          <Animated.View style={styles.bannerContainer}>
-            {markedList.map((markItem, key) => {
-              if (markItem !== undefined) {
-                return (
-                  <TouchableOpacity key={key} style={{height: 48, width: 347}}>
-                    <Text
-                      style={{
-                        fontFamily: 'SF Pro Text',
-                        fontWeight: '400',
-                        fontSize: 14,
-                      }}>{`${key} - ${markItem.title}`}</Text>
-                  </TouchableOpacity>
-                );
-              }
-            })}
-          </Animated.View>
-        </Animated.ScrollView>
-      </View>
+        {markedList.map((markItem, key) => {
+          if (markItem !== undefined) {
+            return (
+              <TouchableOpacity
+                key={key}
+                style={{height: 48, width: 347, backgroundColor: 'orange'}}>
+                <Text
+                  style={{
+                    fontFamily: 'SF Pro Text',
+                    fontWeight: '400',
+                    fontSize: 14,
+                  }}>{`${key} - ${markItem.title}`}</Text>
+              </TouchableOpacity>
+            );
+          }
+        })}
+      </Animated.ScrollView>
     </View>
   );
 };
@@ -570,23 +410,6 @@ const styles = StyleSheet.create({
   search: {
     flex: 2,
   },
-  scrollView: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-
-    height: 274,
-    width: 375,
-    borderTopLeftRadius: 22,
-    borderTopRightRadius: 22,
-  },
-  titleText: {
-    fontSize: 14,
-    lineHeight: 24,
-    fontWeight: 'bold',
-    backgroundColor: 'white',
-  },
   markerWrap: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -598,45 +421,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(130,4,150, 0.3)',
     position: 'absolute',
   },
-  calloutButton: {
-    width: 'auto',
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    paddingHorizontal: 6,
-    paddingVertical: 6,
-    borderRadius: 12,
-    alignItems: 'center',
-    marginHorizontal: 10,
-    marginVertical: 10,
-  },
-  buttonContainer: {
+  bottomPopupMenu: {
     flex: 1,
-    flexDirection: 'row',
-    width: 1400,
-    marginVertical: 20,
-    backgroundColor: 'transparent',
-  },
-  bubble: {
-    flex: 1,
-    width: 1400,
-
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20,
-  },
-  sheet: {
-    position: 'absolute',
-    top: Dimensions.get('window').height,
-    left: 0,
-    right: 0,
-    height: '100%',
-    justifyContent: 'flex-end',
-  },
-  popup: {
-    backgroundColor: 'orange',
-    width: width - 20,
-    alignItems: 'center',
-    alignSelf: 'center',
+    backgroundColor: 'white',
+    width: 375,
+    marginBottom: 129,
+    paddingBottom: 100,
+    borderRadius: 22,
   },
 });
 
