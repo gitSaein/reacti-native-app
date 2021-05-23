@@ -284,13 +284,6 @@ const community = ({navigation}) => {
       latitude: item.latitude,
       longitude: item.longitude,
     });
-    Animated.spring(scrollY, {
-      toValue: 0,
-      velocity: 3,
-      tension: 2,
-      friction: 8,
-      useNativeDriver: true,
-    }).start();
   };
   const onPressScroll = () => {
     if (scrollStatus.isOpen) {
@@ -321,13 +314,17 @@ const community = ({navigation}) => {
         style={styles.map}
         onRegionChangeComplete={onRegionChangeComplete}
         region={location}>
-        {marks.map((item, key) => {
+        {marks.map((item, index) => {
           return (
             <Marker
-              // ref={markRef}
               coordinate={item.coordinate}
-              key={key}
-              onPress={() => {
+              key={index}
+              onPress={event => {
+                console.log(event);
+
+                if (event.nativeEvent.action === 'marker-press') {
+                }
+                console.log('JIJIJIJIJIJIJJIJI');
                 onPressMark(item.coordinate);
               }}>
               <View style={styles.markerWrap}>
