@@ -1,6 +1,7 @@
 import React from 'react';
 import {useState, useEffect, useRef} from 'react';
 import {
+  Image,
   View,
   StyleSheet,
   Text,
@@ -14,6 +15,7 @@ import {
 import Geolocation from 'react-native-geolocation-service';
 import HeaderSearchInputWhite from '../../components/input/headerSearchInputWhite';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
+import ProfileTitle from '../../components/text/profileTitle';
 // remove PROVIDER_GOOGLE import if not using Google Maps
 /*  */
 const {width, height} = Dimensions.get('window');
@@ -270,20 +272,19 @@ const community = ({navigation}) => {
   };
 
   const onPressMark = item => {
-    console.log('ok');
-    setMarkedList(
-      marks.filter(e => {
-        return (
-          e.coordinate.latitude === item.latitude &&
-          e.coordinate.longitude === item.longitude
-        );
-      }),
-    );
+    let filteredMarks = marks.filter(e => {
+      return (
+        e.coordinate.latitude === item.latitude &&
+        e.coordinate.longitude === item.longitude
+      );
+    });
+    setMarkedList(filteredMarks);
     setLocation({
       ...location,
       latitude: item.latitude,
       longitude: item.longitude,
     });
+    setScrollStatus({...scrollStatus, itemCount: filteredMarks.length});
   };
   const onPressScroll = () => {
     if (scrollStatus.isOpen) {
@@ -353,21 +354,25 @@ const community = ({navigation}) => {
           {backgroundColor: 'white'},
           {transform: [{translateY: scrollY}]},
         ]}>
-        <TouchableOpacity onPress={onPressScroll}>
-          <Text style={{alignSelf: 'center'}}>{scrollStatus.itemCount}</Text>
+        <TouchableOpacity
+          style={{alignSelf: 'center', height: 40}}
+          onPress={onPressScroll}>
+          <ProfileTitle text={`목록: ${scrollStatus.itemCount} `} />
         </TouchableOpacity>
         {markedList.map((markItem, key) => {
           if (markItem !== undefined) {
             return (
               <TouchableOpacity
-                key={key}
-                style={{height: 48, width: 347, backgroundColor: 'orange'}}>
-                <Text
-                  style={{
-                    fontFamily: 'SF Pro Text',
-                    fontWeight: '400',
-                    fontSize: 14,
-                  }}>{`${key} - ${markItem.title}`}</Text>
+                style={{
+                  flexDirection: 'row',
+                  alignSelf: 'flex-start',
+                  padding: 10,
+                }}
+                key={key}>
+                <Image
+                  source={require('../../assets/images/icon/location.png')}
+                />
+                <ProfileTitle text={`${key} - ${markItem.title}`} />
               </TouchableOpacity>
             );
           }
