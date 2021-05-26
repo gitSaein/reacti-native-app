@@ -16,6 +16,7 @@ import Geolocation from 'react-native-geolocation-service';
 import HeaderSearchInputWhite from '../../components/input/headerSearchInputWhite';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import ProfileTitle from '../../components/text/profileTitle';
+import ButtonAdd from '../../components/buttons/buttonAdd';
 // remove PROVIDER_GOOGLE import if not using Google Maps
 /*  */
 const {width, height} = Dimensions.get('window');
@@ -58,7 +59,7 @@ const community = ({navigation}) => {
     isOpen: false,
     itemCount: 0,
   });
-  const scrollY = useRef(new Animated.Value(235)).current;
+  const scrollY = useRef(new Animated.Value(height / 2.3)).current;
 
   const Images = [
     {uri: 'https://i.imgur.com/sNam9iJ.jpg'},
@@ -287,9 +288,10 @@ const community = ({navigation}) => {
     setScrollStatus({...scrollStatus, itemCount: filteredMarks.length});
   };
   const onPressScroll = () => {
+    console.log(height);
     if (scrollStatus.isOpen) {
       Animated.spring(scrollY, {
-        toValue: 235,
+        toValue: height / 2.3,
         velocity: 3,
         tension: 2,
         friction: 8,
@@ -322,10 +324,6 @@ const community = ({navigation}) => {
               key={index}
               onPress={event => {
                 console.log(event);
-
-                if (event.nativeEvent.action === 'marker-press') {
-                }
-                console.log('JIJIJIJIJIJIJJIJI');
                 onPressMark(item.coordinate);
               }}>
               <View style={styles.markerWrap}>
@@ -347,6 +345,7 @@ const community = ({navigation}) => {
       </MapView>
       <View style={styles.search}>
         <HeaderSearchInputWhite placeholder={'Search'} />
+        <ButtonAdd onDone={() => navigation.navigate('CommunityAdd')} />
       </View>
       <Animated.ScrollView
         style={[
@@ -410,7 +409,7 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   search: {
-    flex: 2,
+    flex: 1,
   },
   markerWrap: {
     alignItems: 'center',
