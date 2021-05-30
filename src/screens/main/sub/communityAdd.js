@@ -1,14 +1,18 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, TextInput, Dimensions} from 'react-native';
 import HeaderWhiteWithComponent from '../../../components/common/headerWhiteWithComponent';
+import BottomSlideUpDownAddmodal from '../../../components/modal/bottomSlideUpDownAddmodal';
+import ButtonBigAdd from '../../../components/buttons/buttonBigAdd';
 const {width, height} = Dimensions.get('window');
 
 const communityAdd = ({navigation}) => {
   const [contents, setContents] = useState({title: '', content: ''});
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const onEndEditing = ({props}) => {
-    setContents({...contents, props});
+  const onCloseAddModal = () => {
+    setIsModalVisible(!isModalVisible);
   };
+
   return (
     <View style={styles.container}>
       <HeaderWhiteWithComponent
@@ -31,6 +35,14 @@ const communityAdd = ({navigation}) => {
           multiline={true}
           value={contents.content}
           onChangeText={event => setContents({...contents, content: event})}
+        />
+        <View style={{flexDirection: 'row', margin: 10}}>
+          <ButtonBigAdd onPress={() => setIsModalVisible(!isModalVisible)} />
+          <ButtonBigAdd onPress={() => setIsModalVisible(!isModalVisible)} />
+        </View>
+        <BottomSlideUpDownAddmodal
+          isVisible={isModalVisible}
+          onClose={onCloseAddModal}
         />
       </View>
     </View>

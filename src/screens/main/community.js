@@ -369,7 +369,7 @@ const community = ({navigation}) => {
                 }}
                 key={key}>
                 <Image
-                  source={require('../../assets/images/icon/location.png')}
+                  source={require('../../assets/images/icon/location_active.png')}
                 />
                 <ProfileTitle text={`${key} - ${markItem.title}`} />
               </TouchableOpacity>
