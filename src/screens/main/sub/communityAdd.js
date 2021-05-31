@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, TextInput, Dimensions} from 'react-native';
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  Dimensions,
+  Image,
+} from 'react-native';
 import HeaderWhiteWithComponent from '../../../components/common/headerWhiteWithComponent';
 import BottomSlideUpDownAddmodal from '../../../components/modal/bottomSlideUpDownAddmodal';
 import ButtonBigAdd from '../../../components/buttons/buttonBigAdd';
@@ -8,11 +15,13 @@ const {width, height} = Dimensions.get('window');
 const communityAdd = ({navigation}) => {
   const [contents, setContents] = useState({title: '', content: ''});
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [photos, setPhotos] = useState([]);
 
   const onCloseAddModal = () => {
     setIsModalVisible(!isModalVisible);
   };
 
+  console.log(photos);
   return (
     <View style={styles.container}>
       <HeaderWhiteWithComponent
@@ -36,13 +45,29 @@ const communityAdd = ({navigation}) => {
           value={contents.content}
           onChangeText={event => setContents({...contents, content: event})}
         />
-        <View style={{flexDirection: 'row', margin: 10}}>
+        <ScrollView horizontal style={{flexDirection: 'row', margin: 10}}>
+          {photos.map((photo, index) => {
+            console.log('-------------------------');
+            console.log(photo.node.image.uri);
+            return (
+              <Image
+                key={index}
+                style={{
+                  width: 90,
+                  height: 90,
+                  margin: 5,
+                  borderRadius: 14,
+                }}
+                source={{uri: photo.node.image.uri}}
+              />
+            );
+          })}
           <ButtonBigAdd onPress={() => setIsModalVisible(!isModalVisible)} />
-          <ButtonBigAdd onPress={() => setIsModalVisible(!isModalVisible)} />
-        </View>
+        </ScrollView>
         <BottomSlideUpDownAddmodal
           isVisible={isModalVisible}
           onClose={onCloseAddModal}
+          setPhotos={setPhotos}
         />
       </View>
     </View>

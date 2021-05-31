@@ -8,7 +8,7 @@ import ButtonAddPerson from '../buttons/buttonAddPerson';
 
 const {width, height} = Dimensions.get('window');
 
-const bottomSlideUpDownAddmodal = ({isVisible, onClose}) => {
+const bottomSlideUpDownAddmodal = ({isVisible, onClose, setPhotos}) => {
   return (
     <Modal
       backdropOpacity={0}
@@ -29,7 +29,7 @@ const bottomSlideUpDownAddmodal = ({isVisible, onClose}) => {
           <ButtonClip />
         </View>
         <View style={{flex: 1}}>
-          <ButtonCamera />
+          <ButtonCamera setPhotos={setPhotos} />
         </View>
         <View style={{flex: 1}}>
           <ButtonLocation />
