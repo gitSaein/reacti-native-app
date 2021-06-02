@@ -9,19 +9,26 @@ import {
 } from 'react-native';
 import HeaderWhiteWithComponent from '../../../components/common/headerWhiteWithComponent';
 import BottomSlideUpDownAddmodal from '../../../components/modal/bottomSlideUpDownAddmodal';
+import PhotoGallaryModal from '../../../components/modal/photoGallaryModal';
 import ButtonBigAdd from '../../../components/buttons/buttonBigAdd';
+
 const {width, height} = Dimensions.get('window');
 
 const communityAdd = ({navigation}) => {
   const [contents, setContents] = useState({title: '', content: ''});
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isGallaryModalVisible, setIsGallaryModalVisible] = useState(false);
   const [photos, setPhotos] = useState([]);
 
   const onCloseAddModal = () => {
     setIsModalVisible(!isModalVisible);
   };
+  const openGallaryModal = e => {
+    console.log(e);
+    setPhotos(e);
+    setIsGallaryModalVisible(!isGallaryModalVisible);
+  };
 
-  console.log(photos);
   return (
     <View style={styles.container}>
       <HeaderWhiteWithComponent
@@ -67,7 +74,12 @@ const communityAdd = ({navigation}) => {
         <BottomSlideUpDownAddmodal
           isVisible={isModalVisible}
           onClose={onCloseAddModal}
-          setPhotos={setPhotos}
+          setPhotos={openGallaryModal}
+        />
+        <PhotoGallaryModal
+          isVisible={isGallaryModalVisible}
+          photos={photos}
+          onClose={() => setIsGallaryModalVisible(!isGallaryModalVisible)}
         />
       </View>
     </View>
