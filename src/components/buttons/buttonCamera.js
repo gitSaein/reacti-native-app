@@ -8,8 +8,6 @@ const buttonCamera = ({setPhotos}) => {
       first: 10,
     })
       .then(r => {
-        console.log('start...');
-        console.log(r.edges);
         setPhotos(r.edges);
       })
       .catch(e => {

@@ -19,13 +19,21 @@ const communityAdd = ({navigation}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isGallaryModalVisible, setIsGallaryModalVisible] = useState(false);
   const [photos, setPhotos] = useState([]);
+  const [isCheckedPhoto, setIsCheckedPhoto] = useState(false);
 
   const onCloseAddModal = () => {
     setIsModalVisible(!isModalVisible);
   };
   const openGallaryModal = e => {
-    console.log(e);
     setPhotos(e);
+    setIsGallaryModalVisible(!isGallaryModalVisible);
+  };
+  const onCheckedPhotos = () => {
+    setIsCheckedPhoto(true);
+    setIsGallaryModalVisible(!isGallaryModalVisible);
+  };
+  const onPhotoGallaryClose = () => {
+    setIsCheckedPhoto(false);
     setIsGallaryModalVisible(!isGallaryModalVisible);
   };
 
@@ -54,20 +62,26 @@ const communityAdd = ({navigation}) => {
         />
         <ScrollView horizontal style={{flexDirection: 'row', margin: 10}}>
           {photos.map((photo, index) => {
-            console.log('-------------------------');
-            console.log(photo.node.image.uri);
-            return (
-              <Image
-                key={index}
-                style={{
-                  width: 90,
-                  height: 90,
-                  margin: 5,
-                  borderRadius: 14,
-                }}
-                source={{uri: photo.node.image.uri}}
-              />
-            );
+            console.log(isCheckedPhoto);
+            console.log(photo);
+            if (
+              Object.keys(photo).includes('isCheck') &&
+              photo.isCheck &&
+              isCheckedPhoto
+            ) {
+              return (
+                <Image
+                  key={index}
+                  style={{
+                    width: 90,
+                    height: 90,
+                    margin: 5,
+                    borderRadius: 14,
+                  }}
+                  source={{uri: photo.node.image.uri}}
+                />
+              );
+            }
           })}
           <ButtonBigAdd onPress={() => setIsModalVisible(!isModalVisible)} />
         </ScrollView>
@@ -79,7 +93,9 @@ const communityAdd = ({navigation}) => {
         <PhotoGallaryModal
           isVisible={isGallaryModalVisible}
           photos={photos}
-          onClose={() => setIsGallaryModalVisible(!isGallaryModalVisible)}
+          onClose={onPhotoGallaryClose}
+          setPhotos={setPhotos}
+          onCheckedPhotos={onCheckedPhotos}
         />
       </View>
     </View>
