@@ -7,10 +7,13 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
+import {Chip} from 'react-native-elements';
+
 import HeaderWhiteWithComponent from '../../../components/common/headerWhiteWithComponent';
 import BottomSlideUpDownAddmodal from '../../../components/modal/bottomSlideUpDownAddmodal';
 import PhotoGallaryModal from '../../../components/modal/photoGallaryModal';
 import ButtonBigAdd from '../../../components/buttons/buttonBigAdd';
+import SelectBoxWithSearch from '../../../components/input/selectBoxWithSearch';
 
 const {width, height} = Dimensions.get('window');
 
@@ -20,12 +23,25 @@ const communityAdd = ({navigation}) => {
   const [isGallaryModalVisible, setIsGallaryModalVisible] = useState(false);
   const [photos, setPhotos] = useState([]);
   const [isCheckedPhoto, setIsCheckedPhoto] = useState(false);
-
+  const [items, setItems] = useState([
+    {label: 'Apple', value: 'apple'},
+    {label: 'Banana', value: 'banana'},
+    {label: 'A', value: 'a'},
+    {label: 'B', value: 'b'},
+    {label: 'C', value: 'c'},
+    {label: 'D', value: 'd'},
+    {label: 'E', value: 'e'},
+    {label: 'F', value: 'f'},
+    {label: 'G', value: 'g'},
+  ]);
+  const handleDelete = () => {
+    console.info('You clicked the delete icon.');
+  };
   const onCloseAddModal = () => {
     setIsModalVisible(!isModalVisible);
   };
-  const openGallaryModal = e => {
-    setPhotos(e);
+  const openGallaryModal = photo => {
+    setPhotos(photo);
     setIsGallaryModalVisible(!isGallaryModalVisible);
   };
   const onCheckedPhotos = () => {
@@ -60,10 +76,9 @@ const communityAdd = ({navigation}) => {
           value={contents.content}
           onChangeText={event => setContents({...contents, content: event})}
         />
+        <SelectBoxWithSearch setItems={setItems} items={items} />
         <ScrollView horizontal style={{flexDirection: 'row', margin: 10}}>
           {photos.map((photo, index) => {
-            console.log(isCheckedPhoto);
-            console.log(photo);
             if (
               Object.keys(photo).includes('isCheck') &&
               photo.isCheck &&
