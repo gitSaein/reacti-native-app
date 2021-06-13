@@ -19,7 +19,6 @@ const photoGallaryModal = ({
   onCheckedPhotos,
 }) => {
   useEffect(() => {
-    console.log(photos);
     photos.map(item => (item.isCheck = false));
   }, []);
 

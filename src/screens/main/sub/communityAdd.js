@@ -7,13 +7,13 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
-import {Chip} from 'react-native-elements';
 
 import HeaderWhiteWithComponent from '../../../components/common/headerWhiteWithComponent';
 import BottomSlideUpDownAddmodal from '../../../components/modal/bottomSlideUpDownAddmodal';
 import PhotoGallaryModal from '../../../components/modal/photoGallaryModal';
 import ButtonBigAdd from '../../../components/buttons/buttonBigAdd';
 import SelectBoxWithSearch from '../../../components/input/selectBoxWithSearch';
+import ChipsWithClose from '../../../components/common/chipsWithClose';
 
 const {width, height} = Dimensions.get('window');
 
@@ -24,18 +24,25 @@ const communityAdd = ({navigation}) => {
   const [photos, setPhotos] = useState([]);
   const [isCheckedPhoto, setIsCheckedPhoto] = useState(false);
   const [items, setItems] = useState([
-    {label: 'Apple', value: 'apple'},
-    {label: 'Banana', value: 'banana'},
-    {label: 'A', value: 'a'},
-    {label: 'B', value: 'b'},
-    {label: 'C', value: 'c'},
-    {label: 'D', value: 'd'},
-    {label: 'E', value: 'e'},
-    {label: 'F', value: 'f'},
-    {label: 'G', value: 'g'},
+    {label: 'Apple', value: 'apple', select: false},
+    {label: 'Banana', value: 'banana', select: false},
+    {label: 'A', value: 'a', select: false},
+    {label: 'B', value: 'b', select: false},
+    {label: 'C', value: 'c', select: false},
+    {label: 'D', value: 'd', select: false},
+    {label: 'E', value: 'e', select: false},
+    {label: 'F', value: 'f', select: false},
+    {label: 'G', value: 'g', select: false},
   ]);
-  const handleDelete = () => {
-    console.info('You clicked the delete icon.');
+  const handleUpdate = selected => {
+    console.log(items);
+
+    setItems(
+      items.map((item, idx) =>
+        item.value === selected ? {...item, select: !item.select} : item,
+      ),
+    );
+    console.log(items);
   };
   const onCloseAddModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -76,7 +83,11 @@ const communityAdd = ({navigation}) => {
           value={contents.content}
           onChangeText={event => setContents({...contents, content: event})}
         />
-        <SelectBoxWithSearch setItems={setItems} items={items} />
+        <ChipsWithClose
+          items={items.filter(e => e.select === true)}
+          onPress={e => handleUpdate(e)}
+        />
+        <SelectBoxWithSearch setItems={e => handleUpdate(e)} items={items} />
         <ScrollView horizontal style={{flexDirection: 'row', margin: 10}}>
           {photos.map((photo, index) => {
             if (
