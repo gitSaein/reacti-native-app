@@ -1,9 +1,8 @@
 import React from 'react';
-import {Dimensions, View, Text} from 'react-native';
+import {View} from 'react-native';
 import {Chip} from 'react-native-elements';
 
 const chipsWithClose = ({items, onPress}) => {
-  console.log(items);
   return (
     <View style={{flexDirection: 'row'}}>
       {items.map((item, index) => {

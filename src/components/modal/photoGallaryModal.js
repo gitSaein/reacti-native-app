@@ -22,7 +22,7 @@ const photoGallaryModal = ({
     photos.map(item => (item.isCheck = false));
   }, []);
 
-  const funcCheckBox = index => {
+  const checked = index => {
     setPhotos(
       photos.map((item, idx) =>
         idx === index ? {...item, isCheck: !item.isCheck} : item,
@@ -46,7 +46,7 @@ const photoGallaryModal = ({
           />
           {photos.map((photo, index) => {
             return (
-              <TouchableOpacity key={index} onPress={() => funcCheckBox(index)}>
+              <TouchableOpacity key={index} onPress={() => checked(index)}>
                 <ImageBackground
                   style={{
                     height: 200,
@@ -57,7 +57,7 @@ const photoGallaryModal = ({
                   <CheckBox
                     disabled={false}
                     value={photo.isCheck}
-                    onValueChange={() => funcCheckBox(index)}
+                    onValueChange={() => checked(index)}
                   />
                 </ImageBackground>
               </TouchableOpacity>

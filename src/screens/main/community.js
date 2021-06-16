@@ -19,7 +19,7 @@ import ProfileTitle from '../../components/text/profileTitle';
 import ButtonAdd from '../../components/buttons/buttonAdd';
 // remove PROVIDER_GOOGLE import if not using Google Maps
 /*  */
-const {width, height} = Dimensions.get('window');
+const {height} = Dimensions.get('window');
 
 /* 현재 위치 함수 */
 const hasLocationPermission = async () => {
@@ -47,7 +47,7 @@ const hasLocationPermission = async () => {
   }
 };
 
-const community = ({navigation}) => {
+const community = ({route, navigation}) => {
   const [markedList, setMarkedList] = useState([]);
   const [location, setLocation] = useState({
     latitude: 37.392018,
@@ -69,176 +69,38 @@ const community = ({navigation}) => {
   ];
   const [marks, setMarks] = useState([
     {
-      index: 0,
-      coordinate: {latitude: 37.0, longitude: -122.0},
-      title: 'hi 100',
-      description: 'description 100',
-      image: Images[0],
-    },
-    {
-      index: 1,
-      coordinate: {latitude: 38, longitude: -122.08395287867834},
-      title: 'hi 2',
-      description: 'description 2',
-      image: Images[1],
-    },
-    {
-      index: 2,
-      coordinate: {latitude: 37.42342342342342, longitude: -122.08395287867832},
-      title: 'hi 3',
-      description: 'description 3',
-      image: Images[2],
-    },
-    {
-      index: 3,
-      coordinate: {latitude: 37.42342342342342, longitude: -122.08395287867832},
-      title: 'hi 4',
-      description: 'description 4',
-      image: Images[3],
-    },
-    {
-      index: 4,
-      coordinate: {latitude: 37.42342342342342, longitude: -122.08395287867832},
-      title: 'hi 5',
-      description: 'description 5',
-      image: Images[4],
-    },
-    {
-      index: 5,
-      coordinate: {latitude: 37.42342342342342, longitude: -122.08395287867832},
-      title: 'hi 6',
-      description: 'description 6',
-      image: Images[5],
-    },
-    {
-      index: 6,
-      coordinate: {latitude: 37.3939, longitude: 127.1172},
-      title: 'hi 7',
-      description: 'description 7',
-      image: Images[5],
-    },
-    {
-      index: 7,
-      coordinate: {latitude: 37.3983623777127, longitude: 127.11751651604328},
-      title: 'hi 8',
-      description: 'description 8',
-      image: Images[5],
-    },
-    {
-      index: 8,
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      index: 9,
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      index: 10,
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      index: 11,
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      index: 12,
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      index: 13,
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      index: 14,
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      index: 15,
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-
-      image: Images[5],
-    },
-    {
-      index: 16,
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      index: 17,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
 
       title: 'hi 9',
-      description: 'description 9',
+      content: 'description 9',
       image: Images[5],
+      photos: [],
+      category: [],
     },
     {
-      index: 18,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
-      description: 'description 9',
+      content: 'description 9',
       image: Images[5],
+      photos: [],
+      category: [],
     },
     {
-      index: 19,
       coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
-      description: 'description 9',
+      content: 'description 9',
       image: Images[5],
-    },
-    {
-      index: 20,
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      index: 21,
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      index: 23,
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      description: 'description 9',
-      image: Images[5],
-    },
-    {
-      index: 24,
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 090909090909',
-      description: 'description 9',
-      image: Images[5],
+      photos: [],
+      category: [],
     },
   ]);
+
+  console.log(route);
+  if (route.params !== undefined) {
+    console.log('--------save-------');
+    console.log(route.params);
+    // setMarks(marks.concat(route.params));
+  }
 
   /* image mapped with marking place */
 
@@ -346,6 +208,7 @@ const community = ({navigation}) => {
       <View style={styles.search}>
         <HeaderSearchInputWhite placeholder={'Search'} />
         <ButtonAdd onDone={() => navigation.navigate('CommunityAdd')} />
+        <Text>{'opopop'}</Text>
       </View>
       <Animated.ScrollView
         style={[

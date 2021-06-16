@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   ScrollView,
@@ -15,35 +15,39 @@ import ButtonBigAdd from '../../../components/buttons/buttonBigAdd';
 import SelectBoxWithSearch from '../../../components/input/selectBoxWithSearch';
 import ChipsWithClose from '../../../components/common/chipsWithClose';
 
-const {width, height} = Dimensions.get('window');
+const {height} = Dimensions.get('window');
 
 const communityAdd = ({navigation}) => {
-  const [contents, setContents] = useState({title: '', content: ''});
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isGallaryModalVisible, setIsGallaryModalVisible] = useState(false);
-  const [photos, setPhotos] = useState([]);
-  const [isCheckedPhoto, setIsCheckedPhoto] = useState(false);
-  const [items, setItems] = useState([
-    {label: 'Apple', value: 'apple', select: false},
-    {label: 'Banana', value: 'banana', select: false},
-    {label: 'A', value: 'a', select: false},
-    {label: 'B', value: 'b', select: false},
-    {label: 'C', value: 'c', select: false},
-    {label: 'D', value: 'd', select: false},
-    {label: 'E', value: 'e', select: false},
-    {label: 'F', value: 'f', select: false},
-    {label: 'G', value: 'g', select: false},
-  ]);
-  const handleUpdate = selected => {
-    console.log(items);
 
-    setItems(
-      items.map((item, idx) =>
-        item.value === selected ? {...item, select: !item.select} : item,
+  const [contents, setContents] = useState({
+    coordinate: {latitude: 37.550582, longitude: 127.001091},
+    title: '',
+    content: '',
+    photo: [],
+    category: [],
+  });
+  const [photos, setPhotos] = useState([]);
+  const [category, setCategory] = useState([
+    {label: '부동산', value: 1, select: false},
+    {label: '아르바이트', value: 2, select: false},
+    {label: '중고매매', value: 3, select: false},
+    {label: '부탁', value: 4, select: false},
+  ]);
+  const updateCategory = selectedIdx => {
+    setCategory(
+      category.map(item =>
+        item.value === selectedIdx ? {...item, select: !item.select} : item,
       ),
     );
-    console.log(items);
   };
+  useEffect(() => {
+    setContents({
+      ...contents,
+      category: category.filter(item => item.select === true),
+    });
+  }, [category]);
   const onCloseAddModal = () => {
     setIsModalVisible(!isModalVisible);
   };
@@ -52,20 +56,27 @@ const communityAdd = ({navigation}) => {
     setIsGallaryModalVisible(!isGallaryModalVisible);
   };
   const onCheckedPhotos = () => {
-    setIsCheckedPhoto(true);
+    setContents({
+      ...contents,
+      photo: contents.photo.concat(
+        photos.filter(
+          photo => photo.isCheck && Object.keys(photo).includes('isCheck'),
+        ),
+      ),
+    });
     setIsGallaryModalVisible(!isGallaryModalVisible);
   };
   const onPhotoGallaryClose = () => {
-    setIsCheckedPhoto(false);
     setIsGallaryModalVisible(!isGallaryModalVisible);
   };
-
   return (
     <View style={styles.container}>
       <HeaderWhiteWithComponent
         title={'Create Post'}
         onClose={() => navigation.navigate('Community')}
-        onNext={() => navigation.navigate('Community')}
+        onNext={() => {
+          navigation.navigate('Community', contents);
+        }}
       />
       <View style={{marginTop: 50}}>
         <TextInput
@@ -84,17 +95,16 @@ const communityAdd = ({navigation}) => {
           onChangeText={event => setContents({...contents, content: event})}
         />
         <ChipsWithClose
-          items={items.filter(e => e.select === true)}
-          onPress={e => handleUpdate(e)}
+          items={category.filter(e => e.select === true)}
+          onPress={e => updateCategory(e)}
         />
-        <SelectBoxWithSearch setItems={e => handleUpdate(e)} items={items} />
+        <SelectBoxWithSearch
+          setItems={e => updateCategory(e)}
+          items={category}
+        />
         <ScrollView horizontal style={{flexDirection: 'row', margin: 10}}>
-          {photos.map((photo, index) => {
-            if (
-              Object.keys(photo).includes('isCheck') &&
-              photo.isCheck &&
-              isCheckedPhoto
-            ) {
+          {contents.photo.map((photo, index) => {
+            if (Object.keys(photo).includes('isCheck') && photo.isCheck) {
               return (
                 <Image
                   key={index}
