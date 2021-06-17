@@ -5,7 +5,9 @@ import {
   StyleSheet,
   TextInput,
   Dimensions,
+  Text,
   Image,
+  ImageBackground,
 } from 'react-native';
 
 import HeaderWhiteWithComponent from '../../../components/common/headerWhiteWithComponent';
@@ -14,6 +16,7 @@ import PhotoGallaryModal from '../../../components/modal/photoGallaryModal';
 import ButtonBigAdd from '../../../components/buttons/buttonBigAdd';
 import SelectBoxWithSearch from '../../../components/input/selectBoxWithSearch';
 import ChipsWithClose from '../../../components/common/chipsWithClose';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const {height} = Dimensions.get('window');
 
@@ -73,7 +76,7 @@ const communityAdd = ({navigation}) => {
     <View style={styles.container}>
       <HeaderWhiteWithComponent
         title={'Create Post'}
-        onClose={() => navigation.navigate('Community')}
+        onClose={() => navigation.goBack()}
         onNext={() => {
           navigation.navigate('Community', contents);
         }}
@@ -106,16 +109,30 @@ const communityAdd = ({navigation}) => {
           {contents.photo.map((photo, index) => {
             if (Object.keys(photo).includes('isCheck') && photo.isCheck) {
               return (
-                <Image
+                <TouchableOpacity
                   key={index}
-                  style={{
-                    width: 90,
-                    height: 90,
-                    margin: 5,
-                    borderRadius: 14,
-                  }}
-                  source={{uri: photo.node.image.uri}}
-                />
+                  onPress={() => {
+                    setContents({
+                      ...contents,
+                      photo: contents.photo.filter((p, idx) => idx !== index),
+                    });
+                  }}>
+                  <ImageBackground
+                    key={index}
+                    style={{
+                      width: 90,
+                      height: 90,
+                      margin: 5,
+                      borderRadius: 14,
+                    }}
+                    source={{uri: photo.node.image.uri}}>
+                    <Image
+                      key={index}
+                      style={{margin: 2}}
+                      source={require('../../../assets/images/icon/close.png')}
+                    />
+                  </ImageBackground>
+                </TouchableOpacity>
               );
             }
           })}

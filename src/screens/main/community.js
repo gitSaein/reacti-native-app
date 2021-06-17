@@ -70,23 +70,6 @@ const community = ({route, navigation}) => {
   const [marks, setMarks] = useState([
     {
       coordinate: {latitude: 37.550582, longitude: 127.001091},
-
-      title: 'hi 9',
-      content: 'description 9',
-      image: Images[5],
-      photos: [],
-      category: [],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      content: 'description 9',
-      image: Images[5],
-      photos: [],
-      category: [],
-    },
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
       title: 'hi 9',
       content: 'description 9',
       image: Images[5],
@@ -95,12 +78,12 @@ const community = ({route, navigation}) => {
     },
   ]);
 
-  console.log(route);
-  if (route.params !== undefined) {
-    console.log('--------save-------');
-    console.log(route.params);
-    // setMarks(marks.concat(route.params));
-  }
+  useEffect(() => {
+    const contents = route.params;
+    setMarks(marks.concat(contents));
+  }, [route.params]);
+
+  // setMarks(marks.concat(route.params));
 
   /* image mapped with marking place */
 
@@ -150,7 +133,6 @@ const community = ({route, navigation}) => {
     setScrollStatus({...scrollStatus, itemCount: filteredMarks.length});
   };
   const onPressScroll = () => {
-    console.log(height);
     if (scrollStatus.isOpen) {
       Animated.spring(scrollY, {
         toValue: height / 2.3,
@@ -185,7 +167,6 @@ const community = ({route, navigation}) => {
               coordinate={item.coordinate}
               key={index}
               onPress={event => {
-                console.log(event);
                 onPressMark(item.coordinate);
               }}>
               <View style={styles.markerWrap}>
@@ -208,7 +189,6 @@ const community = ({route, navigation}) => {
       <View style={styles.search}>
         <HeaderSearchInputWhite placeholder={'Search'} />
         <ButtonAdd onDone={() => navigation.navigate('CommunityAdd')} />
-        <Text>{'opopop'}</Text>
       </View>
       <Animated.ScrollView
         style={[
