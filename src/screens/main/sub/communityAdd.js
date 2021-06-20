@@ -5,7 +5,6 @@ import {
   StyleSheet,
   TextInput,
   Dimensions,
-  Text,
   Image,
   ImageBackground,
 } from 'react-native';

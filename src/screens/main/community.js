@@ -61,31 +61,14 @@ const community = ({route, navigation}) => {
   });
   const scrollY = useRef(new Animated.Value(height / 2.3)).current;
 
-  const Images = [
-    {uri: 'https://i.imgur.com/sNam9iJ.jpg'},
-    {uri: 'https://i.imgur.com/N7rlQYt.jpg'},
-    {uri: 'https://i.imgur.com/UDrH0wm.jpg'},
-    {uri: 'https://i.imgur.com/Ka8kNST.jpg'},
-  ];
-  const [marks, setMarks] = useState([
-    {
-      coordinate: {latitude: 37.550582, longitude: 127.001091},
-      title: 'hi 9',
-      content: 'description 9',
-      image: Images[5],
-      photos: [],
-      category: [],
-    },
-  ]);
+  const [marks, setMarks] = useState([]);
 
   useEffect(() => {
     const contents = route.params;
-    setMarks(marks.concat(contents));
+    if (contents !== undefined) {
+      setMarks(marks.concat(contents));
+    }
   }, [route.params]);
-
-  // setMarks(marks.concat(route.params));
-
-  /* image mapped with marking place */
 
   /** map position setting */
   useEffect(() => {
@@ -113,9 +96,7 @@ const community = ({route, navigation}) => {
     });
   }, []);
 
-  const onRegionChangeComplete = region => {
-    console.log(region);
-  };
+  const onRegionChangeComplete = region => {};
 
   const onPressMark = item => {
     let filteredMarks = marks.filter(e => {
