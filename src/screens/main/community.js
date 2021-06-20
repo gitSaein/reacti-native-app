@@ -113,7 +113,7 @@ const community = ({route, navigation}) => {
     });
     setScrollStatus({...scrollStatus, itemCount: filteredMarks.length});
   };
-  const onPressScroll = () => {
+  const onIsOpenScroll = () => {
     if (scrollStatus.isOpen) {
       Animated.spring(scrollY, {
         toValue: height / 2.3,
@@ -179,26 +179,24 @@ const community = ({route, navigation}) => {
         ]}>
         <TouchableOpacity
           style={{alignSelf: 'center', height: 40}}
-          onPress={onPressScroll}>
+          onPress={onIsOpenScroll}>
           <ProfileTitle text={`목록: ${scrollStatus.itemCount} `} />
         </TouchableOpacity>
         {markedList.map((markItem, key) => {
-          if (markItem !== undefined) {
-            return (
-              <TouchableOpacity
-                style={{
-                  flexDirection: 'row',
-                  alignSelf: 'flex-start',
-                  padding: 10,
-                }}
-                key={key}>
-                <Image
-                  source={require('../../assets/images/icon/location_active.png')}
-                />
-                <ProfileTitle text={`${key} - ${markItem.title}`} />
-              </TouchableOpacity>
-            );
-          }
+          return (
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+                alignSelf: 'flex-start',
+                padding: 10,
+              }}
+              key={key}>
+              <Image
+                source={require('../../assets/images/icon/location_active.png')}
+              />
+              <ProfileTitle text={`${key} - ${markItem.title}`} />
+            </TouchableOpacity>
+          );
         })}
       </Animated.ScrollView>
     </View>
