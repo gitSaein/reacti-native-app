@@ -1,22 +1,19 @@
 import React from 'react';
-import {useState, useEffect, useRef} from 'react';
+import {useState, useEffect} from 'react';
 import {
-  Image,
   View,
   StyleSheet,
   Text,
   StatusBar,
-  Animated,
   Dimensions,
-  TouchableOpacity,
   Platform,
   PermissionsAndroid,
 } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import HeaderSearchInputWhite from '../../components/input/headerSearchInputWhite';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
-import ProfileTitle from '../../components/text/profileTitle';
 import ButtonAdd from '../../components/buttons/buttonAdd';
+import BottomHalfModal from '../../components/modal/bottomHalfModal';
 // remove PROVIDER_GOOGLE import if not using Google Maps
 /*  */
 const {height} = Dimensions.get('window');
@@ -48,23 +45,21 @@ const hasLocationPermission = async () => {
 };
 
 const community = ({route, navigation}) => {
-  const [markedList, setMarkedList] = useState([]);
+  const [selectedMarkedList, setSelectedMarkedList] = useState([]);
   const [location, setLocation] = useState({
     latitude: 37.392018,
     longitude: 127.090389,
     latitudeDelta: 1,
     longitudeDelta: 1,
   });
-  const [scrollStatus, setScrollStatus] = useState({
-    isOpen: false,
-    itemCount: 0,
-  });
-  const scrollY = useRef(new Animated.Value(height / 2.3)).current;
+  const [isScrollOpen, setIsScrollOpen] = useState(false);
 
   const [marks, setMarks] = useState([]);
 
   useEffect(() => {
     const contents = route.params;
+    console.log('----- start setMarks ----');
+    console.log(contents);
     if (contents !== undefined) {
       setMarks(marks.concat(contents));
     }
@@ -99,39 +94,21 @@ const community = ({route, navigation}) => {
   const onRegionChangeComplete = region => {};
 
   const onPressMark = item => {
-    let filteredMarks = marks.filter(e => {
-      return (
-        e.coordinate.latitude === item.latitude &&
-        e.coordinate.longitude === item.longitude
-      );
-    });
-    setMarkedList(filteredMarks);
-    setLocation({
-      ...location,
-      latitude: item.latitude,
-      longitude: item.longitude,
-    });
-    setScrollStatus({...scrollStatus, itemCount: filteredMarks.length});
+    setSelectedMarkedList(
+      marks.filter(e => {
+        return (
+          e.coordinate.latitude === item.latitude &&
+          e.coordinate.longitude === item.longitude
+        );
+      }),
+    );
+    setIsScrollOpen(!isScrollOpen);
+    console.log(isScrollOpen);
   };
-  const onIsOpenScroll = () => {
-    if (scrollStatus.isOpen) {
-      Animated.spring(scrollY, {
-        toValue: height / 2.3,
-        velocity: 3,
-        tension: 2,
-        friction: 8,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      Animated.spring(scrollY, {
-        toValue: 0,
-        velocity: 3,
-        tension: 2,
-        friction: 8,
-        useNativeDriver: true,
-      }).start();
-    }
-    setScrollStatus({...scrollStatus, isOpen: !scrollStatus.isOpen});
+
+  const onCloseSelectedItemModal = e => {
+    console.log(e);
+    setIsScrollOpen(!isScrollOpen);
   };
 
   return (
@@ -142,13 +119,18 @@ const community = ({route, navigation}) => {
         style={styles.map}
         onRegionChangeComplete={onRegionChangeComplete}
         region={location}>
-        {marks.map((item, index) => {
+        {marks.map((mark, index) => {
           return (
             <Marker
-              coordinate={item.coordinate}
               key={index}
-              onPress={event => {
-                onPressMark(item.coordinate);
+              coordinate={mark.coordinate}
+              onPress={() => {
+                console.log('----- ----- -----');
+                onPressMark(mark.coordinate);
+              }}
+              onSelect={() => {
+                console.log('----- ----- -----');
+                onPressMark(mark.coordinate);
               }}>
               <View style={styles.markerWrap}>
                 <View style={[styles.ring]} />
@@ -156,8 +138,8 @@ const community = ({route, navigation}) => {
                   {
                     marks.filter(e => {
                       return (
-                        e.coordinate.latitude === item.coordinate.latitude &&
-                        e.coordinate.longitude === item.coordinate.longitude
+                        e.coordinate.latitude === mark.coordinate.latitude &&
+                        e.coordinate.longitude === mark.coordinate.longitude
                       );
                     }).length
                   }
@@ -167,38 +149,20 @@ const community = ({route, navigation}) => {
           );
         })}
       </MapView>
+
       <View style={styles.search}>
-        <HeaderSearchInputWhite placeholder={'Search'} />
+        <HeaderSearchInputWhite
+          placeholder={'Search'}
+          items={selectedMarkedList}
+        />
         <ButtonAdd onDone={() => navigation.navigate('CommunityAdd')} />
       </View>
-      <Animated.ScrollView
-        style={[
-          styles.bottomPopupMenu,
-          {backgroundColor: 'white'},
-          {transform: [{translateY: scrollY}]},
-        ]}>
-        <TouchableOpacity
-          style={{alignSelf: 'center', height: 40}}
-          onPress={onIsOpenScroll}>
-          <ProfileTitle text={`목록: ${scrollStatus.itemCount} `} />
-        </TouchableOpacity>
-        {markedList.map((markItem, key) => {
-          return (
-            <TouchableOpacity
-              style={{
-                flexDirection: 'row',
-                alignSelf: 'flex-start',
-                padding: 10,
-              }}
-              key={key}>
-              <Image
-                source={require('../../assets/images/icon/location_active.png')}
-              />
-              <ProfileTitle text={`${key} - ${markItem.title}`} />
-            </TouchableOpacity>
-          );
-        })}
-      </Animated.ScrollView>
+
+      <BottomHalfModal
+        isOpen={isScrollOpen}
+        toggleModal={onCloseSelectedItemModal}
+        items={selectedMarkedList}
+      />
     </View>
   );
 };
@@ -243,14 +207,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: 'rgba(130,4,150, 0.3)',
     position: 'absolute',
-  },
-  bottomPopupMenu: {
-    flex: 1,
-    backgroundColor: 'white',
-    width: 375,
-    marginBottom: 129,
-    paddingBottom: 100,
-    borderRadius: 22,
   },
 });
 

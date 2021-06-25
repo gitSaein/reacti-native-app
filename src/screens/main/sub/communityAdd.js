@@ -14,7 +14,7 @@ import BottomSlideUpDownAddmodal from '../../../components/modal/bottomSlideUpDo
 import PhotoGallaryModal from '../../../components/modal/photoGallaryModal';
 import ButtonBigAdd from '../../../components/buttons/buttonBigAdd';
 import SelectBoxWithSearch from '../../../components/input/selectBoxWithSearch';
-import ChipsWithClose from '../../../components/common/chipsWithClose';
+import ChipsWithClose from '../../../components/chip/chipsWithClose';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const {height} = Dimensions.get('window');
