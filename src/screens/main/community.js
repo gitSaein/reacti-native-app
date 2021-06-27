@@ -14,6 +14,7 @@ import HeaderSearchInputWhite from '../../components/input/headerSearchInputWhit
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import ButtonAdd from '../../components/buttons/buttonAdd';
 import BottomHalfModal from '../../components/modal/bottomHalfModal';
+import CommunityAddModal from './sub/communityAddModal';
 // remove PROVIDER_GOOGLE import if not using Google Maps
 /*  */
 const {height} = Dimensions.get('window');
@@ -53,17 +54,9 @@ const community = ({route, navigation}) => {
     longitudeDelta: 1,
   });
   const [isScrollOpen, setIsScrollOpen] = useState(false);
+  const [isAddOpen, setIsAddOpen] = useState(false);
 
   const [marks, setMarks] = useState([]);
-
-  useEffect(() => {
-    const contents = route.params;
-    console.log('----- start setMarks ----');
-    console.log(contents);
-    if (contents !== undefined) {
-      setMarks(marks.concat(contents));
-    }
-  }, [route.params]);
 
   /** map position setting */
   useEffect(() => {
@@ -111,6 +104,13 @@ const community = ({route, navigation}) => {
     setIsScrollOpen(!isScrollOpen);
   };
 
+  const saveContent = content => {
+    if (content !== undefined) {
+      setMarks(marks.concat(content));
+    }
+    setIsAddOpen(false);
+  };
+
   return (
     <View style={styles.container}>
       <MapView
@@ -155,13 +155,17 @@ const community = ({route, navigation}) => {
           placeholder={'Search'}
           items={selectedMarkedList}
         />
-        <ButtonAdd onDone={() => navigation.navigate('CommunityAdd')} />
+        <ButtonAdd onDone={() => setIsAddOpen(true)} />
       </View>
-
       <BottomHalfModal
         isOpen={isScrollOpen}
         toggleModal={onCloseSelectedItemModal}
         items={selectedMarkedList}
+      />
+      <CommunityAddModal
+        isOpen={isAddOpen}
+        setIsOpen={setIsAddOpen}
+        saveContent={saveContent}
       />
     </View>
   );

@@ -6,13 +6,7 @@ const chips = ({items}) => {
   return (
     <View style={{flexDirection: 'row'}}>
       {items.map((item, index) => {
-        return (
-          <Chip
-            key={index}
-            title={item.label}
-            style={{backgroundColor: 'yellow'}}
-          />
-        );
+        return <Chip key={index} title={item.label} type="outline" />;
       })}
     </View>
   );

@@ -3,12 +3,13 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  Image,
   StyleSheet,
   Dimensions,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+import Chips from '../chip/chips';
 
 const {width, height} = Dimensions.get('window');
 
@@ -31,9 +32,10 @@ const bottomHalfModal = ({isOpen, toggleModal, items}) => {
         <View style={{alignItems: 'center'}}>
           <Icon name="window-minimize" size={20} color="grey" />
         </View>
-        <ScrollView style={{borderRadius: 16, alignContent: 'flex-start'}}>
+        <ScrollView
+          style={{borderRadius: 16, alignContent: 'flex-start', padding: 10}}>
           <TouchableOpacity
-            style={{alignSelf: 'center', height: 40}}
+            style={{alignSelf: 'center', height: 40, padding: 10}}
             onPress={toggleModal}
           />
           {items.length > 0 &&
@@ -46,9 +48,7 @@ const bottomHalfModal = ({isOpen, toggleModal, items}) => {
                     padding: 10,
                   }}
                   key={key}>
-                  <Image
-                    source={require('../../assets/images/icon/location_active.png')}
-                  />
+                  <Chips items={item.category} />
                   <ProfileTitle text={`${item.title}`} />
                 </TouchableOpacity>
               );
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     height: height / 2,
     bottom: 0,
+    margin: 5,
   },
 });
 

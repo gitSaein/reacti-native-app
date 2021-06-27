@@ -22,7 +22,7 @@ const selectBoxWithSearch = ({items, setItems}) => {
         borderWidth: 1,
         borderColor: '#F9F9F9',
         margin: 5,
-        width: width - 10,
+        width: width - 20,
       }}
       placeholderStyle={{
         color: 'grey',

@@ -29,8 +29,6 @@ import Community from './src/screens/main/community';
 import MyPage from './src/screens/main/myPage';
 import Group from './src/screens/main/group';
 
-import CommunityAdd from './src/screens/main/sub/communityAdd';
-
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -126,10 +124,6 @@ const tabNavRoutes = [
   {
     name: 'Home',
     component: HomeStackScreen,
-  },
-  {
-    name: 'CommunityAdd',
-    component: CommunityAdd,
   },
 ];
 /* 현재 위치 함수 */

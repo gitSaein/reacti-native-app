@@ -44,25 +44,31 @@ const photoGallaryModal = ({
             onClose={onClose}
             onNext={onCheckedPhotos}
           />
-          {photos.map((photo, index) => {
-            return (
-              <TouchableOpacity key={index} onPress={() => checked(index)}>
-                <ImageBackground
-                  style={{
-                    height: 200,
-                    margin: 5,
-                    borderRadius: 14,
-                  }}
-                  source={{uri: photo.node.image.uri}}>
-                  <CheckBox
-                    disabled={false}
-                    value={photo.isCheck}
-                    onValueChange={() => checked(index)}
-                  />
-                </ImageBackground>
-              </TouchableOpacity>
-            );
-          })}
+          {photos.length > 0 &&
+            photos.map((photo, index) => {
+              return (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => {
+                    checked(index);
+                  }}>
+                  <ImageBackground
+                    key={index}
+                    style={{
+                      height: 200,
+                      margin: 5,
+                      borderRadius: 14,
+                    }}
+                    source={{uri: photo.node.image.uri}}>
+                    <CheckBox
+                      disabled={false}
+                      value={photo.isCheck}
+                      onValueChange={() => checked(index)}
+                    />
+                  </ImageBackground>
+                </TouchableOpacity>
+              );
+            })}
         </ScrollView>
       </Modal>
     );
