@@ -14,10 +14,16 @@ const chipsWithClose = ({items, onPress}) => {
               name: 'close',
               type: 'font-awesome',
               size: 20,
-              color: 'white',
+              color: '#504DE5',
             }}
             iconRight
             onPress={() => onPress(item.value)}
+            titleStyle={{color: '#504DE5'}}
+            containerStyle={{
+              borderColor: '#504DE5',
+              borderWidth: 0.7,
+              borderRadius: 20,
+            }}
           />
         );
       })}

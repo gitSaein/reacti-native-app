@@ -8,6 +8,7 @@ import {
   Dimensions,
   Platform,
   PermissionsAndroid,
+  TouchableOpacity,
 } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import HeaderSearchInputWhite from '../../components/input/headerSearchInputWhite';
@@ -15,9 +16,10 @@ import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import ButtonAdd from '../../components/buttons/buttonAdd';
 import BottomHalfModal from '../../components/modal/bottomHalfModal';
 import CommunityAddModal from './sub/communityAddModal';
+import CommunityAddModalRead from './sub/communityAddModalRead';
 // remove PROVIDER_GOOGLE import if not using Google Maps
 /*  */
-const {height} = Dimensions.get('window');
+const {height, width} = Dimensions.get('window');
 
 /* 현재 위치 함수 */
 const hasLocationPermission = async () => {
@@ -55,6 +57,8 @@ const community = ({route, navigation}) => {
   });
   const [isScrollOpen, setIsScrollOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
+  const [isReadAddOpen, setIsReadAddOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({});
 
   const [marks, setMarks] = useState([]);
 
@@ -121,18 +125,13 @@ const community = ({route, navigation}) => {
         region={location}>
         {marks.map((mark, index) => {
           return (
-            <Marker
-              key={index}
-              coordinate={mark.coordinate}
-              onPress={() => {
-                console.log('----- ----- -----');
-                onPressMark(mark.coordinate);
-              }}
-              onSelect={() => {
-                console.log('----- ----- -----');
-                onPressMark(mark.coordinate);
-              }}>
-              <View style={styles.markerWrap}>
+            <Marker key={index} coordinate={mark.coordinate}>
+              <TouchableOpacity
+                style={styles.markerWrap}
+                onPress={() => {
+                  console.log('ojoj');
+                  onPressMark(mark.coordinate);
+                }}>
                 <View style={[styles.ring]} />
                 <Text style={styles.marks}>
                   {
@@ -144,21 +143,24 @@ const community = ({route, navigation}) => {
                     }).length
                   }
                 </Text>
-              </View>
+              </TouchableOpacity>
             </Marker>
           );
         })}
       </MapView>
-
       <View style={styles.search}>
         <HeaderSearchInputWhite
           placeholder={'Search'}
           items={selectedMarkedList}
         />
-        <ButtonAdd onDone={() => setIsAddOpen(true)} />
+        <ButtonAdd onPress={() => setIsAddOpen(true)} />
       </View>
       <BottomHalfModal
         isOpen={isScrollOpen}
+        selectItem={item => {
+          setSelectedItem(item);
+          setIsReadAddOpen(true);
+        }}
         toggleModal={onCloseSelectedItemModal}
         items={selectedMarkedList}
       />
@@ -167,19 +169,19 @@ const community = ({route, navigation}) => {
         setIsOpen={setIsAddOpen}
         saveContent={saveContent}
       />
+      <CommunityAddModalRead
+        isOpen={isReadAddOpen}
+        setIsOpen={setIsReadAddOpen}
+        contents={selectedItem}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  bannerContainer: {},
   container: {
-    ...StyleSheet.absoluteFillObject,
-    flex: 1,
-    height: height + 48,
-    width: 400,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    height: height,
+    width: width,
     paddingTop: StatusBar.currentHeight,
   },
   map: {
@@ -191,7 +193,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     width: 45,
     height: 45,
-    borderRadius: 75,
+    borderRadius: 45 / 2,
     backgroundColor: '#B3B2FF',
     fontSize: 16,
     fontWeight: 'bold',
@@ -200,6 +202,8 @@ const styles = StyleSheet.create({
   },
   search: {
     flex: 1,
+    flexDirection: 'row',
+    paddingRight: 70,
   },
   markerWrap: {
     alignItems: 'center',
@@ -208,7 +212,7 @@ const styles = StyleSheet.create({
   ring: {
     width: 30,
     height: 30,
-    borderRadius: 12,
+    borderRadius: 30 / 2,
     backgroundColor: 'rgba(130,4,150, 0.3)',
     position: 'absolute',
   },

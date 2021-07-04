@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {
-  View,
   ScrollView,
   StyleSheet,
   TextInput,
@@ -21,7 +20,6 @@ import CameraRoll from '@react-native-community/cameraroll';
 const {height, width} = Dimensions.get('window');
 
 const communityAddModal = ({isOpen, setIsOpen, saveContent}) => {
-  console.log('----- open communityAddModal -----');
   const [isGallaryModalVisible, setIsGallaryModalVisible] = useState(false);
   const [contents, setContents] = useState({
     coordinate: {latitude: 37.550582, longitude: 127.001091},
@@ -38,12 +36,12 @@ const communityAddModal = ({isOpen, setIsOpen, saveContent}) => {
     {label: '부탁', value: 4, select: false},
   ]);
   const updateCategory = selectedIdx => {
-    console.log('--- --- update category --- ---');
     setCategory(
       category.map(item =>
         item.value === selectedIdx ? {...item, select: !item.select} : item,
       ),
     );
+    console.log(category);
   };
   const getPhotos = () => {
     CameraRoll.getPhotos({
@@ -65,8 +63,6 @@ const communityAddModal = ({isOpen, setIsOpen, saveContent}) => {
   }, [category]);
 
   const openGallaryModal = photo => {
-    console.log(photo);
-
     getPhotos();
     setIsGallaryModalVisible(!isGallaryModalVisible);
   };
@@ -86,79 +82,87 @@ const communityAddModal = ({isOpen, setIsOpen, saveContent}) => {
   };
 
   return (
-    <Modal isVisible={isOpen}>
-      <View style={styles.container}>
-        <HeaderWhiteWithComponent
-          title={'Create Post'}
-          onClose={() => setIsOpen(false)}
-          onNext={() => saveContent(contents)}
-        />
-        <View style={{marginTop: 50}}>
-          <TextInput
-            style={styles.textTitle}
-            placeholder={'제목...'}
-            placeholderTextColor="#6F8BA4"
-            value={contents.title}
-            onChangeText={event => setContents({...contents, title: event})}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="내용..."
-            placeholderTextColor="#6F8BA4"
-            multiline={true}
-            value={contents.content}
-            onChangeText={event => setContents({...contents, content: event})}
-          />
-          <ChipsWithClose
-            items={category.filter(e => e.select === true)}
-            onPress={e => updateCategory(e)}
-          />
-          <SelectBoxWithSearch
-            setItems={e => updateCategory(e)}
-            items={category}
-          />
-          <ScrollView horizontal style={{flexDirection: 'row', margin: 10}}>
-            {contents.photo.map((photo, index) => {
-              if (Object.keys(photo).includes('isCheck') && photo.isCheck) {
-                return (
-                  <TouchableOpacity
+    <Modal isVisible={isOpen} style={styles.container}>
+      <HeaderWhiteWithComponent
+        title={'Create Post'}
+        onClose={() => setIsOpen(false)}
+        onNext={() => {
+          saveContent(contents);
+          setContents({
+            coordinate: {latitude: 37.550582, longitude: 127.001091},
+            title: '',
+            content: '',
+            photo: [],
+            category: [],
+          });
+          setCategory([
+            {label: '부동산', value: 1, select: false},
+            {label: '아르바이트', value: 2, select: false},
+            {label: '중고매매', value: 3, select: false},
+            {label: '부탁', value: 4, select: false},
+          ]);
+        }}
+      />
+      <TextInput
+        style={styles.textTitle}
+        placeholder={'제목...'}
+        placeholderTextColor="#6F8BA4"
+        value={contents.title}
+        onChangeText={event => setContents({...contents, title: event})}
+      />
+      <TextInput
+        style={styles.textInput}
+        placeholder="내용..."
+        placeholderTextColor="#6F8BA4"
+        multiline={true}
+        value={contents.content}
+        onChangeText={event => setContents({...contents, content: event})}
+      />
+      <ChipsWithClose
+        items={category.filter(e => e.select === true)}
+        onPress={e => updateCategory(e)}
+      />
+      <SelectBoxWithSearch setItems={e => updateCategory(e)} items={category} />
+      <ScrollView horizontal style={{flexDirection: 'row', margin: 10}}>
+        {contents.photo.map((photo, index) => {
+          if (Object.keys(photo).includes('isCheck') && photo.isCheck) {
+            return (
+              <TouchableOpacity
+                key={index}
+                onPress={() => {
+                  setContents({
+                    ...contents,
+                    photo: contents.photo.filter((p, idx) => idx !== index),
+                  });
+                }}>
+                <ImageBackground
+                  key={index}
+                  style={{
+                    width: 90,
+                    height: 90,
+                    margin: 5,
+                    borderRadius: 14,
+                  }}
+                  source={{uri: photo.node.image.uri}}>
+                  <Image
                     key={index}
-                    onPress={() => {
-                      setContents({
-                        ...contents,
-                        photo: contents.photo.filter((p, idx) => idx !== index),
-                      });
-                    }}>
-                    <ImageBackground
-                      key={index}
-                      style={{
-                        width: 90,
-                        height: 90,
-                        margin: 5,
-                        borderRadius: 14,
-                      }}
-                      source={{uri: photo.node.image.uri}}>
-                      <Image
-                        key={index}
-                        style={{margin: 2}}
-                        source={require('../../../assets/images/icon/close.png')}
-                      />
-                    </ImageBackground>
-                  </TouchableOpacity>
-                );
-              }
-            })}
-            <ButtonBigAdd onPress={openGallaryModal} />
-          </ScrollView>
-          <PhotoGallaryModal
-            isVisible={isGallaryModalVisible}
-            photos={photos}
-            onClose={onPhotoGallaryClose}
-            setPhotos={setPhotos}
-            onCheckedPhotos={onCheckedPhotos}
-          />
-        </View>
-      </View>
+                    style={{margin: 2}}
+                    source={require('../../../assets/images/icon/close.png')}
+                  />
+                </ImageBackground>
+              </TouchableOpacity>
+            );
+          }
+        })}
+        <ButtonBigAdd onPress={openGallaryModal} />
+      </ScrollView>
+      <PhotoGallaryModal
+        isVisible={isGallaryModalVisible}
+        photos={photos}
+        onClose={onPhotoGallaryClose}
+        setPhotos={setPhotos}
+        onCheckedPhotos={onCheckedPhotos}
+      />
     </Modal>
   );
 };

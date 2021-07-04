@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, Image} from 'react-native';
 
-const buttonAdd = ({onDone}) => {
+const buttonAdd = ({onPress}) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onDone}>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
       <Image
         style={styles.image}
         source={require('../../assets/images/icon/Add.png')}

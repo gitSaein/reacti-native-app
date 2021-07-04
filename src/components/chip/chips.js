@@ -1,14 +1,29 @@
 import React from 'react';
-import {View} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import {Chip} from 'react-native-elements';
 
-const chips = ({items}) => {
+const chips = ({items, onPress}) => {
   return (
-    <View style={{flexDirection: 'row'}}>
-      {items.map((item, index) => {
-        return <Chip key={index} title={item.label} type="outline" />;
-      })}
-    </View>
+    items &&
+    items.map((item, index) => {
+      return (
+        <TouchableOpacity
+          style={{padding: 5, backgroundColor: 'white', height: 50}}
+          onPress={() => onPress(item)}>
+          <Chip
+            key={index}
+            title={item.label}
+            type="outline"
+            titleStyle={{color: '#504DE5'}}
+            containerStyle={{
+              borderColor: '#504DE5',
+              borderWidth: 0.7,
+              borderRadius: 20,
+            }}
+          />
+        </TouchableOpacity>
+      );
+    })
   );
 };
 

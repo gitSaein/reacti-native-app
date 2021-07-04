@@ -15,9 +15,7 @@ const {width, height} = Dimensions.get('window');
 
 import ProfileTitle from '../../components/text/profileTitle';
 
-const bottomHalfModal = ({isOpen, toggleModal, items}) => {
-  console.log(isOpen);
-
+const bottomHalfModal = ({isOpen, toggleModal, selectItem, items}) => {
   return (
     <Modal
       isVisible={isOpen}
@@ -47,7 +45,8 @@ const bottomHalfModal = ({isOpen, toggleModal, items}) => {
                     alignSelf: 'flex-start',
                     padding: 10,
                   }}
-                  key={key}>
+                  key={key}
+                  onPress={() => selectItem(item)}>
                   <Chips items={item.category} />
                   <ProfileTitle text={`${item.title}`} />
                 </TouchableOpacity>

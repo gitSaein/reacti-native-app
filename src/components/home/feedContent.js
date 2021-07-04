@@ -3,14 +3,21 @@ import GreyCropProfileTitle from '../text/greyCropProfileTitle';
 import Contents from '../text/content';
 
 import {Avatar} from 'react-native-elements';
-import {StyleSheet, Image, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Image,
+  View,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import ButtonLike from '../../components/buttons/buttonLike';
 import ButtonComment from '../../components/buttons/buttonComment';
-import ButtonShare from '../../components/buttons/buttonShare';
-
+import ButtonShareArrow from '../../components/buttons/buttonShareArrow';
 import IconContent from '../../components/text/iconContent';
 
 const feedContent = ({item}) => {
+  const {width} = Dimensions.get('window');
+
   return (
     <View key={item.id} style={styles.container}>
       {/**** profile ****/}
@@ -34,19 +41,19 @@ const feedContent = ({item}) => {
       {/* **************** */}
       {/* photo */}
       <Image
-        style={{height: 170, borderRadius: 16}}
+        style={{height: 170, borderRadius: 16, width: width * 0.9}}
         source={require('../../assets/images/temp/feed.png')}
       />
       {/* **************** */}
       {/* command */}
-      <View style={styles.profile}>
+      <View style={styles.command}>
         <View style={{flexDirection: 'row'}}>
           <ButtonLike />
           <IconContent text={'2'} />
           <ButtonComment />
           <IconContent text={'2'} />
         </View>
-        <ButtonShare />
+        <ButtonShareArrow />
       </View>
       {/* **************** */}
     </View>
@@ -57,12 +64,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    height: 370,
-
+    height: 350,
     backgroundColor: '#ffffff',
     margin: 2,
     padding: 12,
+    paddingLeft: 20,
   },
-  profile: {flexDirection: 'row', justifyContent: 'space-between', padding: 3},
+  profile: {flexDirection: 'row', justifyContent: 'space-between', padding: 10},
+  command: {flexDirection: 'row', justifyContent: 'space-between', padding: 10},
 });
 export default feedContent;
