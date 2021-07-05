@@ -19,6 +19,7 @@
     "node-sass": "5.0.0",
     "react": "17.0.1",
     "react-native": "0.64.0",
+    "react-native-action-button": "2.8.5",
     "react-native-app-intro-slider": "4.0.4",
     "react-native-dropdown-picker": "5.1.19",
     "react-native-dropdownalert": "4.3.0",

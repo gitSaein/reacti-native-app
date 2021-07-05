@@ -8,6 +8,7 @@ const chips = ({items, onPress}) => {
     items.map((item, index) => {
       return (
         <TouchableOpacity
+          key={index}
           style={{padding: 5, backgroundColor: 'white', height: 50}}
           onPress={() => onPress(item)}>
           <Chip

@@ -46,6 +46,22 @@ const group = ({navigation}) => {
             contents: 'hi my name is saein lee',
           }}
         />
+        <GroupConent
+          item={{
+            id: '2',
+            title: 'Kim2',
+            profileImage: require('../../assets/images/temp/middleProfile.png'),
+            contents: 'hi my name is saein lee',
+          }}
+        />
+        <GroupConent
+          item={{
+            id: '3',
+            title: 'Kim3',
+            profileImage: require('../../assets/images/temp/middleProfile.png'),
+            contents: 'hi my name is saein lee',
+          }}
+        />
       </ScrollView>
     </View>
   );
