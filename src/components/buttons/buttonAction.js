@@ -8,13 +8,23 @@ const buttonAction = ({items, onPress}) => {
     items &&
     items.map(item => (
       <ActionButton.Item
+        size={40}
         buttonColor={item.color}
         title={item.title}
         onPress={() => onPress(item)}>
         <Icon name={item.icon} size={25} />
       </ActionButton.Item>
     ));
-  return <ActionButton buttonColor="#FF028A">{menuList}</ActionButton>;
+  return (
+    <ActionButton
+      style={{
+        marginBottom: 53,
+      }}
+      size={45}
+      buttonColor="#FF028A">
+      {menuList}
+    </ActionButton>
+  );
 };
 
 export default buttonAction;
