@@ -3,15 +3,7 @@ import GreyCropProfileTitle from '../text/greyCropProfileTitle';
 import Contents from '../text/content';
 
 import {Avatar} from 'react-native-elements';
-import {
-  StyleSheet,
-  Image,
-  View,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
-import ButtonLike from '../buttons/buttonLike';
-import ButtonComment from '../buttons/buttonComment';
+import {StyleSheet, Image, View, Dimensions} from 'react-native';
 import SmallCircleAvatar from '../profile/smallCircleAvatar';
 
 import ButtonShareArrow from '../buttons/buttonShareArrow';
@@ -26,7 +18,7 @@ const groupContent = ({item}) => {
         {/**** profile ****/}
         <View style={styles.profile}>
           <View style={{flexDirection: 'row'}}>
-            <Avatar size="small" rounded={true} source={item.profileImage} />
+            <Avatar size="medium" rounded={true} source={item.profileImage} />
             <GreyCropProfileTitle text={item.title} />
           </View>
           <Button2 title={'JOIN'} />

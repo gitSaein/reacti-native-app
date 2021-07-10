@@ -1,6 +1,6 @@
 import React from 'react';
 import GreyCropProfileTitle from '../text/greyCropProfileTitle';
-import Contents from '../text/content';
+import Content from '../text/content';
 
 import {Avatar} from 'react-native-elements';
 import {
@@ -10,10 +10,10 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import ButtonLike from '../../components/buttons/buttonLike';
-import ButtonComment from '../../components/buttons/buttonComment';
-import ButtonShareArrow from '../../components/buttons/buttonShareArrow';
-import IconContent from '../../components/text/iconContent';
+import ButtonLike from '../buttons/buttonLike';
+import ButtonComment from '../buttons/buttonComment';
+import ButtonShareArrow from '../buttons/buttonShareArrow';
+import IconContent from '../text/iconContent';
 
 const feedContent = ({item}) => {
   const {width} = Dimensions.get('window');
@@ -23,7 +23,7 @@ const feedContent = ({item}) => {
       {/**** profile ****/}
       <View style={styles.profile}>
         <View style={{flexDirection: 'row'}}>
-          <Avatar size="small" rounded={true} source={item.profileImage} />
+          <Avatar size="medium" rounded={true} source={item.profileImage} />
           <GreyCropProfileTitle text={item.title} />
         </View>
         <TouchableOpacity>
@@ -36,14 +36,16 @@ const feedContent = ({item}) => {
       {/* **************** */}
       {/* text */}
       <View style={{height: 48}}>
-        <Contents text={item.contents} />
+        <Content text={item.contents} />
       </View>
       {/* **************** */}
       {/* photo */}
-      <Image
-        style={{height: 170, borderRadius: 16, width: width * 0.9}}
-        source={require('../../assets/images/temp/feed.png')}
-      />
+      <View style={{alignItems: 'center'}}>
+        <Image
+          style={{height: 170, borderRadius: 16, width: width * 0.9}}
+          source={require('../../assets/images/temp/feed.png')}
+        />
+      </View>
       {/* **************** */}
       {/* command */}
       <View style={styles.command}>
@@ -66,11 +68,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     height: 350,
     backgroundColor: '#ffffff',
-    margin: 2,
-    padding: 12,
-    paddingLeft: 20,
+    margin: 5,
+    padding: 5,
   },
-  profile: {flexDirection: 'row', justifyContent: 'space-between', padding: 10},
-  command: {flexDirection: 'row', justifyContent: 'space-between', padding: 10},
+  profile: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 5,
+  },
+  command: {flexDirection: 'row', justifyContent: 'space-between', margin: 20},
 });
 export default feedContent;

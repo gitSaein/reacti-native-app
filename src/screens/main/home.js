@@ -10,9 +10,9 @@ import {
 import HeaderWithComponent from '../../components/common/headerWithComponent';
 import HeaderSearchInput from '../../components/input/headerSearchInput';
 import ButtonAdd from '../../components/buttons/buttonAdd';
-import CropUserProfile from '../../components/home/cropUserProfile';
+import CropUserProfile from '../../components/common/cropUserProfile';
 import ProfileTitle from '../../components/text/profileTitle';
-import FeedContent from '../../components/home/feedContent';
+import FeedContent from '../../components/common/feedContent';
 
 const liveFeeds = [
   {

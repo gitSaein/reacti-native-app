@@ -1,11 +1,27 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+
 import ButtonAction from '../../components/buttons/buttonAction';
 import HeaderSearchInput from '../../components/input/headerSearchInput';
 import ProfileTitle from '../../components/text/profileTitle';
 import HeaderWithComponent from '../../components/common/headerWithComponent';
+import MessageInfo from '../../components/common/messageInfo';
 
 const chat = ({navigation}) => {
+  const messageInfoList = [
+    {
+      title: 'kim',
+      message: 'hi nice to meet you',
+      imageUrl: require('../../assets/images/temp/middleProfile.png'),
+      updateDate: '11:30',
+    },
+    {
+      title: 'sora',
+      message: 'hi hi hi',
+      imageUrl: require('../../assets/images/temp/middleProfile.png'),
+      updateDate: '2021.07.07',
+    },
+  ];
   return (
     <View style={styles.container}>
       <HeaderWithComponent
@@ -13,7 +29,19 @@ const chat = ({navigation}) => {
       />
       <View style={{marginTop: 90, alignSelf: 'flex-start'}}>
         <ProfileTitle text={'Message'} />
+        <ScrollView>
+          {messageInfoList.length > 0 &&
+            messageInfoList.map((item, index) => {
+              return (
+                <TouchableOpacity>
+                  <MessageInfo item={item} index={index} />
+                </TouchableOpacity>
+              );
+            })}
+          <TouchableOpacity />
+        </ScrollView>
       </View>
+
       <ButtonAction
         items={[
           {

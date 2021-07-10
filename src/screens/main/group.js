@@ -3,7 +3,7 @@ import {View, ScrollView, StyleSheet, Dimensions} from 'react-native';
 import HeaderWithComponent from '../../components/common/headerWithComponent';
 import HeaderSearchInput from '../../components/input/headerSearchInput';
 import ButtonAdd from '../../components/buttons/buttonAdd';
-import GroupConent from '../../components/group/groupConent';
+import GroupConent from '../../components/common/groupConent';
 
 import Chips from '../../components/chip/chips';
 const {height, width} = Dimensions.get('window');
