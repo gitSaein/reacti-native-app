@@ -34,7 +34,7 @@ const chat = ({navigation}) => {
             messageInfoList.map((item, index) => {
               return (
                 <TouchableOpacity
-                  onPress={() => navigation.navigate('ChatDetail')}>
+                  onPress={() => navigation.navigate('ChatDetail', item)}>
                   <MessageInfo item={item} index={index} />
                 </TouchableOpacity>
               );

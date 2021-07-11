@@ -22,7 +22,7 @@ import ForgotPassword from './src/screens/auth/ForgotPassword';
 import ResetPassword from './src/screens/auth/ResetPassword';
 import SmsCode from './src/screens/auth/SmsCode';
 import SmsPhoneNumber from './src/screens/auth/SmsPhoneNumber';
-import ChatDetail from './src/screens/main/sub/chatDetail';
+import ChatDetail from './src/screens/main/chatDetail';
 
 import Home from './src/screens/main/home';
 import Chat from './src/screens/main/chat';

@@ -14,7 +14,7 @@ import ButtonLike from '../buttons/buttonLike';
 import ButtonComment from '../buttons/buttonComment';
 import ButtonShareArrow from '../buttons/buttonShareArrow';
 import IconContent from '../text/iconContent';
-
+import ButtonWhiteMoreHorizontal from '../buttons/buttonWhiteMoreHorizontal';
 const feedContent = ({item}) => {
   const {width} = Dimensions.get('window');
 
@@ -26,11 +26,7 @@ const feedContent = ({item}) => {
           <Avatar size="medium" rounded={true} source={item.profileImage} />
           <GreyCropProfileTitle text={item.title} />
         </View>
-        <TouchableOpacity>
-          <Image
-            source={require('../../assets/images/icon/more-horizontal-icon.png')}
-          />
-        </TouchableOpacity>
+        <ButtonWhiteMoreHorizontal onPress={() => console.log('hihi')} />
       </View>
       <View style={styles.icon} />
       {/* **************** */}
