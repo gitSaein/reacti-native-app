@@ -76,14 +76,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   header: {
-    margin: 2,
-    width: width - 4,
     height: height * 0.1,
   },
   box: {
     backgroundColor: '#FFFFFF',
     margin: 2,
-    width: width - 8,
     height: height * 0.3,
     borderRadius: 14,
     shadowOffset: {
