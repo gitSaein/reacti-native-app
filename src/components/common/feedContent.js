@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     height: 350,
     backgroundColor: '#ffffff',
-    margin: 5,
+    marginTop: 5,
     padding: 5,
   },
   profile: {

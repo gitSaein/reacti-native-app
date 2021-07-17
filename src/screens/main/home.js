@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
   },
   newLive: {
-    flex: 1,
+    flex: 1.4,
     backgroundColor: '#ffffff',
   },
   feed: {

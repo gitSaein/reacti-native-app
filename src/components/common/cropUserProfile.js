@@ -9,8 +9,12 @@ const cropUserProfile = ({item}) => {
     <TouchableOpacity style={styles.item}>
       <Image style={styles.image} rounded source={item.image} />
       <View style={styles.user}>
-        <Avatar size="small" rounded={true} source={item.profileImage} />
-        <GreyCropProfileTitle text={item.title} />
+        <View style={{flex: 1, justifyContent: 'center'}}>
+          <Avatar size="small" rounded={true} source={item.profileImage} />
+        </View>
+        <View style={{flex: 3.5, justifyContent: 'center'}}>
+          <GreyCropProfileTitle text={item.title} />
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -20,9 +24,7 @@ const styles = StyleSheet.create({
   item: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 189,
-    width: 220,
-    margin: 2,
+    margin: 5,
   },
   image: {
     width: 220,
@@ -32,6 +34,7 @@ const styles = StyleSheet.create({
   user: {
     flexDirection: 'row',
     alignSelf: 'flex-start',
+    margin: 10,
   },
 });
 export default cropUserProfile;
