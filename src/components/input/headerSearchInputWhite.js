@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     width: 298,
     height: 40,
     borderColor: '#fff',
-    marginTop: 15,
     marginHorizontal: 5,
   },
   image: {marginRight: 10, marginTop: 4},

@@ -202,6 +202,8 @@ const styles = StyleSheet.create({
   },
   search: {
     flex: 1,
+    marginTop: 15,
+
     flexDirection: 'row',
     paddingRight: 70,
   },

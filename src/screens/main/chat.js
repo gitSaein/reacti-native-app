@@ -1,17 +1,22 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import React from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  StatusBar,
+} from 'react-native';
 
 import ButtonAction from '../../components/buttons/buttonAction';
-import HeaderSearchInput from '../../components/input/headerSearchInput';
 import ProfileTitle from '../../components/text/profileTitle';
-import HeaderWithComponent from '../../components/common/headerWithComponent';
+import HeaderPurpleSearch from '../../components/header/headerPurpleSearch';
 import MessageInfo from '../../components/common/messageInfo';
 
 const chat = ({navigation}) => {
   const messageInfoList = [
     {
       title: 'kim',
-      message: 'hi nice to meet you',
+      message: 'hi nice to meet you 10000000001 2000000000002 3000000003',
       imageUrl: require('../../assets/images/temp/middleProfile.png'),
       updateDate: '11:30',
     },
@@ -24,16 +29,15 @@ const chat = ({navigation}) => {
   ];
   return (
     <View style={styles.container}>
-      <HeaderWithComponent
-        leftComponent={<HeaderSearchInput placeholder={'Search'} />}
-      />
-      <View style={{marginTop: 90, alignSelf: 'flex-start'}}>
+      <HeaderPurpleSearch />
+      <View style={{alignSelf: 'flex-start'}}>
         <ProfileTitle text={'Message'} />
         <ScrollView>
           {messageInfoList.length > 0 &&
             messageInfoList.map((item, index) => {
               return (
                 <TouchableOpacity
+                  key={index}
                   onPress={() => navigation.navigate('ChatDetail', item)}>
                   <MessageInfo item={item} index={index} />
                 </TouchableOpacity>
@@ -42,7 +46,6 @@ const chat = ({navigation}) => {
           <TouchableOpacity />
         </ScrollView>
       </View>
-
       <ButtonAction
         items={[
           {
@@ -62,6 +65,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    paddingTop: StatusBar.currentHeight,
     backgroundColor: '#ffffff',
   },
 });

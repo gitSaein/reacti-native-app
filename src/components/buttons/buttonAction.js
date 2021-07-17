@@ -6,8 +6,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const buttonAction = ({items, onPress}) => {
   const menuList =
     items &&
-    items.map(item => (
+    items.map((item, index) => (
       <ActionButton.Item
+        key={index}
         size={40}
         buttonColor={item.color}
         title={item.title}

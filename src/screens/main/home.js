@@ -7,9 +7,8 @@ import {
   StatusBar,
 } from 'react-native';
 
-import HeaderWithComponent from '../../components/common/headerWithComponent';
-import HeaderSearchInput from '../../components/input/headerSearchInput';
-import ButtonAdd from '../../components/buttons/buttonAdd';
+import HeadePurpleSearchAdd from '../../components/header/headePurpleSearchAdd';
+
 import CropUserProfile from '../../components/common/cropUserProfile';
 import ProfileTitle from '../../components/text/profileTitle';
 import FeedContent from '../../components/common/feedContent';
@@ -95,21 +94,17 @@ const feeds = [
 const home = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderWithComponent
-        leftComponent={<HeaderSearchInput placeholder={'Search'} />}
-        rightComponent={<ButtonAdd />}
-      />
-      <View style={styles.new_live}>
+      <HeadePurpleSearchAdd />
+      <View style={styles.newLive}>
         <ProfileTitle text={"What's New"} />
         <FlatList
           horizontal={true}
           data={liveFeeds}
           keyExtractor={(item, index) => index}
           renderItem={CropUserProfile}
-          style={styles.scrollView}
         />
       </View>
-      <View>
+      <View style={styles.feed}>
         <FlatList
           data={feeds}
           keyExtractor={(item, index) => index}
@@ -123,14 +118,16 @@ const home = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignContent: 'center',
+    justifyContent: 'center',
     paddingTop: StatusBar.currentHeight,
   },
-  new_live: {
-    marginTop: 60,
+  newLive: {
+    flex: 1,
     backgroundColor: '#ffffff',
   },
-  scrollView: {
-    height: 225,
+  feed: {
+    flex: 2,
   },
 });
 

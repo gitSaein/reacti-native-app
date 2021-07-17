@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, Image} from 'react-native';
 
-const buttonAdd = ({onPress}) => {
+const buttonAddPurple = ({onPress}) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <Image
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
     width: 32,
   },
 });
-export default buttonAdd;
+export default buttonAddPurple;
