@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     fontSize: 14,
     color: '#6F8BA4',
-    margin: 10,
   },
 });
 

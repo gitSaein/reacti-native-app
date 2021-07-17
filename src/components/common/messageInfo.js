@@ -12,11 +12,11 @@ const messageInfo = ({item, index}) => {
         <View style={{flex: 1}}>
           <Avatar size="medium" rounded={true} source={item.imageUrl} />
         </View>
-        <View style={{flex: 3, flexDirection: 'column', marginLeft: 10}}>
+        <View style={{flex: 4, marginLeft: 15}}>
           <GreyCropProfileTitle text={item.title} />
           <Content text={item.message} />
         </View>
-        <View style={{flex: 3, alignItems: 'flex-end', marginRight: 10}}>
+        <View style={{flex: 1.5, alignItems: 'flex-end', marginRight: 15}}>
           <Content text={item.updateDate} />
         </View>
       </View>
