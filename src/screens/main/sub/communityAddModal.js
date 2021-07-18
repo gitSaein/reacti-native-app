@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 
-import HeaderWhiteWithComponent from '../../../components/common/headerWhiteWithComponent';
+import HeaderWhiteWithComponent from '../../../components/header/headerWhiteWithComponent';
 import PhotoGallaryModal from '../../../components/modal/photoGallaryModal';
 import ButtonBigAdd from '../../../components/buttons/buttonBigAdd';
 import SelectBoxWithSearch from '../../../components/input/selectBoxWithSearch';

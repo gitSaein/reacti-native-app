@@ -9,7 +9,7 @@ import {
 import Modal from 'react-native-modal';
 import CheckBox from '@react-native-community/checkbox';
 
-import HeaderWhiteWithComponent from '../../components/common/headerWhiteWithComponent';
+import HeaderWhiteWithComponent from '../../components/header/headerWhiteWithComponent';
 
 const photoGallaryModal = ({
   isVisible,

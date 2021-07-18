@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 
-import Header1 from '../../components/common/header1.js';
+import Header1 from '../../components/header/header1.js';
 import InputPassword from '../../components/input/inputPassword.js';
 import Button1 from '../../components/buttons/button1';
 

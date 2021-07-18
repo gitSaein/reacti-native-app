@@ -4,6 +4,7 @@ import {View, StyleSheet, StatusBar, ScrollView} from 'react-native';
 import HeaderPurpleChatInfo from '../../components/header/headerPurpleChatInfo';
 import MessageByMe from '../../components/common/messageByMe';
 import MessageByOthers from '../../components/common/messageByOthers';
+import MessageInputSender from '../../components/common/messageInputSender';
 
 const chatDetail = ({route, navigation}) => {
   const item = route.params;
@@ -14,8 +15,17 @@ const chatDetail = ({route, navigation}) => {
         item={item}
         onLeft={() => navigation.navigate('Chat')}
       />
-      <MessageByOthers item={item} />
-      <MessageByMe item={item} />
+      <ScrollView style={{flex: 4}}>
+        <MessageByOthers item={item} />
+        <MessageByMe item={item} />
+        <MessageByMe item={item} />
+        <MessageByMe item={item} />
+        <MessageByMe item={item} />
+        <MessageByOthers item={item} />
+        <MessageByOthers item={item} />
+        <MessageByOthers item={item} />
+      </ScrollView>
+      <MessageInputSender />
     </View>
   );
 };

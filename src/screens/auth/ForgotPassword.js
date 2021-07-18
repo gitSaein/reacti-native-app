@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import DropdownAlert from 'react-native-dropdownalert';
 
-import Header1 from '../../components/common/header1.js';
+import Header1 from '../../components/header/header1.js';
 import Input1 from '../../components/input/input1.js';
 import Button1 from '../../components/buttons/button1';
 

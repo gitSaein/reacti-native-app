@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 
-import HeaderWithShare from '../../../components/common/headerWithShare';
+import HeaderWithShare from '../../../components/header/headerWithShare';
 import Chips from '../../../components/chip/chips';
 
 const {height, width} = Dimensions.get('window');

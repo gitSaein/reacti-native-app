@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Image} from 'react-native';
+import {StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Input} from 'react-native-elements';
 
 const headerSearchInput = props => {
@@ -8,7 +8,9 @@ const headerSearchInput = props => {
       placeholder={'    Search'}
       placeholderTextColor={'#FFFFFF'}
       rightIcon={
-        <Image source={require('../../assets/images/icon/Search.png')} />
+        <TouchableOpacity>
+          <Image source={require('../../assets/images/icon/Search.png')} />
+        </TouchableOpacity>
       }
       textAlign={'left'}
       inputContainerStyle={styles.input}
