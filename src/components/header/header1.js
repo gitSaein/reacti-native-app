@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 
 import {Header} from 'react-native-elements';
+const {height} = Dimensions.get('window');
 
 const header1 = props => {
   return (
@@ -19,14 +20,12 @@ const header1 = props => {
 
 const styles = StyleSheet.create({
   containerStyle: {
-    position: 'absolute',
-    left: '0%',
-    right: '0%',
-    top: '0%',
-    bottom: '90.47%',
+    height: height * 0.1,
+    justifyContent: 'center',
 
     backgroundColor: '#504DE5',
-    borderRadius: 16,
+    borderBottomRightRadius: 16,
+    borderBottomLeftRadius: 16,
   },
 });
 export default header1;

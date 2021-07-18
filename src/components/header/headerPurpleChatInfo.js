@@ -7,7 +7,7 @@ import ButtonWhiteMoreHorizontal from '../buttons/buttonWhiteMoreHorizontal';
 import WhiteTitle from '../text/whiteTitle';
 import ContentWhite from '../text/contentWhite';
 
-const {height, width} = Dimensions.get('window');
+const {height} = Dimensions.get('window');
 
 const headerPurpleChatInfo = props => {
   return (

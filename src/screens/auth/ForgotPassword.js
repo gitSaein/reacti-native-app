@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
-import DropdownAlert from 'react-native-dropdownalert';
 
 import Header1 from '../../components/header/header1.js';
 import Input1 from '../../components/input/input1.js';
