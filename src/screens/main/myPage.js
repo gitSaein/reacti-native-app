@@ -1,11 +1,11 @@
-import React, {useState, useCallback} from 'react';
+import React from 'react';
 import {View, StyleSheet, StatusBar} from 'react-native';
-import HeaderPurpleOnlyTitle from '../../components/header/headerPurpleOnlyTitle.js';
+import HeaderPurpleAddSetting from '../../components/header/headerPurpleAddSetting.js';
 
 const myPage = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <HeaderPurpleOnlyTitle title={'비밀번호 재설정'} />
+      <HeaderPurpleAddSetting title={'my page'} />
     </View>
   );
 };

@@ -2,13 +2,23 @@ import React from 'react';
 import {StyleSheet, View, Dimensions} from 'react-native';
 
 import WhiteTitle from '../text/whiteTitle';
+import ButtonSetting from '../buttons/buttonSetting';
+import ButtonAdd from '../buttons/buttonAdd';
 
 const {height} = Dimensions.get('window');
 
-const headerPurpleOnlyTitle = props => {
+const headerPurpleAddSetting = props => {
   return (
     <View style={styles.containerStyle}>
-      <WhiteTitle text={props.title} />
+      <View style={{flex: 4}}>
+        <WhiteTitle text={props.title} />
+      </View>
+      <View style={{flex: 0.5, alignContent: 'flex-end'}}>
+        <ButtonAdd />
+      </View>
+      <View style={{flex: 0.5, alignContent: 'flex-end'}}>
+        <ButtonSetting />
+      </View>
     </View>
   );
 };
@@ -24,4 +34,4 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 16,
   },
 });
-export default headerPurpleOnlyTitle;
+export default headerPurpleAddSetting;
