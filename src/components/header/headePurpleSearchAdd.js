@@ -11,7 +11,7 @@ const headePurpleSearchAdd = props => {
       <View style={{flex: 7}}>
         <HeaderSearchInput />
       </View>
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, justifyContent: 'center'}}>
         <ButtonAdd />
       </View>
     </View>

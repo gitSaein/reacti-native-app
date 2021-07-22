@@ -15,20 +15,20 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Geolocation from 'react-native-geolocation-service';
 
-import Welcome1 from './src/screens/welcome/Welcome1';
-import SignIn1 from './src/screens/auth/SignIn1';
-import SignUp from './src/screens/auth/SignUp';
-import ForgotPassword from './src/screens/auth/ForgotPassword';
-import ResetPassword from './src/screens/auth/ResetPassword';
-import SmsCode from './src/screens/auth/SmsCode';
-import SmsPhoneNumber from './src/screens/auth/SmsPhoneNumber';
-import ChatDetail from './src/screens/main/chatDetail';
+import Welcome1 from './src/views/welcome/Welcome1';
+import SignIn1 from './src/views/auth/SignIn1';
+import SignUp from './src/views/auth/SignUp';
+import ForgotPassword from './src/views/auth/ForgotPassword';
+import ResetPassword from './src/views/auth/ResetPassword';
+import SmsCode from './src/views/auth/SmsCode';
+import SmsPhoneNumber from './src/views/auth/SmsPhoneNumber';
+import ChatDetail from './src/views/main/chatDetail';
 
-import Home from './src/screens/main/home';
-import Chat from './src/screens/main/chat';
-import Community from './src/screens/main/community';
-import MyPage from './src/screens/main/myPage';
-import Group from './src/screens/main/group';
+import Home from './src/views/main/home';
+import Chat from './src/views/main/chat';
+import Community from './src/views/main/community';
+import MyPage from './src/views/main/myPage';
+import Group from './src/views/main/group';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();

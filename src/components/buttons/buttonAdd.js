@@ -14,8 +14,8 @@ const buttonAdd = ({onPress}) => {
 
 const styles = StyleSheet.create({
   image: {
-    height: 30,
-    width: 30,
+    height: 23,
+    width: 23,
   },
 });
 export default buttonAdd;
