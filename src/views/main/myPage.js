@@ -22,11 +22,11 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     paddingTop: StatusBar.currentHeight,
   },
+  profile: {flex: 0.3, backgroundColor: 'red'},
   tab: {
-    flex: 2,
+    flex: 0.7,
     backgroundColor: 'yellow',
   },
-  profile: {flex: 1, backgroundColor: 'red'},
 });
 
 export default myPage;
