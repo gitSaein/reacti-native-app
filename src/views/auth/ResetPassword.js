@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, StatusBar} from 'react-native';
 
 import Header1 from '../../components/header/header1.js';
 import InputPassword from '../../components/input/inputPassword.js';
@@ -22,8 +22,9 @@ const SignUp = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center', //세로
+    justifyContent: 'flex-start', //세로
     alignItems: 'center', //가로
+    paddingTop: StatusBar.currentHeight,
   },
   button: {
     top: '25%',

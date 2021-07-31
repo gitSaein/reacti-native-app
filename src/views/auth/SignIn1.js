@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, SafeAreaView, StyleSheet, StatusBar} from 'react-native';
 import Header1 from '../../components/header/header1.js';
 import Input1 from '../../components/input/input1.js';
 import InputPassword from '../../components/input/inputPassword.js';
@@ -11,7 +11,7 @@ import GreyText from '../../components/text/greyText';
 
 const SignIn1 = ({navigation}) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header1 title={'로그인'} />
       <View style={styles.form}>
         <Input1 placeholder={'email'} autoCompleteType={'email'} />
@@ -33,15 +33,16 @@ const SignIn1 = ({navigation}) => {
       />
       <ButtonKakao text={'카카오로 시작하기'} />
       <ButtonNaver text={'네이버로 시작하기'} />
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center', //세로
+    justifyContent: 'flex-start', //세로
     alignItems: 'center', //가로
+    paddingTop: StatusBar.currentHeight,
   },
   form: {
     marginTop: 120,

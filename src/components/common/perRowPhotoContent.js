@@ -1,25 +1,25 @@
 import React from 'react';
 import {View, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
-const perRowPhotoContent = ({i, items}) => {
+const perRowPhotoContent = ({i, items, onPress}) => {
   return (
     <View key={i} style={styles.rowView}>
       {items[i * 3] ? (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => onPress(items[i * 3])}>
           <Image style={styles.image} source={items[i * 3].img_url} />
         </TouchableOpacity>
       ) : (
         <View />
       )}
       {items[i * 3 + 1] ? (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => onPress(items[i * 3 + 1])}>
           <Image style={styles.image} source={items[i * 3 + 1].img_url} />
         </TouchableOpacity>
       ) : (
         <View />
       )}
       {items[i * 3 + 2] ? (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => onPress(items[i * 3 + 2])}>
           <Image style={styles.image} source={items[i * 3 + 2].img_url} />
         </TouchableOpacity>
       ) : (

@@ -1,20 +1,14 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Image,
-  ScrollView,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, ScrollView, View} from 'react-native';
 
 import PerRowPhotoContent from '../../../components/common/perRowPhotoContent';
 
 const tabFeedView = props => {
   const items = [
-    {img_url: require('../../../assets/images/temp/tmp1.png')},
-    {img_url: require('../../../assets/images/temp/tmp2.png')},
-    {img_url: require('../../../assets/images/temp/tmp3.png')},
-    {img_url: require('../../../assets/images/temp/tmp4.png')},
+    {key: 1, img_url: require('../../../assets/images/temp/tmp1.png')},
+    {key: 2, img_url: require('../../../assets/images/temp/tmp2.png')},
+    {key: 3, img_url: require('../../../assets/images/temp/tmp3.png')},
+    {key: 4, img_url: require('../../../assets/images/temp/tmp4.png')},
   ];
   let row = items.length / 3; //몫
   const left = items.length % 3; //나머지
@@ -25,7 +19,13 @@ const tabFeedView = props => {
 
   const rowItems = [];
   for (let i = 0; i < row; i++) {
-    rowItems.push(<PerRowPhotoContent i={i} items={items} />);
+    rowItems.push(
+      <PerRowPhotoContent
+        i={i}
+        items={items}
+        onPress={item => console.log(item)}
+      />,
+    );
   }
 
   return (
