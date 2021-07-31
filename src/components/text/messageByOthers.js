@@ -1,8 +1,8 @@
 import React from 'react';
 import {View} from 'react-native';
 import {Avatar} from 'react-native-elements';
-import Content from '../text/content';
-import ContentDark from '../text/contentDark';
+import Content from './content';
+import ContentDark from './contentDark';
 
 const messageByOthers = ({item, index}) => {
   return (

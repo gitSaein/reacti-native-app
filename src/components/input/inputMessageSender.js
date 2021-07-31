@@ -3,7 +3,7 @@ import {View, StyleSheet} from 'react-native';
 
 import ButtonClipInactive from '../buttons/buttonClipInactive';
 import ButtonSender from '../buttons/buttonSender';
-import NoLineInput from '../input/noLineInput';
+import NoLineInput from './noLineInput';
 
 const messageInputSender = props => {
   return (

@@ -9,7 +9,7 @@ import {
 
 import HeadePurpleSearchAdd from '../../components/header/headePurpleSearchAdd';
 
-import CropUserProfile from '../../components/common/cropUserProfile';
+import CropUserProfile from '../../components/profile/cropUserProfile';
 import ProfileTitle from '../../components/text/profileTitle';
 import FeedContent from '../../components/common/feedContent';
 

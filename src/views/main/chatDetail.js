@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {View, StyleSheet, StatusBar, ScrollView} from 'react-native';
 
 import HeaderPurpleChatInfo from '../../components/header/headerPurpleChatInfo';
-import MessageByMe from '../../components/common/messageByMe';
-import MessageByOthers from '../../components/common/messageByOthers';
-import MessageInputSender from '../../components/common/messageInputSender';
+import MessageByMe from '../../components/text/messageByMe';
+import MessageByOthers from '../../components/text/messageByOthers';
+import InputMessageSender from '../../components/input/inputMessageSender';
 
 const chatDetail = ({route, navigation}) => {
   const item = route.params;
@@ -25,7 +25,7 @@ const chatDetail = ({route, navigation}) => {
         <MessageByOthers item={item} />
         <MessageByOthers item={item} />
       </ScrollView>
-      <MessageInputSender />
+      <InputMessageSender />
     </View>
   );
 };

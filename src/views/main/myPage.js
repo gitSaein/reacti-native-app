@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   profile: {flex: 0.3, backgroundColor: 'red'},
   tab: {
     flex: 0.7,
-    backgroundColor: 'yellow',
+    backgroundColor: 'white',
   },
 });
 

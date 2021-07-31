@@ -7,45 +7,30 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const tabFeedView = () => {
+import PerRowPhotoContent from '../../../components/common/perRowPhotoContent';
+
+const tabFeedView = props => {
+  const items = [
+    {img_url: require('../../../assets/images/temp/tmp1.png')},
+    {img_url: require('../../../assets/images/temp/tmp2.png')},
+    {img_url: require('../../../assets/images/temp/tmp3.png')},
+    {img_url: require('../../../assets/images/temp/tmp4.png')},
+  ];
+  let row = items.length / 3; //몫
+  const left = items.length % 3; //나머지
+
+  if (left > 0) {
+    row + 1;
+  }
+
+  const rowItems = [];
+  for (let i = 0; i < row; i++) {
+    rowItems.push(<PerRowPhotoContent i={i} items={items} />);
+  }
+
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <View style={styles.rowView}>
-          <TouchableOpacity>
-            <Image
-              style={styles.image}
-              source={require('../../../assets/images/temp/tmp1.png')}
-            />
-          </TouchableOpacity>
-          <Image
-            style={styles.image}
-            source={require('../../../assets/images/temp/tmp2.png')}
-          />
-          <Image
-            style={styles.image}
-            source={require('../../../assets/images/temp/tmp3.png')}
-          />
-        </View>
-        <View style={styles.rowView}>
-          <Image
-            style={styles.image}
-            source={require('../../../assets/images/temp/tmp4.png')}
-          />
-        </View>
-        <View style={styles.rowView}>
-          <Image
-            style={styles.image}
-            source={require('../../../assets/images/temp/tmp4.png')}
-          />
-        </View>
-        <View style={styles.rowView}>
-          <Image
-            style={styles.image}
-            source={require('../../../assets/images/temp/tmp4.png')}
-          />
-        </View>
-      </ScrollView>
+      <ScrollView>{rowItems}</ScrollView>
     </View>
   );
 };

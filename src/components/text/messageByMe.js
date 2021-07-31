@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
-import Content from '../text/content';
-import ContentWhite from '../text/contentWhite';
+import Content from './content';
+import ContentWhite from './contentWhite';
 
 const messageByMe = ({item, index}) => {
   return (
