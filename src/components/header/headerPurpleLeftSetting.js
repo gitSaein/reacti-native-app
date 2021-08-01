@@ -10,13 +10,18 @@ const {height} = Dimensions.get('window');
 const headerPurpleLeftSetting = props => {
   return (
     <View style={styles.containerStyle}>
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, justifyContent: 'center'}}>
         <ButtonWhiteLeft onPress={props.onLeft} />
       </View>
-      <View style={{flex: 8, alignContent: 'flex-end'}}>
+      <View style={{flex: 8, paddingLeft: '30%', justifyContent: 'center'}}>
         <WhiteTitle text={props.title} />
       </View>
-      <View style={{flex: 1, alignContent: 'flex-end'}}>
+      <View
+        style={{
+          flex: 1,
+          alignContent: 'flex-end',
+          justifyContent: 'center',
+        }}>
         <ButtonWhiteMoreHorizontal />
       </View>
     </View>

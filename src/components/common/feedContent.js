@@ -1,20 +1,15 @@
 import React from 'react';
+import {Avatar} from 'react-native-elements';
+import {StyleSheet, Image, View, Dimensions} from 'react-native';
+
 import GreyCropProfileTitle from '../text/greyCropProfileTitle';
 import Content from '../text/content';
-
-import {Avatar} from 'react-native-elements';
-import {
-  StyleSheet,
-  Image,
-  View,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
 import ButtonLike from '../buttons/buttonLike';
 import ButtonComment from '../buttons/buttonComment';
 import ButtonShareArrow from '../buttons/buttonShareArrow';
 import IconContent from '../text/iconContent';
 import ButtonWhiteMoreHorizontal from '../buttons/buttonWhiteMoreHorizontal';
+import FeedBottomLayout from '../layout/feedBottomLayout';
 const feedContent = ({item}) => {
   const {width} = Dimensions.get('window');
 
@@ -28,7 +23,6 @@ const feedContent = ({item}) => {
         </View>
         <ButtonWhiteMoreHorizontal onPress={() => console.log('hihi')} />
       </View>
-      <View style={styles.icon} />
       {/* **************** */}
       {/* text */}
       <View style={{height: 48}}>
@@ -42,18 +36,7 @@ const feedContent = ({item}) => {
           source={require('../../assets/images/temp/feed.png')}
         />
       </View>
-      {/* **************** */}
-      {/* command */}
-      <View style={styles.command}>
-        <View style={{flexDirection: 'row'}}>
-          <ButtonLike />
-          <IconContent text={'2'} />
-          <ButtonComment />
-          <IconContent text={'2'} />
-        </View>
-        <ButtonShareArrow />
-      </View>
-      {/* **************** */}
+      <FeedBottomLayout likeCnt={4} cmtCnt={10} />
     </View>
   );
 };
@@ -72,6 +55,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 5,
   },
-  command: {flexDirection: 'row', justifyContent: 'space-between', margin: 20},
 });
 export default feedContent;

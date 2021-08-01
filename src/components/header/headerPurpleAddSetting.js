@@ -10,13 +10,15 @@ const {height} = Dimensions.get('window');
 const headerPurpleAddSetting = props => {
   return (
     <View style={styles.containerStyle}>
-      <View style={{flex: 4}}>
+      <View style={{flex: 8, justifyContent: 'center'}}>
         <WhiteTitle text={props.title} />
       </View>
-      <View style={{flex: 0.5, alignContent: 'flex-end'}}>
+      <View
+        style={{flex: 1, alignContent: 'flex-end', justifyContent: 'center'}}>
         <ButtonAdd />
       </View>
-      <View style={{flex: 0.5, alignContent: 'flex-end'}}>
+      <View
+        style={{flex: 1, alignContent: 'flex-end', justifyContent: 'center'}}>
         <ButtonSetting />
       </View>
     </View>

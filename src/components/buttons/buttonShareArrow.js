@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Image, View} from 'react-native';
+import {TouchableOpacity, Image} from 'react-native';
 
 const buttonShare = props => {
   return (
