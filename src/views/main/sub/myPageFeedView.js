@@ -1,9 +1,12 @@
 import React from 'react';
 import {StyleSheet, ScrollView, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import PerRowPhotoContent from '../../../components/common/perRowPhotoContent';
 
-const tabFeedView = props => {
+const tabFeedView = () => {
+  const navigation = useNavigation();
+
   const items = [
     {key: 1, img_url: require('../../../assets/images/temp/tmp1.png')},
     {key: 2, img_url: require('../../../assets/images/temp/tmp2.png')},
@@ -17,15 +20,13 @@ const tabFeedView = props => {
     row + 1;
   }
 
+  const onPress = item => {
+    navigation.navigate('PhotoDetail', item);
+  };
+
   const rowItems = [];
   for (let i = 0; i < row; i++) {
-    rowItems.push(
-      <PerRowPhotoContent
-        i={i}
-        items={items}
-        onPress={item => console.log(item)}
-      />,
-    );
+    rowItems.push(<PerRowPhotoContent i={i} items={items} onPress={onPress} />);
   }
 
   return (

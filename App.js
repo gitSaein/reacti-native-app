@@ -23,6 +23,7 @@ import ResetPassword from './src/views/auth/ResetPassword';
 import SmsCode from './src/views/auth/SmsCode';
 import SmsPhoneNumber from './src/views/auth/SmsPhoneNumber';
 import ChatDetail from './src/views/main/chatDetail';
+import PhotoDetail from './src/views/common/photoDetail';
 
 import Home from './src/views/main/home';
 import Chat from './src/views/main/chat';
@@ -129,6 +130,10 @@ const tabNavRoutes = [
   {
     name: 'ChatDetail',
     component: ChatDetail,
+  },
+  {
+    name: 'PhotoDetail',
+    component: PhotoDetail,
   },
 ];
 /* 현재 위치 함수 */
