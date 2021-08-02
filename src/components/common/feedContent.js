@@ -4,10 +4,6 @@ import {StyleSheet, Image, View, Dimensions} from 'react-native';
 
 import GreyCropProfileTitle from '../text/greyCropProfileTitle';
 import Content from '../text/content';
-import ButtonLike from '../buttons/buttonLike';
-import ButtonComment from '../buttons/buttonComment';
-import ButtonShareArrow from '../buttons/buttonShareArrow';
-import IconContent from '../text/iconContent';
 import ButtonWhiteMoreHorizontal from '../buttons/buttonWhiteMoreHorizontal';
 import FeedBottomLayout from '../layout/feedBottomLayout';
 const feedContent = ({item}) => {
