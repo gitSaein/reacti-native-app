@@ -14,10 +14,10 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'SF Pro Text',
     fontStyle: 'normal',
-    fontWeight: 'normal',
+    fontWeight: 'bold',
     textAlignVertical: 'top',
     letterSpacing: 1,
-    fontSize: 14,
+    fontSize: 15,
     color: '#3B566E',
   },
 });

@@ -12,10 +12,25 @@ const commendInfo = ({item, index}) => {
     <View index={index} style={{width: width, height: 66, margin: 10}}>
       <View style={{flexDirection: 'row'}}>
         <View style={{flex: 1}}>
-          <Avatar size="medium" rounded={true} source={item.imageUrl} />
+          <Avatar
+            size="medium"
+            rounded={true}
+            source={item.imageUrl}
+            containerStyle={{
+              padding: 1,
+              margin: 1,
+              borderColor: '#504DE5',
+              borderWidth: 2,
+            }}
+          />
         </View>
         <View style={{flex: 5, marginLeft: 15}}>
-          <GreyCropProfileTitle text={item.userId} />
+          <View style={{flexDirection: 'row'}}>
+            <GreyCropProfileTitle text={item.userId} />
+            <View style={{marginLeft: 10}}>
+              <Content text={item.createDate} />
+            </View>
+          </View>
           <Content text={item.commend} />
         </View>
         <View style={{flex: 1, flexDirection: 'row', marginRight: 40}}>

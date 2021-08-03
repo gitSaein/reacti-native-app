@@ -5,7 +5,6 @@ import {SliderBox} from 'react-native-image-slider-box';
 
 import Header from '../../components/header/headerPurpleLeftSetting.js';
 import FeedBottomLayout from '../../components/layout/feedBottomLayout';
-import CircleProfile from '../../components/profile/mediumCircleAvatar';
 import CommendInfo from '../../components/common/commendInfo';
 
 const photoDetail = ({route}) => {
@@ -25,30 +24,35 @@ const photoDetail = ({route}) => {
       commend: 'jdslfd',
       imageUrl: require('../../assets/images/temp/middleProfile.png'),
       likeCnt: 12,
+      createDate: '1hour',
     },
     {
       userId: 'dd2',
       commend: 'jdslfd',
       imageUrl: require('../../assets/images/temp/middleProfile.png'),
       likeCnt: 2,
+      createDate: '1hour',
     },
     {
       userId: 'dd3',
       commend: 'jdslfd',
       imageUrl: require('../../assets/images/temp/middleProfile.png'),
       likeCnt: 1,
+      createDate: '1hour',
     },
     {
       userId: 'dd4',
       commend: 'jdslfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdd',
       imageUrl: require('../../assets/images/temp/middleProfile.png'),
       likeCnt: 10,
+      createDate: '1hour',
     },
     {
       userId: 'dd',
       commend: 'jdslfd',
       imageUrl: require('../../assets/images/temp/middleProfile.png'),
       likeCnt: 2,
+      createDate: '1hour',
     },
   ];
 
@@ -71,10 +75,7 @@ const photoDetail = ({route}) => {
           flex: 4.3,
           margin: 10,
         }}>
-        <ScrollView
-          style={{
-            marginHorizontal: 10,
-          }}>
+        <ScrollView>
           {items.length > 0 &&
             items.map((item, index) => {
               return <CommendInfo index={index} item={item} />;
