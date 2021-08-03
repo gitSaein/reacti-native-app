@@ -6,6 +6,7 @@ import {SliderBox} from 'react-native-image-slider-box';
 import Header from '../../components/header/headerPurpleLeftSetting.js';
 import FeedBottomLayout from '../../components/layout/feedBottomLayout';
 import CommendInfo from '../../components/common/commendInfo';
+import InputMessageSender from '../../components/input/inputMessageSender';
 
 const photoDetail = ({route}) => {
   const navigation = useNavigation();
@@ -82,6 +83,7 @@ const photoDetail = ({route}) => {
             })}
         </ScrollView>
       </View>
+      <InputMessageSender />
     </View>
   );
 };
@@ -91,6 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignContent: 'center',
     paddingTop: StatusBar.currentHeight,
+    backgroundColor: 'white',
   },
 });
 
