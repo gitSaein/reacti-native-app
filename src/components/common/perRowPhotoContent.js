@@ -1,27 +1,31 @@
 import React from 'react';
-import {View, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import MediumRactangleImageFrame from '../image/mediumRactangle';
 
 const perRowPhotoContent = ({i, items, onPress}) => {
   return (
     <View key={i} style={styles.rowView}>
       {items[i * 3] ? (
-        <TouchableOpacity onPress={() => onPress(items[i * 3])}>
-          <Image style={styles.image} source={items[i * 3].img_url} />
-        </TouchableOpacity>
+        <MediumRactangleImageFrame
+          onPress={() => onPress(items[i * 3])}
+          imageUrl={items[i * 3].img_url}
+        />
       ) : (
         <View />
       )}
       {items[i * 3 + 1] ? (
-        <TouchableOpacity onPress={() => onPress(items[i * 3 + 1])}>
-          <Image style={styles.image} source={items[i * 3 + 1].img_url} />
-        </TouchableOpacity>
+        <MediumRactangleImageFrame
+          onPress={() => onPress(items[i * 3 + 1])}
+          imageUrl={items[i * 3 + 1].img_url}
+        />
       ) : (
         <View />
       )}
       {items[i * 3 + 2] ? (
-        <TouchableOpacity onPress={() => onPress(items[i * 3 + 2])}>
-          <Image style={styles.image} source={items[i * 3 + 2].img_url} />
-        </TouchableOpacity>
+        <MediumRactangleImageFrame
+          onPress={() => onPress(items[i * 3 + 2])}
+          imageUrl={items[i * 3 + 2].img_url}
+        />
       ) : (
         <View />
       )}
