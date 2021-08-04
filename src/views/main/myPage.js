@@ -4,6 +4,9 @@ import {View, StyleSheet, StatusBar, Text} from 'react-native';
 import MyPageTabView from './sub/myPageTabView';
 import HeaderPurpleAddSetting from '../../components/header/headerPurpleAddSetting.js';
 import ProfileImage from '../../components/image/smallMediumRactangle';
+import Button from '../../components/buttons/buttonPurpleMedium';
+import SenderButton from '../../components/buttons/buttonPurpleSender';
+
 const myPage = ({navigation}) => {
   return (
     <View style={styles.container}>
@@ -22,6 +25,21 @@ const myPage = ({navigation}) => {
           <Text style={styles.email}>{'saein@naver.com'}</Text>
         </View>
       </View>
+      <View style={styles.info}>
+        <View style={{flex: 1, alignItems: 'center'}}>
+          <Text style={styles.info_title}>{'FOLLOWING'}</Text>
+          <Text style={styles.info_title_cnt}>{'23'}</Text>
+        </View>
+        <View style={{flex: 1, alignItems: 'center'}}>
+          <Text style={styles.info_title}>{'FOLLOWER'}</Text>
+          <Text style={styles.info_title_cnt}>{'23'}</Text>
+        </View>
+      </View>
+      <View style={styles.button}>
+        <Button title={'Follow'} onPress={() => console.log('----')} />
+        <View style={{margin: 20}} />
+        <SenderButton onPress={() => console.log()} />
+      </View>
       <View style={styles.tab}>
         <MyPageTabView />
       </View>
@@ -31,12 +49,26 @@ const myPage = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 5,
+    flex: 1,
     alignContent: 'center',
     paddingTop: StatusBar.currentHeight,
     backgroundColor: 'white',
   },
-  user: {flex: 0.3, margin: 20, flexDirection: 'row'},
+  user: {flex: 2, margin: 20, flexDirection: 'row'},
+  button: {
+    flex: 1,
+    alignSelf: 'center',
+    flexDirection: 'row',
+  },
+
+  info: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#F9F9F9',
+    borderWidth: 1,
+  },
   profile: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -77,8 +109,22 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#333333',
   },
+  info_title: {
+    fontFamily: 'SF Pro Text',
+    fontStyle: 'normal',
+    letterSpacing: 1,
+    fontSize: 12,
+    color: '#6F8BA4',
+  },
+  info_title_cnt: {
+    fontFamily: 'SF Pro Text',
+    fontStyle: 'normal',
+    fontSize: 14,
+    textAlignVertical: 'top',
+    color: '#3B566E',
+  },
   tab: {
-    flex: 0.7,
+    flex: 7,
   },
 });
 
