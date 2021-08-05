@@ -16,37 +16,37 @@ import FeedContent from '../../components/common/feedContent';
 const liveFeeds = [
   {
     id: '1',
-    title: 'Kim',
+    content: 'Kim',
     image: require('../../assets/images/temp/WhatsNew2.png'),
     profileImage: require('../../assets/images/temp/UserProfileCrop.png'),
   },
   {
     id: '2',
-    title: 'DOGE',
+    content: 'DOGE',
     image: require('../../assets/images/temp/WhatsNew2.png'),
     profileImage: require('../../assets/images/temp/UserProfileCrop.png'),
   },
   {
     id: '3',
-    title: 'Sides3',
+    content: 'Sides3',
     image: require('../../assets/images/temp/WhatsNew2.png'),
     profileImage: require('../../assets/images/temp/UserProfileCrop.png'),
   },
   {
     id: '4',
-    title: 'Sides4',
+    content: 'Sides4',
     image: require('../../assets/images/temp/WhatsNew2.png'),
     profileImage: require('../../assets/images/temp/UserProfileCrop.png'),
   },
   {
     id: '5',
-    title: 'Sides5',
+    content: 'Sides5',
     image: require('../../assets/images/temp/WhatsNew2.png'),
     profileImage: require('../../assets/images/temp/UserProfileCrop.png'),
   },
   {
     id: '6',
-    title: 'Sides6',
+    content: 'Sides6',
     image: require('../../assets/images/temp/WhatsNew2.png'),
     profileImage: require('../../assets/images/temp/UserProfileCrop.png'),
   },
@@ -92,16 +92,19 @@ const feeds = [
 ];
 
 const home = ({navigation}) => {
+  const clickNewUser = () => {
+    navigation.navigate('PhotoDetail');
+  };
   return (
     <SafeAreaView style={styles.container}>
       <HeadePurpleSearchAdd />
-      <View style={styles.newLive}>
+      <View style={styles.whatsnew}>
         <ProfileTitle text={"What's New"} />
         <FlatList
           horizontal={true}
           data={liveFeeds}
           keyExtractor={(item, index) => index}
-          renderItem={CropUserProfile}
+          renderItem={({item}) => CropUserProfile(item, clickNewUser)}
         />
       </View>
       <View style={styles.feed}>
@@ -122,12 +125,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingTop: StatusBar.currentHeight,
   },
-  newLive: {
-    flex: 1.4,
+  whatsnew: {
+    flex: 3,
     backgroundColor: '#ffffff',
   },
   feed: {
-    flex: 2,
+    flex: 7,
   },
 });
 

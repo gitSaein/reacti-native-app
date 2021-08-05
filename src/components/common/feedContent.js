@@ -21,7 +21,7 @@ const feedContent = ({item}) => {
       </View>
       {/* **************** */}
       {/* text */}
-      <View style={{height: 48}}>
+      <View style={{height: 30}}>
         <Content text={item.contents} />
       </View>
       {/* **************** */}
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    height: 350,
+    height: 300,
     backgroundColor: '#ffffff',
     marginTop: 5,
     padding: 5,

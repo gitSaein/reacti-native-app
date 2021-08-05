@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 
-const smallMediumRactangle = ({onPress, imageUrl}) => {
+const smallMediumRactangle = ({imageUrl}) => {
   return <Image style={styles.image} source={imageUrl} />;
 };
 

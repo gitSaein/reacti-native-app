@@ -57,7 +57,6 @@ const photoDetail = ({route}) => {
     },
   ];
 
-  console.log(route.params);
   return (
     <View style={styles.container}>
       <Header title={'Photo Detail'} onLeft={() => navigation.goBack()} />

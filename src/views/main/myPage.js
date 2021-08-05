@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
   user: {flex: 2, margin: 20, flexDirection: 'row'},
   button: {
     flex: 1,
+    marginTop: 10,
     alignSelf: 'center',
     flexDirection: 'row',
   },

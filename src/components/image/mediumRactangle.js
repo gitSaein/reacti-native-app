@@ -1,20 +1,33 @@
 import React from 'react';
-import {TouchableOpacity, Image, StyleSheet} from 'react-native';
+import {
+  TouchableOpacity,
+  StyleSheet,
+  ImageBackground,
+  View,
+} from 'react-native';
 
-const mediumRactangle = ({onPress, imageUrl}) => {
+const mediumRactangle = ({imageUrl, component}) => {
   return (
-    <TouchableOpacity onPress={() => onPress()}>
-      <Image style={styles.image} source={imageUrl} />
-    </TouchableOpacity>
+    <ImageBackground
+      style={styles.image}
+      imageStyle={{borderRadius: 14, borderColor: '#D8D8D8', borderWidth: 1}}
+      resizeMode="cover"
+      source={imageUrl}>
+      <View style={styles.text}>{component}</View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   image: {
-    borderRadius: 14,
     margin: 5,
-    width: 120,
+    width: 90,
     height: 120,
+  },
+  text: {
+    padding: 3,
+    marginTop: '85%',
+    alignItems: 'center',
   },
 });
 

@@ -1,21 +1,19 @@
 import React from 'react';
-import GreyCropProfileTitle from '../text/greyCropProfileTitle';
+import MediumRactangleImg from '../image/mediumRactangle';
 
-import {Avatar} from 'react-native-elements';
-import {StyleSheet, Image, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 
-const cropUserProfile = ({item}) => {
+const ImageText = content => {
+  return <Text style={styles.text}>{content}</Text>;
+};
+
+const cropUserProfile = (item, onPress) => {
   return (
-    <TouchableOpacity style={styles.item}>
-      <Image style={styles.image} rounded source={item.image} />
-      <View style={styles.user}>
-        <View style={{flex: 1, justifyContent: 'center'}}>
-          <Avatar size="small" rounded={true} source={item.profileImage} />
-        </View>
-        <View style={{flex: 3.5, justifyContent: 'center'}}>
-          <GreyCropProfileTitle text={item.title} />
-        </View>
-      </View>
+    <TouchableOpacity style={styles.item} onPress={onPress}>
+      <MediumRactangleImg
+        imageUrl={item.image}
+        component={ImageText(item.content)}
+      />
     </TouchableOpacity>
   );
 };
@@ -24,17 +22,21 @@ const styles = StyleSheet.create({
   item: {
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 5,
-  },
-  image: {
-    width: 220,
-    height: 150,
-    borderRadius: 18,
+    margin: 1,
   },
   user: {
     flexDirection: 'row',
     alignSelf: 'flex-start',
     margin: 10,
+  },
+  text: {
+    fontFamily: 'SF Pro Text',
+    fontStyle: 'normal',
+    letterSpacing: 1,
+    fontWeight: 'bold',
+    fontSize: 15,
+    color: '#ffffff',
+    lineHeight: 20,
   },
 });
 export default cropUserProfile;

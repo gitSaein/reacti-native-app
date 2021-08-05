@@ -4,19 +4,17 @@ import {TabView, TabBar, SceneMap} from 'react-native-tab-view';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FeedView from './myPageFeedView';
 import LikeView from './myPageLikeView';
-import ProcessView from './myPageProcessView';
 
 const renderScene = SceneMap({
-  first: ProcessView,
-  second: FeedView,
-  third: LikeView,
+  first: FeedView,
+  second: LikeView,
 });
 
 const myPageTabView = () => {
   const {width} = Dimensions.get('window');
 
   const [index, setIndex] = useState(0);
-  const [routes] = useState([{key: 'first'}, {key: 'second'}, {key: 'third'}]);
+  const [routes] = useState([{key: 'first'}, {key: 'second'}]);
 
   const renderTabBar = props => (
     <TabBar
@@ -34,14 +32,6 @@ const myPageTabView = () => {
               />
             );
           case 'second':
-            return (
-              <Icon
-                size={25}
-                name={focused ? 'md-image-sharp' : 'md-image-outline'}
-                color={focused ? '#6F8BA4' : '#DDDCFF'}
-              />
-            );
-          case 'third':
             return (
               <Icon
                 size={25}
