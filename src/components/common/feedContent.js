@@ -11,28 +11,37 @@ const feedContent = ({item}) => {
 
   return (
     <View key={item.id} style={styles.container}>
-      {/**** profile ****/}
-      <View style={styles.profile}>
-        <View style={{flexDirection: 'row'}}>
-          <Avatar size="medium" rounded={true} source={item.profileImage} />
-          <GreyCropProfileTitle text={item.title} />
+      <View style={{margin: 10}}>
+        {/**** profile ****/}
+        <View style={styles.profile}>
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <View style={{justifyContent: 'center'}}>
+              <Avatar size="medium" rounded={true} source={item.profileImage} />
+            </View>
+            <View style={{justifyContent: 'center', marginLeft: 10}}>
+              <GreyCropProfileTitle text={item.title} />
+              <Content text={item.title} />
+            </View>
+          </View>
+          <View style={{justifyContent: 'center', marginRight: 10}}>
+            <ButtonWhiteMoreHorizontal onPress={() => console.log('hihi')} />
+          </View>
         </View>
-        <ButtonWhiteMoreHorizontal onPress={() => console.log('hihi')} />
+        {/* **************** */}
+        {/* text */}
+        <View style={{height: 30, marginTop: 10}}>
+          <Content text={item.contents} />
+        </View>
+        {/* **************** */}
+        {/* photo */}
+        <View style={{alignItems: 'center'}}>
+          <Image
+            style={{height: 170, borderRadius: 16}}
+            source={require('../../assets/images/temp/feed.png')}
+          />
+        </View>
+        <FeedBottomLayout likeCnt={4} cmtCnt={10} />
       </View>
-      {/* **************** */}
-      {/* text */}
-      <View style={{height: 30}}>
-        <Content text={item.contents} />
-      </View>
-      {/* **************** */}
-      {/* photo */}
-      <View style={{alignItems: 'center'}}>
-        <Image
-          style={{height: 170, borderRadius: 16, width: width * 0.9}}
-          source={require('../../assets/images/temp/feed.png')}
-        />
-      </View>
-      <FeedBottomLayout likeCnt={4} cmtCnt={10} />
     </View>
   );
 };
@@ -41,15 +50,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    height: 300,
     backgroundColor: '#ffffff',
     marginTop: 5,
-    padding: 5,
   },
   profile: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 5,
   },
 });
 export default feedContent;

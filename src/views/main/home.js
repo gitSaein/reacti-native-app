@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
   },
   whatsnew: {
     flex: 3,
+    padding: 5,
     backgroundColor: '#ffffff',
   },
   feed: {

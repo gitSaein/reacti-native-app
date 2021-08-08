@@ -22,21 +22,7 @@ const styles = StyleSheet.create({
   item: {
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 1,
-  },
-  user: {
-    flexDirection: 'row',
-    alignSelf: 'flex-start',
-    margin: 10,
-  },
-  text: {
-    fontFamily: 'SF Pro Text',
-    fontStyle: 'normal',
-    letterSpacing: 1,
-    fontWeight: 'bold',
-    fontSize: 15,
-    color: '#ffffff',
-    lineHeight: 20,
+    marginRight: 5,
   },
 });
 export default cropUserProfile;
