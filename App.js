@@ -64,6 +64,7 @@ const tabButtonRoutes = [
     component: MyPage,
     active: require('./src/assets/images/icon/Profile.png'),
     inactive: require('./src/assets/images/icon/ProfileInactive.png'),
+    params: {isMe: true},
   },
 ];
 
@@ -80,6 +81,7 @@ const HomeStackScreen = () => {
           key={`s-${route.name}`}
           name={route.name}
           component={route.component}
+          initialParams={route.params}
           options={{
             // tabBarBadge: 3,
             // tabBarVisible: false,
@@ -134,6 +136,12 @@ const tabNavRoutes = [
   {
     name: 'PhotoDetail',
     component: PhotoDetail,
+  },
+  ,
+  {
+    name: 'FriendPage',
+    component: MyPage,
+    params: {isMe: false},
   },
 ];
 /* 현재 위치 함수 */

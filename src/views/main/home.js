@@ -16,37 +16,37 @@ import FeedContent from '../../components/common/feedContent';
 const liveFeeds = [
   {
     id: '1',
-    content: 'Kim',
+    userName: 'Kim',
     image: require('../../assets/images/temp/WhatsNew2.png'),
     profileImage: require('../../assets/images/temp/UserProfileCrop.png'),
   },
   {
     id: '2',
-    content: 'DOGE',
+    userName: 'DOGE',
     image: require('../../assets/images/temp/WhatsNew2.png'),
     profileImage: require('../../assets/images/temp/UserProfileCrop.png'),
   },
   {
     id: '3',
-    content: 'Sides3',
+    userName: 'Sides3',
     image: require('../../assets/images/temp/WhatsNew2.png'),
     profileImage: require('../../assets/images/temp/UserProfileCrop.png'),
   },
   {
     id: '4',
-    content: 'Sides4',
+    userName: 'Sides4',
     image: require('../../assets/images/temp/WhatsNew2.png'),
     profileImage: require('../../assets/images/temp/UserProfileCrop.png'),
   },
   {
     id: '5',
-    content: 'Sides5',
+    userName: 'Sides5',
     image: require('../../assets/images/temp/WhatsNew2.png'),
     profileImage: require('../../assets/images/temp/UserProfileCrop.png'),
   },
   {
     id: '6',
-    content: 'Sides6',
+    userName: 'Sides6',
     image: require('../../assets/images/temp/WhatsNew2.png'),
     profileImage: require('../../assets/images/temp/UserProfileCrop.png'),
   },
@@ -92,8 +92,8 @@ const feeds = [
 ];
 
 const home = ({navigation}) => {
-  const clickNewUser = () => {
-    navigation.navigate('PhotoDetail');
+  const clickNewUser = item => {
+    navigation.navigate('FriendPage', {isMe: false, item});
   };
   return (
     <SafeAreaView style={styles.container}>

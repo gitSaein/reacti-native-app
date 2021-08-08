@@ -9,7 +9,7 @@ const {width} = Dimensions.get('window');
 
 const commendInfo = ({item, index}) => {
   return (
-    <View index={index} style={{width: width, height: 66, margin: 10}}>
+    <View key={index} style={{width: width, height: 66, margin: 10}}>
       <View style={{flexDirection: 'row'}}>
         <View style={{flex: 1}}>
           <Avatar

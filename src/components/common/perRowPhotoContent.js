@@ -3,8 +3,9 @@ import {View, StyleSheet} from 'react-native';
 import MediumRactangleImageFrame from '../image/mediumSquare';
 
 const perRowPhotoContent = ({i, items, onPress}) => {
+  console.log(i);
   return (
-    <View key={i} style={styles.rowView}>
+    <View key={'per_content_' + i} style={styles.rowView}>
       {items[i * 3] ? (
         <MediumRactangleImageFrame
           onPress={() => onPress(items[i * 3])}

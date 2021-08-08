@@ -9,10 +9,10 @@ const ImageText = content => {
 
 const cropUserProfile = (item, onPress) => {
   return (
-    <TouchableOpacity style={styles.item} onPress={onPress}>
+    <TouchableOpacity style={styles.item} onPress={() => onPress(item)}>
       <MediumRactangleImg
         imageUrl={item.image}
-        component={ImageText(item.content)}
+        component={ImageText(item.userName)}
       />
     </TouchableOpacity>
   );

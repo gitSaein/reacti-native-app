@@ -1,16 +1,45 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, StatusBar, Text} from 'react-native';
 
 import MyPageTabView from './sub/myPageTabView';
 import HeaderPurpleAddSetting from '../../components/header/headerPurpleAddSetting.js';
+import HeaderPurpleLeftAddSetting from '../../components/header/headerPurpleLeftAddSetting.js';
 import ProfileImage from '../../components/image/smallMediumRactangle';
 import Button from '../../components/buttons/buttonPurpleMedium';
 import SenderButton from '../../components/buttons/buttonPurpleSender';
 
-const myPage = ({navigation}) => {
+const FriendPage = () => {
+  return (
+    <View style={styles.button}>
+      <Button title={'Follow'} onPress={() => console.log('----')} />
+      <View style={{margin: 20}} />
+      <SenderButton onPress={() => console.log()} />
+    </View>
+  );
+};
+
+const MyPage = () => {
+  return (
+    <View style={styles.button}>
+      <Button title={'Edited Profile'} onPress={() => console.log('----')} />
+    </View>
+  );
+};
+
+const myPage = ({route, navigation}) => {
+  const item = route.params;
+  console.log(item);
   return (
     <View style={styles.container}>
-      <HeaderPurpleAddSetting title={'my page'} />
+      {item !== undefined && item.isMe ? (
+        <HeaderPurpleAddSetting title={'my page'} />
+      ) : (
+        <HeaderPurpleLeftAddSetting
+          title={item.item.userName}
+          onPress={() => navigation.goBack()}
+        />
+      )}
+
       <View style={styles.user}>
         <View style={styles.profile}>
           <ProfileImage
@@ -35,11 +64,7 @@ const myPage = ({navigation}) => {
           <Text style={styles.info_title_cnt}>{'23'}</Text>
         </View>
       </View>
-      <View style={styles.button}>
-        <Button title={'Follow'} onPress={() => console.log('----')} />
-        <View style={{margin: 20}} />
-        <SenderButton onPress={() => console.log()} />
-      </View>
+      {item !== undefined && item.isMe ? <MyPage /> : <FriendPage />}
       <View style={styles.tab}>
         <MyPageTabView />
       </View>
