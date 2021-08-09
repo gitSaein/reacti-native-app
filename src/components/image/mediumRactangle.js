@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  TouchableOpacity,
-  StyleSheet,
-  ImageBackground,
-  View,
-} from 'react-native';
+import {StyleSheet, ImageBackground, View} from 'react-native';
 
 const mediumRactangle = ({imageUrl, component}) => {
   return (

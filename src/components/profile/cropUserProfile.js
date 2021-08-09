@@ -24,5 +24,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 5,
   },
+  text: {
+    fontFamily: 'SF Pro Text',
+    fontStyle: 'normal',
+    letterSpacing: 1,
+    fontWeight: 'bold',
+    fontSize: 15,
+    color: '#ffffff',
+    lineHeight: 20,
+  },
 });
 export default cropUserProfile;

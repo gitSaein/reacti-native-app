@@ -1,17 +1,49 @@
 import React from 'react';
-import {StyleSheet, ScrollView, View} from 'react-native';
+import {StyleSheet, FlatList, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-import PerRowPhotoContent from '../../../components/common/perRowPhotoContent';
+import FeedContent from '../../../components/common/feedContent';
 
 const tabFeedView = () => {
   const navigation = useNavigation();
 
   const items = [
-    {key: 1, img_url: require('../../../assets/images/temp/tmp1.png')},
-    {key: 2, img_url: require('../../../assets/images/temp/tmp2.png')},
-    {key: 3, img_url: require('../../../assets/images/temp/tmp3.png')},
-    {key: 4, img_url: require('../../../assets/images/temp/tmp4.png')},
+    {
+      id: '1',
+      title: 'Kim',
+      profileImage: require('../../../assets/images/temp/middleProfile.png'),
+      contents: 'hi my name is saein lee',
+    },
+    {
+      id: '2',
+      title: 'DOGE',
+      profileImage: require('../../../assets/images/temp/middleProfile.png'),
+      contents: 'hi my name is saein lee',
+    },
+    {
+      id: '3',
+      title: 'Sides3',
+      profileImage: require('../../../assets/images/temp/middleProfile.png'),
+      contents: 'hi my name is saein lee',
+    },
+    {
+      id: '4',
+      title: 'Sides4',
+      profileImage: require('../../../assets/images/temp/middleProfile.png'),
+      contents: 'hi my name is saein lee',
+    },
+    {
+      id: '5',
+      title: 'Sides5',
+      profileImage: require('../../../assets/images/temp/middleProfile.png'),
+      contents: 'hi my name is saein lee',
+    },
+    {
+      id: '6',
+      title: 'Sides6',
+      profileImage: require('../../../assets/images/temp/middleProfile.png'),
+      contents: 'hi my name is saein lee',
+    },
   ];
   let row = items.length / 3; //몫
   const left = items.length % 3; //나머지
@@ -26,12 +58,17 @@ const tabFeedView = () => {
 
   const rowItems = [];
   for (let i = 0; i < row; i++) {
-    rowItems.push(<PerRowPhotoContent i={i} items={items} onPress={onPress} />);
+    rowItems.push(<FeedContent item={items} />);
   }
 
   return (
     <View style={styles.container}>
-      <ScrollView>{rowItems}</ScrollView>
+      <FlatList
+        data={items}
+        keyExtractor={(item, index) => index}
+        renderItem={FeedContent}
+        onPress={onPress}
+      />
     </View>
   );
 };

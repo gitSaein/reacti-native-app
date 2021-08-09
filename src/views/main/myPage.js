@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet, StatusBar, Text} from 'react-native';
 
 import MyPageTabView from './sub/myPageTabView';
@@ -7,6 +7,7 @@ import HeaderPurpleLeftAddSetting from '../../components/header/headerPurpleLeft
 import ProfileImage from '../../components/image/smallMediumRactangle';
 import Button from '../../components/buttons/buttonPurpleMedium';
 import SenderButton from '../../components/buttons/buttonPurpleSender';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const FriendPage = () => {
   return (
@@ -28,9 +29,11 @@ const MyPage = () => {
 
 const myPage = ({route, navigation}) => {
   const item = route.params;
-  console.log(item);
   return (
-    <View style={styles.container}>
+    <ScrollView
+      pagingEnabled={true}
+      style={styles.container}
+      scrollEventThrottle={16}>
       {item !== undefined && item.isMe ? (
         <HeaderPurpleAddSetting title={'my page'} />
       ) : (
@@ -68,7 +71,7 @@ const myPage = ({route, navigation}) => {
       <View style={styles.tab}>
         <MyPageTabView />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -79,14 +82,13 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
     backgroundColor: 'white',
   },
-  user: {flex: 2, margin: 20, flexDirection: 'row'},
+  user: {flex: 1.5, margin: 20, flexDirection: 'row', top: 0, bottom: 0},
   button: {
     flex: 1,
     marginTop: 10,
     alignSelf: 'center',
     flexDirection: 'row',
   },
-
   info: {
     flex: 1,
     flexDirection: 'row',
@@ -94,6 +96,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderColor: '#F9F9F9',
     borderWidth: 1,
+  },
+  tab: {
+    flex: 6,
   },
   profile: {
     justifyContent: 'center',
@@ -148,9 +153,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlignVertical: 'top',
     color: '#3B566E',
-  },
-  tab: {
-    flex: 7,
   },
 });
 
