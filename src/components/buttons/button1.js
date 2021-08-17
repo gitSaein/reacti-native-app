@@ -11,6 +11,7 @@ const button1 = ({text, onPress}) => {
 
 const styles = StyleSheet.create({
   button: {
+    justifyContent: 'center',
     backgroundColor: '#504DE5',
     height: 50,
     width: 347,

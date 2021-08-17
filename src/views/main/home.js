@@ -95,6 +95,9 @@ const home = ({navigation}) => {
   const clickNewUser = item => {
     navigation.navigate('FriendPage', {isMe: false, item});
   };
+  const clickFeedDetail = item => {
+    navigation.navigate('PhotoDetail', item);
+  };
   return (
     <SafeAreaView style={styles.container}>
       <HeadePurpleSearchAdd />
@@ -111,7 +114,9 @@ const home = ({navigation}) => {
         <FlatList
           data={feeds}
           keyExtractor={(item, index) => index}
-          renderItem={FeedContent}
+          renderItem={({item}) => (
+            <FeedContent item={item} onPress={clickFeedDetail} />
+          )}
         />
       </View>
     </SafeAreaView>

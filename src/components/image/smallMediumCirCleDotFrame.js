@@ -11,7 +11,7 @@ const smallMediumRactangle = ({imageUrl}) => {
 
 const styles = StyleSheet.create({
   image: {
-    borderRadius: 10,
+    borderRadius: 50,
     width: 90,
     height: 90,
   },
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     borderStyle: 'dotted',
     borderColor: '#504DE5',
     borderWidth: 2,
-    borderRadius: 10,
+    borderRadius: 50,
     padding: 40,
     width: 95,
     height: 95,

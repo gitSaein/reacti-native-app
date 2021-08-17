@@ -1,10 +1,10 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet, Text} from 'react-native';
 
-const buttonNext = ({onNext}) => {
+const button = ({onNext, text}) => {
   return (
     <TouchableOpacity onPress={onNext}>
-      <Text style={styles.text}>Next</Text>
+      <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );
 };
@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 12,
     textAlignVertical: 'top',
-    color: '#504DE5',
+    color: '#ffffff',
   },
 });
 
-export default buttonNext;
+export default button;

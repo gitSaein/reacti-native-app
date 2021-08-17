@@ -7,11 +7,11 @@ import Content from '../text/content';
 import ButtonWhiteMoreHorizontal from '../buttons/buttonWhiteMoreHorizontal';
 import FeedBottomLayout from '../layout/feedBottomLayout';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-const feedContent = ({item}) => {
+const feedContent = ({item, onPress}) => {
   return (
     <View key={item.id} style={styles.container}>
       <View style={{margin: 10}}>
-        <TouchableOpacity onPress={item.goDetail}>
+        <TouchableOpacity onPress={() => onPress(item)}>
           {/**** profile ****/}
           <View style={styles.profile}>
             <View style={{flexDirection: 'row', justifyContent: 'center'}}>

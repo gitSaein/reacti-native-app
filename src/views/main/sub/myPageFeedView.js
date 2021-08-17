@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, FlatList, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import FeedContent from '../../../components/common/feedContent';
@@ -62,34 +62,14 @@ const tabFeedView = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={items}
-        keyExtractor={(item, index) => index}
-        renderItem={FeedContent}
-        onPress={onPress}
-      />
-    </View>
+    <FlatList
+      data={items}
+      keyExtractor={(item, index) => index}
+      renderItem={({item}) => <FeedContent item={item} onPress={onPress} />}
+      onPress={onPress}
+    />
   );
+  s;
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    margin: 10,
-  },
-  image: {
-    borderRadius: 14,
-    margin: 5,
-    width: 120,
-    height: 120,
-  },
-  rowView: {
-    flexDirection: 'row',
-    alignSelf: 'flex-start',
-  },
-});
 
 export default tabFeedView;

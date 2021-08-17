@@ -9,6 +9,9 @@ import CommendInfo from '../../components/common/commendInfo';
 import InputMessageSender from '../../components/input/inputMessageSender';
 
 const photoDetail = ({route}) => {
+  console.log('----------------------');
+  console.log(route);
+  console.log('----------------------');
   const navigation = useNavigation();
   const images = {
     images: [

@@ -24,6 +24,7 @@ import SmsCode from './src/views/auth/SmsCode';
 import SmsPhoneNumber from './src/views/auth/SmsPhoneNumber';
 import ChatDetail from './src/views/main/chatDetail';
 import PhotoDetail from './src/views/common/photoDetail';
+import EditProfile from './src/views/common/editProfileView';
 
 import Home from './src/views/main/home';
 import Chat from './src/views/main/chat';
@@ -137,11 +138,14 @@ const tabNavRoutes = [
     name: 'PhotoDetail',
     component: PhotoDetail,
   },
-  ,
   {
     name: 'FriendPage',
     component: MyPage,
     params: {isMe: false},
+  },
+  {
+    name: 'EditProfile',
+    component: EditProfile,
   },
 ];
 /* 현재 위치 함수 */

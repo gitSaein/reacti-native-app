@@ -24,7 +24,7 @@ const selectBox = props => {
 const styles = StyleSheet.create({
   boxWithShadow: {
     height: 50,
-    width: 150,
+    width: 200,
     borderRadius: 14,
     paddingTop: 5,
     paddingBottom: 5,

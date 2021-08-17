@@ -5,24 +5,28 @@ import MyPageTabView from './sub/myPageTabView';
 import HeaderPurpleAddSetting from '../../components/header/headerPurpleAddSetting.js';
 import HeaderPurpleLeftAddSetting from '../../components/header/headerPurpleLeftAddSetting.js';
 import ProfileImage from '../../components/image/smallMediumRactangle';
-import Button from '../../components/buttons/buttonPurpleMedium';
+import Button from '../../components/buttons/button1';
+import Button2 from '../../components/buttons/buttonPurpleMedium';
 import SenderButton from '../../components/buttons/buttonPurpleSender';
 import {ScrollView} from 'react-native-gesture-handler';
 
 const FriendPage = () => {
   return (
     <View style={styles.button}>
-      <Button title={'Follow'} onPress={() => console.log('----')} />
+      <Button2 title={'Follow'} onPress={() => console.log('----')} />
       <View style={{margin: 20}} />
       <SenderButton onPress={() => console.log()} />
     </View>
   );
 };
 
-const MyPage = () => {
+const MyPage = ({navigation}) => {
   return (
     <View style={styles.button}>
-      <Button title={'Edited Profile'} onPress={() => console.log('----')} />
+      <Button
+        text={'Edited Profile'}
+        onPress={() => navigation.navigate('EditProfile')}
+      />
     </View>
   );
 };
@@ -42,32 +46,35 @@ const myPage = ({route, navigation}) => {
           onPress={() => navigation.goBack()}
         />
       )}
-
-      <View style={styles.user}>
-        <View style={styles.profile}>
+      <View style={{backgroundColor: 'white'}}>
+        <View style={styles.user}>
           <ProfileImage
             imageUrl={require('../../assets/images/temp/tmp4.png')}
           />
+          <View style={{marginTop: 12, paddingLeft: 20}}>
+            <Text style={styles.profile_title}>{'Dodge Coin'}</Text>
+            <View style={{margin: 3}} />
+            <Text style={styles.profile_medium_title}>{'Dodge Coin'}</Text>
+            <View style={{margin: 3}} />
+            <Text style={styles.email}>{'saein@naver.com'}</Text>
+          </View>
         </View>
-        <View style={{marginTop: 12, paddingLeft: 20}}>
-          <Text style={styles.profile_title}>{'Dodge Coin'}</Text>
-          <View style={{margin: 3}} />
-          <Text style={styles.profile_medium_title}>{'Dodge Coin'}</Text>
-          <View style={{margin: 3}} />
-          <Text style={styles.email}>{'saein@naver.com'}</Text>
+        <View style={styles.info}>
+          <View style={{flex: 1, alignItems: 'center'}}>
+            <Text style={styles.info_title}>{'FOLLOWING'}</Text>
+            <Text style={styles.info_title_cnt}>{'23'}</Text>
+          </View>
+          <View style={{flex: 1, alignItems: 'center'}}>
+            <Text style={styles.info_title}>{'FOLLOWER'}</Text>
+            <Text style={styles.info_title_cnt}>{'23'}</Text>
+          </View>
         </View>
+        {item !== undefined && item.isMe ? (
+          <MyPage navigation={navigation} />
+        ) : (
+          <FriendPage />
+        )}
       </View>
-      <View style={styles.info}>
-        <View style={{flex: 1, alignItems: 'center'}}>
-          <Text style={styles.info_title}>{'FOLLOWING'}</Text>
-          <Text style={styles.info_title_cnt}>{'23'}</Text>
-        </View>
-        <View style={{flex: 1, alignItems: 'center'}}>
-          <Text style={styles.info_title}>{'FOLLOWER'}</Text>
-          <Text style={styles.info_title_cnt}>{'23'}</Text>
-        </View>
-      </View>
-      {item !== undefined && item.isMe ? <MyPage /> : <FriendPage />}
       <View style={styles.tab}>
         <MyPageTabView />
       </View>
@@ -80,12 +87,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignContent: 'center',
     paddingTop: StatusBar.currentHeight,
-    backgroundColor: 'white',
   },
-  user: {flex: 1.5, margin: 20, flexDirection: 'row', top: 0, bottom: 0},
+  user: {flex: 1.5, margin: 20, flexDirection: 'row'},
   button: {
     flex: 1,
-    marginTop: 10,
     alignSelf: 'center',
     flexDirection: 'row',
   },
@@ -99,16 +104,6 @@ const styles = StyleSheet.create({
   },
   tab: {
     flex: 6,
-  },
-  profile: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderStyle: 'dotted',
-    borderColor: '#504DE5',
-    borderWidth: 2,
-    borderRadius: 10,
-    width: 95,
-    height: 95,
   },
   email: {
     fontFamily: 'SF Pro Text',
