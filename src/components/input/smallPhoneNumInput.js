@@ -1,14 +1,19 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 
-const smallPhoneNumInput = props => {
+const smallPhoneNumInput = ({
+  placeholder,
+  keyboardType,
+  onChangeText,
+  value,
+}) => {
   return (
     <TextInput
-      {...props}
-      placeholder={props.placeholder}
-      keyboardType={props.keyboardType}
+      placeholder={placeholder}
+      keyboardType={keyboardType}
       style={styles.boxWithShadow}
-      onEndEditing={props.onEndEditing}
+      onChangeText={onChangeText}
+      value={value}
     />
   );
 };

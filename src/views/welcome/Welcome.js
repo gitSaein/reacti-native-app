@@ -1,15 +1,14 @@
-import React, {useState, useCallback} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import React from 'react';
+import {View, Image, StyleSheet} from 'react-native';
 import Button1 from '../../components/buttons/button1';
 
-const Welcome1 = ({navigation}) => {
+const Welcome = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
         style={{margin: 60}}
         source={require('../../assets/images/temp/ImageWelcome1.png')}
       />
-      <Text style={styles.text_title}>Welcome</Text>
       <Button1
         text={'내 위치로 시작하기'}
         onPress={() => navigation.navigate('SignIn1')}
@@ -30,24 +29,6 @@ const styles = StyleSheet.create({
     top: 231,
     left: 14,
   },
-  text_title: {
-    position: 'absolute',
-    height: 19,
-    width: 80,
-    marginTop: '115%',
-
-    fontFamily: 'SF Pro Text',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    fontSize: 16,
-    lineHeight: 19,
-    /* identical to box height */
-
-    textAlign: 'center',
-    letterSpacing: 1,
-
-    color: '#3B566E',
-  },
 });
 
-export default Welcome1;
+export default Welcome;

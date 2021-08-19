@@ -12,17 +12,16 @@ const button1 = ({text, onPress}) => {
 const styles = StyleSheet.create({
   button: {
     justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#504DE5',
     height: 50,
     width: 347,
     borderRadius: 25,
-    marginTop: 20,
   },
   button_text: {
     position: 'absolute',
     height: 14,
     marginTop: 16,
-    alignSelf: 'center',
 
     fontFamily: 'SF Pro Text',
     fontStyle: 'normal',

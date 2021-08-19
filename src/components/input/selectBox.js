@@ -11,6 +11,7 @@ const selectBox = props => {
       onValueChange={itemValue => props.onValueChange(itemValue)}>
       {props.items.map((item, key) => (
         <Picker.Item
+          color={'#636363'}
           key={key}
           label={item.label}
           value={item.value}
@@ -24,12 +25,13 @@ const selectBox = props => {
 const styles = StyleSheet.create({
   boxWithShadow: {
     height: 50,
-    width: 200,
+    width: '50%',
     borderRadius: 14,
     paddingTop: 5,
     paddingBottom: 5,
+    borderWidth: 10,
     backgroundColor: '#ffffff',
-    shadowColor: '#000',
+    shadowColor: 'black',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -38,7 +40,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   item: {
-    fontSize: 10,
+    fontSize: 14,
   },
 });
 

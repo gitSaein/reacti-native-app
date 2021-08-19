@@ -15,13 +15,11 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Geolocation from 'react-native-geolocation-service';
 
-import Welcome1 from './src/views/welcome/Welcome1';
+import Welcome from './src/views/welcome/Welcome';
 import SignIn1 from './src/views/auth/SignIn1';
-import SignUp from './src/views/auth/SignUp';
 import ForgotPassword from './src/views/auth/ForgotPassword';
 import ResetPassword from './src/views/auth/ResetPassword';
 import SmsCode from './src/views/auth/SmsCode';
-import SmsPhoneNumber from './src/views/auth/SmsPhoneNumber';
 import ChatDetail from './src/views/main/chatDetail';
 import PhotoDetail from './src/views/common/photoDetail';
 import EditProfile from './src/views/common/editProfileView';
@@ -99,16 +97,12 @@ const HomeStackScreen = () => {
 
 const tabNavRoutes = [
   {
-    name: 'Welcome1',
-    component: Welcome1,
+    name: 'Welcome',
+    component: Welcome,
   },
   {
     name: 'SignIn1',
     component: SignIn1,
-  },
-  {
-    name: 'SignUp',
-    component: SignUp,
   },
   {
     name: 'ForgotPassword',
@@ -117,10 +111,6 @@ const tabNavRoutes = [
   {
     name: 'ResetPassword',
     component: ResetPassword,
-  },
-  {
-    name: 'SmsPhoneNumber',
-    component: SmsPhoneNumber,
   },
   {
     name: 'SmsCode',
@@ -191,7 +181,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Welcome1"
+        initialRouteName="Welcome"
         screenOptions={{headerShown: false}}>
         {tabNavRoutes.map(route => (
           <Stack.Screen
