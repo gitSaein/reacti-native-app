@@ -14,10 +14,14 @@ const horizontalTitleSelect = ({title, items, value, onChangeValue, index}) => {
         borderBottomWidth: 1,
         borderBottomColor: '#F9F9F9',
       }}>
-      <View style={{flex: 1, alignItems: 'center'}}>
+      <View style={{flex: 1, alignItems: 'flex-start'}}>
         <GreyTitle text={title} />
       </View>
-      <View style={{flex: 2, justifyContent: 'flex-start'}}>
+      <View
+        style={{
+          flex: 3,
+          justifyContent: 'flex-start',
+        }}>
         <SelectBox
           items={items}
           onValueChange={onChangeValue}

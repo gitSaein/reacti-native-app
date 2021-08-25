@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, StatusBar, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+
 import ProfileImage from '../../components/image/smallMediumCirCleDotFrame';
 import HorizontalTitleEdit from '../../components/common/horizontalTitleEdit';
 import HorizontalTitleSelect from '../../components/common/horizontalTitleSelect';
+import HorizontalTitleEditButton from '../../components/common/horizontalTitleEditButton';
+
 import Header from '../../components/header/headerPurpleLeftDone';
 
 const editProfileView = ({route}) => {
@@ -17,37 +20,12 @@ const editProfileView = ({route}) => {
     gender: 'f',
   });
 
-  const onChangeValue = value => {
-    onChangeUserInfo(prevState => ({
-      ...prevState,
-      nationalNo: value,
-    }));
-  };
   const onChangeGenderValue = value => {
     onChangeUserInfo(prevState => ({
       ...prevState,
       gender: value,
     }));
   };
-
-  const nationalList = [
-    {
-      label: 'Korea (+82)',
-      value: 82,
-    },
-    {
-      label: 'Japan (+81)',
-      value: 81,
-    },
-    {
-      label: 'Vietnam (+84)',
-      value: 84,
-    },
-    {
-      label: 'China (+86)',
-      value: 86,
-    },
-  ];
 
   const genders = [
     {
@@ -76,8 +54,9 @@ const editProfileView = ({route}) => {
           />
         </TouchableOpacity>
       </View>
-      <View style={{flex: 7}}>
+      <View style={{flex: 7, paddingLeft: 20, paddingRight: 20}}>
         <HorizontalTitleEdit
+          keyboardType={'number-pad'}
           index={0}
           title={'name'}
           value={userInfo.name}
@@ -88,28 +67,14 @@ const editProfileView = ({route}) => {
             }))
           }
         />
-        <HorizontalTitleEdit
-          index={1}
-          title={'email'}
-          value={userInfo.email}
-          onChangeText={value =>
-            onChangeUserInfo(prevState => ({
-              ...prevState,
-              email: value,
-            }))
-          }
-        />
-        <HorizontalTitleSelect
-          index={2}
-          title={'nation'}
-          items={nationalList}
-          value={userInfo.nationalNo}
-          onChangeValue={onChangeValue}
-        />
-        <HorizontalTitleEdit
+        <HorizontalTitleEditButton
+          keyboardType={'numeric'}
           index={3}
+          editable={false}
           title={'phone'}
-          value={userInfo.phone}
+          value={'+' + userInfo.nationalNo + ' ' + userInfo.phone}
+          buttonTitle={'수정하기'}
+          onPress={() => navigation.navigate('SmsPhoneNumber')}
           onChangeText={value =>
             onChangeUserInfo(prevState => ({
               ...prevState,

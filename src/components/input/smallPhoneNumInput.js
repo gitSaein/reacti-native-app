@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     borderRadius: 14,
     elevation: 5,
+    color: '#6F8BA4',
   },
 });
 

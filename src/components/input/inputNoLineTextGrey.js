@@ -1,13 +1,21 @@
 import React from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 
-const inputNoLineTextGrey = ({text, onChangeText}) => {
+const inputNoLineTextGrey = ({
+  text,
+  value,
+  onChangeText,
+  keyboardType,
+  editable,
+}) => {
   return (
     <TextInput
+      editable={editable === undefined ? true : editable}
+      keyboardType={keyboardType}
       style={styles.input}
       placeholder={text}
       onChangeText={onChangeText}
-      value={text}
+      value={value}
     />
   );
 };

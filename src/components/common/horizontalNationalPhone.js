@@ -31,17 +31,21 @@ const horizontalNationalPhone = ({
 
   return (
     <View key={index} style={styles.input}>
-      <SelectBox
-        items={nationalList}
-        onValueChange={onChangeValue}
-        selectedValue={value}
-      />
-      <SmallPhoneNumInput
-        placeholder={'핸드폰 번호'}
-        keyboardType={'number-pad'}
-        onChangeText={onChangeValue2}
-        value={value2}
-      />
+      <View style={{flex: 1}}>
+        <SelectBox
+          items={nationalList}
+          onValueChange={onChangeValue}
+          selectedValue={value}
+        />
+      </View>
+      <View style={{flex: 1}}>
+        <SmallPhoneNumInput
+          placeholder={'핸드폰 번호'}
+          keyboardType={'numeric'}
+          onChangeText={onChangeValue2}
+          value={value2}
+        />
+      </View>
     </View>
   );
 };

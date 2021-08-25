@@ -1,15 +1,18 @@
 import React from 'react';
 import {View} from 'react-native';
-import InputNoLineTextGrey from '../../components/input/inputNoLineTextGrey';
-import GreyTitle from '../../components/text/greyTitle';
+import InputNoLineTextGrey from '../input/inputNoLineTextGrey';
+import GreyTitle from '../text/greyTitle';
+import {Button} from 'react-native-elements';
 
-const horizontalTitleEdit = ({
+const horizontalTitleEditButton = ({
   title,
   value,
   onChangeText,
   index,
   keyboardType,
   editable,
+  buttonTitle,
+  onPress,
 }) => {
   return (
     <View
@@ -24,7 +27,7 @@ const horizontalTitleEdit = ({
       <View style={{flex: 1, alignItems: 'flex-start'}}>
         <GreyTitle text={title} />
       </View>
-      <View style={{flex: 3, justifyContent: 'flex-start'}}>
+      <View style={{flex: 2, justifyContent: 'flex-start'}}>
         <InputNoLineTextGrey
           editable={editable}
           onChangeText={onChangeText}
@@ -32,7 +35,10 @@ const horizontalTitleEdit = ({
           keyboardType={keyboardType}
         />
       </View>
+      <View style={{flex: 1, justifyContent: 'flex-start'}}>
+        <Button title={buttonTitle} type="Clear" onPress={onPress} />
+      </View>
     </View>
   );
 };
-export default horizontalTitleEdit;
+export default horizontalTitleEditButton;

@@ -1,19 +1,9 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 
-const customInput = props => {
-  return (
-    <TextInput
-      {...props}
-      editable
-      placeholder={props.placeholder}
-      keyboardType={props.keyboardType}
-      style={styles.input1}
-      onEndEditing={props.onEndEditing}
-      value={props.value}
-    />
-  );
-};
+const customInput = forwardRef((props, ref) => {
+  return <TextInput ref={ref} {...props} editable style={styles.input1} />;
+});
 
 const styles = StyleSheet.create({
   input1: {

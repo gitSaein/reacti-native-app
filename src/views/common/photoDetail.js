@@ -9,9 +9,7 @@ import CommendInfo from '../../components/common/commendInfo';
 import InputMessageSender from '../../components/input/inputMessageSender';
 
 const photoDetail = ({route}) => {
-  console.log('----------------------');
   console.log(route);
-  console.log('----------------------');
   const navigation = useNavigation();
   const images = {
     images: [
@@ -70,7 +68,7 @@ const photoDetail = ({route}) => {
           images={images.images}
         />
       </View>
-      <View style={{flex: 0.7}}>
+      <View style={{flex: 0.1, margin: 20}}>
         <FeedBottomLayout likeCnt={10} cmtCnt={4} />
       </View>
       <View

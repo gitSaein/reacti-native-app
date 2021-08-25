@@ -1,10 +1,7 @@
 import React, {useState} from 'react';
 import {View, SafeAreaView, StyleSheet, StatusBar} from 'react-native';
 import Header1 from '../../components/header/header1.js';
-import Input1 from '../../components/input/input1.js';
-import InputPassword from '../../components/input/inputPassword.js';
 import Button1 from '../../components/buttons/button1';
-import ButtonNoLine from '../../components/buttons/buttonNoLine';
 import ButtonNaver from '../../components/buttons/buttonNaver';
 import ButtonKakao from '../../components/buttons/buttonKakao';
 import GreyText from '../../components/text/greyText';
@@ -63,15 +60,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   form: {
-    margin: 20,
+    padding: 20,
+    flex: 1.5,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  or: {},
-  others: {margin: 20},
-
-  forgot_password: {
-    alignSelf: 'flex-end',
-  },
+  or: {flex: 1, justifyContent: 'center'},
+  others: {margin: 20, flex: 3, justifyContent: 'flex-start'},
 });
 export default SignIn1;

@@ -24,9 +24,8 @@ const smsPhoneNumber = ({navigation}) => {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.input}>
-        <GreyTitle text={'핸드폰 번호를 입력하세요'} />
-      </View>
+      <GreyTitle text={'핸드폰 번호를 입력하세요'} />
+      <View style={{padding: 10}} />
       <HorizontalNationalPhone
         onChangeValue={onValueChange}
         onChangeValue2={onValueChangePhoneNo}
@@ -46,10 +45,6 @@ const styles = StyleSheet.create({
     alignItems: 'center', //가로
     backgroundColor: '#ffffff',
     padding: 20,
-  },
-  input: {
-    flexDirection: 'row',
-    marginBottom: 40,
   },
 });
 export default smsPhoneNumber;

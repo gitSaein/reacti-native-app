@@ -17,9 +17,8 @@ import Geolocation from 'react-native-geolocation-service';
 
 import Welcome from './src/views/welcome/Welcome';
 import SignIn1 from './src/views/auth/SignIn1';
-import ForgotPassword from './src/views/auth/ForgotPassword';
-import ResetPassword from './src/views/auth/ResetPassword';
-import SmsCode from './src/views/auth/SmsCode';
+import smsCodeView from './src/views/auth/SmsCodeView';
+import SmsPhoneNumber from './src/views/auth/SmsPhoneNumber';
 import ChatDetail from './src/views/main/chatDetail';
 import PhotoDetail from './src/views/common/photoDetail';
 import EditProfile from './src/views/common/editProfileView';
@@ -105,16 +104,12 @@ const tabNavRoutes = [
     component: SignIn1,
   },
   {
-    name: 'ForgotPassword',
-    component: ForgotPassword,
-  },
-  {
-    name: 'ResetPassword',
-    component: ResetPassword,
-  },
-  {
     name: 'SmsCode',
-    component: SmsCode,
+    component: smsCodeView,
+  },
+  {
+    name: 'SmsPhoneNumber',
+    component: SmsPhoneNumber,
   },
   {
     name: 'Home',
