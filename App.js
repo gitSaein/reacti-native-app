@@ -22,6 +22,7 @@ import SmsPhoneNumber from './src/views/auth/SmsPhoneNumber';
 import ChatDetail from './src/views/main/chatDetail';
 import PhotoDetail from './src/views/common/photoDetail';
 import EditProfile from './src/views/common/editProfileView';
+import CommentView from './src/views/common/commentView';
 
 import Home from './src/views/main/home';
 import Chat from './src/views/main/chat';
@@ -131,6 +132,10 @@ const tabNavRoutes = [
   {
     name: 'EditProfile',
     component: EditProfile,
+  },
+  {
+    name: 'CommentView',
+    component: CommentView,
   },
 ];
 /* 현재 위치 함수 */

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Avatar} from 'react-native-elements';
 import {StyleSheet, Image, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import GreyCropProfileTitle from '../text/greyCropProfileTitle';
 import Content from '../text/content';
@@ -8,6 +9,8 @@ import ButtonWhiteMoreHorizontal from '../buttons/buttonWhiteMoreHorizontal';
 import FeedBottomLayout from '../layout/feedBottomLayout';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 const feedContent = ({item, onPress}) => {
+  const navigation = useNavigation();
+
   const [visible, setVisible] = React.useState(false);
   return (
     <View key={item.id} style={styles.container}>
@@ -30,22 +33,24 @@ const feedContent = ({item, onPress}) => {
         </View>
       </View>
       {/* **************** */}
-      <TouchableOpacity onPress={() => onPress(item)}>
-        {/* text */}
-        <View style={{height: 30, marginTop: 10}}>
-          <Content text={item.contents} />
-        </View>
-        {/* **************** */}
-        {/* photo */}
-        <View style={{alignItems: 'center'}}>
-          <Image
-            style={{height: 170, borderRadius: 16}}
-            source={require('../../assets/images/temp/feed.png')}
-          />
-        </View>
-      </TouchableOpacity>
+      {/* text */}
+      <View style={{height: 30, marginTop: 10}}>
+        <Content text={item.contents} />
+      </View>
+      {/* **************** */}
+      {/* photo */}
+      <View style={{alignItems: 'center'}}>
+        <Image
+          style={{height: 170, borderRadius: 16}}
+          source={require('../../assets/images/temp/feed.png')}
+        />
+      </View>
       <View style={{paddingTop: 10}}>
-        <FeedBottomLayout likeCnt={4} cmtCnt={10} />
+        <FeedBottomLayout
+          likeCnt={4}
+          cmtCnt={10}
+          clickChat={() => navigation.navigate('CommentView')}
+        />
       </View>
     </View>
   );

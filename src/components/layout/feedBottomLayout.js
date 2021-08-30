@@ -7,7 +7,7 @@ import ButtonShare from '../buttons/buttonShare';
 import ButtonBookmark from '../buttons/buttonBookmark';
 
 import IconContent from '../text/iconContent';
-const feedBottomLayout = ({likeCnt, cmtCnt}) => {
+const feedBottomLayout = ({likeCnt, cmtCnt, clickChat}) => {
   return (
     <View style={styles.command}>
       <View
@@ -27,7 +27,7 @@ const feedBottomLayout = ({likeCnt, cmtCnt}) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <ButtonComment />
+        <ButtonComment onPress={clickChat} />
         <IconContent text={cmtCnt} />
       </View>
       <View style={{flex: 1.5, justifyContent: 'center', alignItems: 'center'}}>
