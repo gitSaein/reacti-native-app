@@ -8,6 +8,8 @@ import ButtonAdd from '../buttons/buttonAdd';
 const {height} = Dimensions.get('window');
 
 const headerPurpleAddSetting = props => {
+  const [visible, setVisible] = React.useState(false);
+
   return (
     <View style={styles.containerStyle}>
       <View style={{flex: 8, justifyContent: 'center'}}>
@@ -19,7 +21,7 @@ const headerPurpleAddSetting = props => {
       </View>
       <View
         style={{flex: 1, alignContent: 'flex-end', justifyContent: 'center'}}>
-        <ButtonSetting />
+        <ButtonSetting onPress={() => setVisible(!visible)} visible={visible} />
       </View>
     </View>
   );

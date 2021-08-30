@@ -3,7 +3,7 @@ import {View, StyleSheet, StatusBar, Text} from 'react-native';
 
 import MyPageTabView from './sub/myPageTabView';
 import HeaderPurpleAddSetting from '../../components/header/headerPurpleAddSetting.js';
-import HeaderPurpleLeftAddSetting from '../../components/header/headerPurpleLeftAddSetting.js';
+import HeaderPurpleSetting from '../../components/header/headerPurpleSetting.js';
 import ProfileImage from '../../components/image/smallMediumRactangle';
 import Button from '../../components/buttons/button1';
 import Button2 from '../../components/buttons/buttonPurpleMedium';
@@ -41,7 +41,7 @@ const myPage = ({route, navigation}) => {
       {item !== undefined && item.isMe ? (
         <HeaderPurpleAddSetting title={'my page'} />
       ) : (
-        <HeaderPurpleLeftAddSetting
+        <HeaderPurpleSetting
           title={item.item.userName}
           onPress={() => navigation.goBack()}
         />
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
   user: {flex: 1.5, margin: 20, flexDirection: 'row'},
   button: {
     flex: 1,
+    padding: 10,
     alignSelf: 'center',
     flexDirection: 'row',
   },

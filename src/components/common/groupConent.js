@@ -6,7 +6,7 @@ import {Avatar} from 'react-native-elements';
 import {StyleSheet, Image, View, Dimensions} from 'react-native';
 import SmallCircleAvatar from '../profile/smallCircleAvatar';
 
-import ButtonShareArrow from '../buttons/buttonShareArrow';
+import ButtonShare from '../buttons/buttonShare';
 import IconContent from '../text/iconContent';
 import Button2 from '../buttons/button2.js';
 const {height, width} = Dimensions.get('window');
@@ -44,7 +44,7 @@ const groupContent = ({item}) => {
               <IconContent text={'+ 10 join this'} />
             </View>
           </View>
-          <ButtonShareArrow />
+          <ButtonShare />
         </View>
         {/* **************** */}
       </View>

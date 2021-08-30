@@ -35,7 +35,7 @@ const myPageTabView = () => {
             return (
               <Icon
                 size={25}
-                name={focused ? 'heart-sharp' : 'heart-outline'}
+                name={focused ? 'bookmarks-sharp' : 'bookmarks-outline'}
                 color={focused ? '#6F8BA4' : '#DDDCFF'}
               />
             );

@@ -1,10 +1,15 @@
 import React from 'react';
 import {TouchableOpacity, Image} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const buttonComment = props => {
   return (
-    <TouchableOpacity style={{marginLeft: 10}}>
-      <Image source={require('../../assets/images/icon/comment.png')} />
+    <TouchableOpacity>
+      <Ionicons
+        style={{color: '#6F8BA4'}}
+        size={20}
+        name={'chatbubble-outline'}
+      />
     </TouchableOpacity>
   );
 };

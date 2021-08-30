@@ -1,6 +1,6 @@
 import React from 'react';
 import {Avatar} from 'react-native-elements';
-import {StyleSheet, Image, View, Dimensions} from 'react-native';
+import {StyleSheet, Image, View} from 'react-native';
 
 import GreyCropProfileTitle from '../text/greyCropProfileTitle';
 import Content from '../text/content';
@@ -8,25 +8,29 @@ import ButtonWhiteMoreHorizontal from '../buttons/buttonWhiteMoreHorizontal';
 import FeedBottomLayout from '../layout/feedBottomLayout';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 const feedContent = ({item, onPress}) => {
+  const [visible, setVisible] = React.useState(false);
   return (
     <View key={item.id} style={styles.container}>
-      <TouchableOpacity onPress={() => onPress(item)}>
-        {/**** profile ****/}
-        <View style={styles.profile}>
-          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-            <View style={{justifyContent: 'center'}}>
-              <Avatar size="medium" rounded={true} source={item.profileImage} />
-            </View>
-            <View style={{justifyContent: 'center', marginLeft: 10}}>
-              <GreyCropProfileTitle text={item.title} />
-              <Content text={item.title} />
-            </View>
+      {/**** profile ****/}
+      <View style={styles.profile}>
+        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+          <View style={{justifyContent: 'center'}}>
+            <Avatar size="medium" rounded={true} source={item.profileImage} />
           </View>
-          <View style={{justifyContent: 'center', marginRight: 10}}>
-            <ButtonWhiteMoreHorizontal onPress={() => console.log('hihi')} />
+          <View style={{justifyContent: 'center', marginLeft: 10}}>
+            <GreyCropProfileTitle text={item.title} />
+            <Content text={item.title} />
           </View>
         </View>
-        {/* **************** */}
+        <View style={{justifyContent: 'center', marginRight: 10}}>
+          <ButtonWhiteMoreHorizontal
+            onPress={() => setVisible(!visible)}
+            visible={visible}
+          />
+        </View>
+      </View>
+      {/* **************** */}
+      <TouchableOpacity onPress={() => onPress(item)}>
         {/* text */}
         <View style={{height: 30, marginTop: 10}}>
           <Content text={item.contents} />

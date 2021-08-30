@@ -1,10 +1,11 @@
 import React from 'react';
 import {TouchableOpacity, Image} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const buttonLike = props => {
   return (
     <TouchableOpacity>
-      <Image source={require('../../assets/images/icon/like.png')} />
+      <Ionicons style={{color: '#6F8BA4'}} size={20} name={'heart-outline'} />
     </TouchableOpacity>
   );
 };

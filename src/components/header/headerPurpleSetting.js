@@ -2,18 +2,26 @@ import React from 'react';
 import {StyleSheet, View, Dimensions} from 'react-native';
 
 import WhiteTitle from '../text/whiteTitle';
-import ButtonWhiteMoreHorizontal from '../buttons/buttonWhiteMoreHorizontal';
+import ButtonSetting from '../buttons/buttonSetting';
+import ButtonAdd from '../buttons/buttonAdd';
+import ButtonWhiteLeft from '../buttons/buttonWhiteLeft';
 
 const {height} = Dimensions.get('window');
 
-const headerPurpleAddSetting = props => {
+const headerPurpleSetting = props => {
+  const [visible, setVisible] = React.useState(false);
+
   return (
     <View style={styles.containerStyle}>
-      <View style={{flex: 9}}>
+      <View style={{flex: 1, justifyContent: 'center'}}>
+        <ButtonWhiteLeft onPress={props.onPress} />
+      </View>
+      <View style={{flex: 8, justifyContent: 'center'}}>
         <WhiteTitle text={props.title} />
       </View>
-      <View style={{flex: 1, alignContent: 'flex-end'}}>
-        <ButtonWhiteMoreHorizontal />
+      <View
+        style={{flex: 1, alignContent: 'flex-end', justifyContent: 'center'}}>
+        <ButtonSetting onPress={() => setVisible(!visible)} visible={visible} />
       </View>
     </View>
   );
@@ -30,4 +38,4 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 16,
   },
 });
-export default headerPurpleAddSetting;
+export default headerPurpleSetting;
