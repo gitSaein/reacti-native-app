@@ -4,12 +4,13 @@ import {Chip} from 'react-native-elements';
 
 const chipsWithClose = ({items, onPress}) => {
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
       {items.map((item, index) => {
         return (
           <Chip
             key={index}
             title={item.label}
+            type="outline"
             icon={{
               name: 'close',
               type: 'font-awesome',

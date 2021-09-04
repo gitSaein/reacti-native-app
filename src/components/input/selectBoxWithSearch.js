@@ -14,22 +14,20 @@ const selectBoxWithSearch = ({items, setItems}) => {
     );
   };
   return (
-    <View>
-      <Dropdown
-        style={styles.dropdown2}
-        data={items}
-        search
-        searchPlaceholder="Search"
-        labelField="label"
-        valueField="value"
-        placeholder="Select item"
-        value={dropdown}
-        onChange={item => {
-          setItems(item.value);
-        }}
-        renderItem={item => _renderItem(item)}
-      />
-    </View>
+    <Dropdown
+      style={styles.dropdown2}
+      data={items}
+      search
+      searchPlaceholder="Search"
+      labelField="label"
+      valueField="value"
+      placeholder="Select item"
+      value={dropdown}
+      onChange={item => {
+        setItems(item.value);
+      }}
+      renderItem={item => _renderItem(item)}
+    />
   );
 };
 
@@ -37,7 +35,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    padding: 40,
   },
   dropdown2: {
     backgroundColor: 'white',
@@ -45,7 +42,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     marginTop: 10,
     padding: 8,
-    width: width - 44,
+    width: width * 0.85,
   },
   icon: {
     marginRight: 5,

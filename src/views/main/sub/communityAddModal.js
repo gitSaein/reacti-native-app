@@ -7,6 +7,7 @@ import {
   Image,
   ImageBackground,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import Modal from 'react-native-modal';
 
@@ -82,7 +83,11 @@ const communityAddModal = ({isOpen, setIsOpen, saveContent}) => {
   };
 
   return (
-    <Modal isVisible={isOpen} style={styles.container}>
+    <Modal
+      isVisible={isOpen}
+      hasBackdrop={true}
+      coverScreen={false}
+      style={styles.container}>
       <HeaderWhiteWithComponent
         title={'Create Post'}
         onClose={() => setIsOpen(false)}
@@ -118,44 +123,53 @@ const communityAddModal = ({isOpen, setIsOpen, saveContent}) => {
         value={contents.content}
         onChangeText={event => setContents({...contents, content: event})}
       />
+
       <ChipsWithClose
         items={category.filter(e => e.select === true)}
         onPress={e => updateCategory(e)}
       />
       <SelectBoxWithSearch setItems={e => updateCategory(e)} items={category} />
-      <ScrollView horizontal style={{flexDirection: 'row', margin: 10}}>
-        {contents.photo.map((photo, index) => {
-          if (Object.keys(photo).includes('isCheck') && photo.isCheck) {
-            return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => {
-                  setContents({
-                    ...contents,
-                    photo: contents.photo.filter((p, idx) => idx !== index),
-                  });
-                }}>
-                <ImageBackground
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          margin: 10,
+          alignItems: 'flex-start',
+        }}>
+        <ScrollView horizontal>
+          {contents.photo.map((photo, index) => {
+            if (Object.keys(photo).includes('isCheck') && photo.isCheck) {
+              return (
+                <TouchableOpacity
                   key={index}
-                  style={{
-                    width: 90,
-                    height: 90,
-                    margin: 5,
-                    borderRadius: 14,
-                  }}
-                  source={{uri: photo.node.image.uri}}>
-                  <Image
+                  onPress={() => {
+                    setContents({
+                      ...contents,
+                      photo: contents.photo.filter((p, idx) => idx !== index),
+                    });
+                  }}>
+                  <ImageBackground
                     key={index}
-                    style={{margin: 2}}
-                    source={require('../../../assets/images/icon/close.png')}
-                  />
-                </ImageBackground>
-              </TouchableOpacity>
-            );
-          }
-        })}
-        <ButtonBigAdd onPress={openGallaryModal} />
-      </ScrollView>
+                    style={{
+                      width: 90,
+                      height: 90,
+                      margin: 5,
+                      borderRadius: 14,
+                    }}
+                    source={{uri: photo.node.image.uri}}>
+                    <Image
+                      key={index}
+                      style={{margin: 2}}
+                      source={require('../../../assets/images/icon/close.png')}
+                    />
+                  </ImageBackground>
+                </TouchableOpacity>
+              );
+            }
+          })}
+          <ButtonBigAdd onPress={openGallaryModal} />
+        </ScrollView>
+      </View>
       <PhotoGallaryModal
         isVisible={isGallaryModalVisible}
         photos={photos}
@@ -170,20 +184,27 @@ const communityAddModal = ({isOpen, setIsOpen, saveContent}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
     backgroundColor: 'white',
+    justifyContent: 'flex-end',
+    alignSelf: 'center',
+
+    alignItems: 'center',
+    width: '100%',
+    padding: 10,
   },
   textTitle: {
     borderBottomColor: '#F9F9F9',
     borderBottomWidth: 1,
     margin: 10,
     fontWeight: 'bold',
+    width: '90%',
     fontSize: 20,
   },
   textInput: {
     borderWidth: 1,
     borderColor: '#F9F9F9',
     margin: 10,
+    width: '90%',
     height: Math.max(35, height / 5),
   },
 });

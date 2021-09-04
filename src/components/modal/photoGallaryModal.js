@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
+  StyleSheet,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import CheckBox from '@react-native-community/checkbox';
@@ -32,7 +33,11 @@ const photoGallaryModal = ({
 
   if (photos !== undefined && photos.length > 0) {
     return (
-      <Modal isVisible={isVisible}>
+      <Modal
+        isVisible={isVisible}
+        hasBackdrop={true}
+        coverScreen={false}
+        style={styles.container}>
         <ScrollView
           style={{
             flex: 1,
@@ -74,7 +79,7 @@ const photoGallaryModal = ({
     );
   } else {
     return (
-      <Modal isVisible={isVisible}>
+      <Modal isVisible={isVisible} style={styles.container}>
         <View style={{flex: 1, backgroundColor: 'white', padding: 20}}>
           <HeaderWhiteWithComponent
             title={'Photo Gallary'}
@@ -88,4 +93,13 @@ const photoGallaryModal = ({
   }
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    justifyContent: 'flex-end',
+    alignSelf: 'center',
+    width: '100%',
+  },
+});
 export default photoGallaryModal;

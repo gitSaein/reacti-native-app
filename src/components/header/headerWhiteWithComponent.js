@@ -7,9 +7,15 @@ import Button from '../buttons/buttonCustomizedText';
 const headerWhiteWithComponent = ({onClose, title, onNext}) => {
   return (
     <View style={styles.container}>
-      <ButtonClose onClose={onClose} />
-      <GreyTitle text={title} />
-      <Button onNext={onNext} text={'Next'} />
+      <View style={{flex: 1}}>
+        <ButtonClose onClose={onClose} />
+      </View>
+      <View style={{flex: 8, alignContent: 'center', alignItems: 'center'}}>
+        <GreyTitle text={title} />
+      </View>
+      <View style={{flex: 1}}>
+        <Button onNext={onNext} text={'Next'} />
+      </View>
     </View>
   );
 };
@@ -18,8 +24,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
-    margin: 10,
+    padding: 10,
   },
 });
 export default headerWhiteWithComponent;

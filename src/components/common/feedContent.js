@@ -7,11 +7,10 @@ import GreyCropProfileTitle from '../text/greyCropProfileTitle';
 import Content from '../text/content';
 import ButtonWhiteMoreHorizontal from '../buttons/buttonWhiteMoreHorizontal';
 import FeedBottomLayout from '../layout/feedBottomLayout';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 const feedContent = ({item, onPress}) => {
   const navigation = useNavigation();
-
   const [visible, setVisible] = React.useState(false);
+
   return (
     <View key={item.id} style={styles.container}>
       {/**** profile ****/}
