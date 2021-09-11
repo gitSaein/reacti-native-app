@@ -8,6 +8,7 @@ import InputMessageSender from '../../components/input/inputMessageSender';
 
 const chatDetail = ({route, navigation}) => {
   const item = route.params;
+  const [message, setMessage] = useState('');
 
   return (
     <View style={styles.container}>
@@ -25,7 +26,17 @@ const chatDetail = ({route, navigation}) => {
         <MessageByOthers item={item} />
         <MessageByOthers item={item} />
       </ScrollView>
-      <InputMessageSender />
+      <InputMessageSender
+        value={message}
+        onChangeText={e => {
+          setMessage(e);
+        }}
+        onPress={msg => {
+          if (msg) {
+            console.log(msg);
+          }
+        }}
+      />
     </View>
   );
 };

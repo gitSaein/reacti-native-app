@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 
 import ButtonClipInactive from '../buttons/buttonClipInactive';
@@ -6,6 +6,10 @@ import ButtonSender from '../buttons/buttonSender';
 import NoLineInput from './noLineInput';
 
 const messageInputSender = props => {
+  const {value, onPress, onChangeText, ...otherProps} = props;
+  const [message, setMessage] = useState(value);
+
+  console.log('messageInputSender: ' + message);
   return (
     <View style={styles.chatInput}>
       <View
@@ -23,7 +27,7 @@ const messageInputSender = props => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <NoLineInput />
+        <NoLineInput value={message} onChangeText={setMessage} />
       </View>
       <View
         style={{
@@ -32,7 +36,7 @@ const messageInputSender = props => {
           alignContent: 'flex-start',
           alignItems: 'center',
         }}>
-        <ButtonSender />
+        <ButtonSender onPress={() => onPress(message)} />
       </View>
     </View>
   );
