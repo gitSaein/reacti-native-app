@@ -8,8 +8,6 @@ import NoLineInput from './noLineInput';
 const messageInputSender = props => {
   const {value, onPress, onChangeText, ...otherProps} = props;
   const [message, setMessage] = useState(value);
-
-  console.log('messageInputSender: ' + message);
   return (
     <View style={styles.chatInput}>
       <View
