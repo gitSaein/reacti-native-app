@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {View, StyleSheet, StatusBar, ScrollView} from 'react-native';
-import * as StompJs from '@stomp/stompjs';
+import Stomp from 'webstomp-client';
 import SockJS from 'sockjs-client';
 
 import HeaderPurpleChatInfo from '../../components/header/headerPurpleChatInfo';
@@ -11,59 +11,52 @@ import InputMessageSender from '../../components/input/inputMessageSender';
 const chatDetail = ({route, navigation}) => {
   const item = route.params;
   const [message, setMessage] = useState('');
-  const client = useRef({});
+  const [connected, setConnected] = useState('');
+
+  const client = useRef();
   const ROOM_SEQ = 1;
+  var socket = '';
+  var stompClient = '';
 
   useEffect(() => {
-    connect();
-
+    connect_1();
     return () => disconnect();
   }, []);
 
-  const connect = () => {
-    console.log('connect start...');
-    client.current = new StompJs.Client({
-      // brokerURL: "ws://localhost:9000/ws", // 웹소켓 서버로 직접 접속
-      webSocketFactory: () => new SockJS('http://localhost:9000/ws'), // proxy를 통한 접속
-      connectHeaders: {},
-      debug: function (str) {
-        console.log(str);
+  const connect_1 = () => {
+    socket = new SockJS('http://10.0.2.2:9000/ws');
+    client.current = Stomp.over(socket);
+    client.current.connect(
+      {},
+      frame => {
+        setConnected(true);
+        stompClient.subscribe(`/topic/chat/${ROOM_SEQ}`, tick => {
+          console.log('[result] ' + tick);
+        });
       },
-      reconnectDelay: 5000,
-      heartbeatIncoming: 4000,
-      heartbeatOutgoing: 4000,
-      onConnect: () => {
-        subscribe();
+      error => {
+        console.error(error);
+        setConnected(false);
       },
-      onStompError: frame => {
-        console.error(frame);
-      },
-    });
-
-    client.current.activate();
+    );
   };
 
   const disconnect = () => {
     console.log('disconnect start...');
     client.current.deactivate();
-  };
-
-  const subscribe = () => {
-    console.log('subscribe start...');
-    client.current.subscribe(`/topic/chat/${ROOM_SEQ}`, ({body}) => {
-      setMessage(_chatMessages => [..._chatMessages, JSON.parse(body)]);
-    });
+    setConnected(false);
   };
 
   const publish = msg => {
-    if (!client.current.connected) {
-      return;
+    if (!connected) {
+      console.log('# start reconnection...');
+      connect_1();
     }
 
-    client.current.publish({
-      destination: '/pub/chat',
-      body: JSON.stringify({roomSeq: ROOM_SEQ, msg}),
-    });
+    console.log('# start send message...');
+    let dd = JSON.stringify({message: msg});
+    console.log(dd);
+    client.current.send(`/app/chat/${ROOM_SEQ}`, dd);
 
     setMessage('');
   };
