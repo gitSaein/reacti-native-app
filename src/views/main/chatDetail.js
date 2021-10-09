@@ -11,12 +11,11 @@ import InputMessageSender from '../../components/input/inputMessageSender';
 const chatDetail = ({route, navigation}) => {
   const item = route.params;
   const [message, setMessage] = useState('');
-  const [connected, setConnected] = useState('');
+  const [connected, setConnected] = useState(false);
 
   const client = useRef();
   const ROOM_SEQ = 1;
   var socket = '';
-  var stompClient = '';
 
   useEffect(() => {
     connect_1();
@@ -24,13 +23,15 @@ const chatDetail = ({route, navigation}) => {
   }, []);
 
   const connect_1 = () => {
-    socket = new SockJS('http://10.0.2.2:9000/ws');
+    socket = new SockJS('http://10.0.2.2:9000/gs-guide-websocket');
     client.current = Stomp.over(socket);
     client.current.connect(
       {},
-      frame => {
+      response => {
+        console.log(response);
+
         setConnected(true);
-        stompClient.subscribe(`/topic/chat/${ROOM_SEQ}`, tick => {
+        client.current.subscribe(`/topic/chat/${ROOM_SEQ}`, tick => {
           console.log('[result] ' + tick);
         });
       },
@@ -42,8 +43,9 @@ const chatDetail = ({route, navigation}) => {
   };
 
   const disconnect = () => {
-    console.log('disconnect start...');
-    client.current.deactivate();
+    client.current.disconnect(function () {
+      console.log('disconnect start...');
+    });
     setConnected(false);
   };
 
@@ -55,9 +57,7 @@ const chatDetail = ({route, navigation}) => {
 
     console.log('# start send message...');
     let dd = JSON.stringify({message: msg});
-    console.log(dd);
     client.current.send(`/app/chat/${ROOM_SEQ}`, dd);
-
     setMessage('');
   };
 
@@ -81,7 +81,6 @@ const chatDetail = ({route, navigation}) => {
         value={message}
         onPress={msg => {
           if (msg) {
-            console.log('message: ' + msg);
             publish(msg);
           }
         }}
