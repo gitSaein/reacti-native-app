@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {View, StyleSheet, StatusBar, ScrollView} from 'react-native';
-import webstomp from 'webstomp-client';
+import * as SockJS from 'sockjs-client';
 import * as StompJs from '@stomp/stompjs';
 
 import HeaderPurpleChatInfo from '../../components/header/headerPurpleChatInfo';
@@ -22,29 +22,38 @@ const chatDetail = ({route, navigation}) => {
   }, []);
 
   const connect_web_socket = () => {
-    client.current = new StompJs.Client({
+    client.current = new StompJs.Client();
+
+    client.current.configure({
       brokerURL: 'ws://10.0.2.2:15674/ws',
       forceBinaryWSFrames: true,
+      appendMissingNULLonIncoming: true,
       connectHeaders: {
         login: 'guest',
         passcode: 'guest',
       },
-      debug: function (str) {
-        console.log('start debug');
-        console.log(str);
-      },
+      // debug: function (str) {
+      //   console.log('start debug');
+      //   console.log(str);
+      // },
       reconnectDelay: 5000,
-      heartbeatIncoming: 4000,
-      heartbeatOutgoing: 4000,
+      heartbeatIncoming: 0,
+      heartbeatOutgoing: 20000,
+      // webSocketFactory: () => {
+      //   return new SockJS('http://10.0.2.2:15674/ws');
+      // },
     });
 
     client.current.onConnect = function (frame) {
-      console.log('connect ...');
+      console.log('onConnect');
+      console.log(frame);
+
       client.current.subscribe(
         `/exchange/message.topic/message.room.${ROOM_SEQ}`,
         response => {
           if (response.body) {
-            console.log('got message with body ' + message.body);
+            console.log('got message with body ');
+            console.log(response.body);
           } else {
             console.log('got empty message');
           }
@@ -53,7 +62,11 @@ const chatDetail = ({route, navigation}) => {
       // Do something, all subscribes must be done is this callback
       // This is needed because this will be executed after a (re)connect
     };
-
+    if (typeof WebSocket !== 'function') {
+      client.current.webSocketFactory = function () {
+        return new SockJS('http://10.0.2.2:15674/stomp');
+      };
+    }
     client.current.onStompError = function (frame) {
       // Will be invoked in case of error encountered at Broker
       // Bad login/passcode typically will cause an error
