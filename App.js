@@ -9,7 +9,7 @@
 import React, {useEffect, useState} from 'react';
 import 'react-native-gesture-handler';
 import {Image, StyleSheet, Platform, PermissionsAndroid} from 'react-native';
-
+import * as encoding from 'text-encoding';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';

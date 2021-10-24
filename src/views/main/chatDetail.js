@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {View, StyleSheet, StatusBar, ScrollView} from 'react-native';
-import Stomp from 'webstomp-client';
-import SockJS from 'sockjs-client';
+import webstomp from 'webstomp-client';
+import * as StompJs from '@stomp/stompjs';
 
 import HeaderPurpleChatInfo from '../../components/header/headerPurpleChatInfo';
 import MessageByMe from '../../components/text/messageByMe';
@@ -15,49 +15,71 @@ const chatDetail = ({route, navigation}) => {
 
   const client = useRef();
   const ROOM_SEQ = 1;
-  var socket = '';
 
   useEffect(() => {
-    connect_1();
+    connect_web_socket();
     return () => disconnect();
   }, []);
 
-  const connect_1 = () => {
-    socket = new SockJS('http://10.0.2.2:9000/gs-guide-websocket');
-    client.current = Stomp.over(socket);
-    client.current.connect(
-      {},
-      response => {
-        console.log(response);
+  const connect_web_socket = () => {
+    client.current = new StompJs.Client({
+      brokerURL: 'ws://10.0.2.2:15674/ws',
+      forceBinaryWSFrames: true,
+      connectHeaders: {
+        login: 'guest',
+        passcode: 'guest',
+      },
+      debug: function (str) {
+        console.log('start debug');
+        console.log(str);
+      },
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
+    });
 
-        setConnected(true);
-        client.current.subscribe(`/topic/chat/${ROOM_SEQ}`, tick => {
-          console.log('[result] ' + tick);
-        });
-      },
-      error => {
-        console.error(error);
-        setConnected(false);
-      },
-    );
+    client.current.onConnect = function (frame) {
+      console.log('connect ...');
+      client.current.subscribe(
+        `/exchange/message.topic/message.room.${ROOM_SEQ}`,
+        response => {
+          if (response.body) {
+            console.log('got message with body ' + message.body);
+          } else {
+            console.log('got empty message');
+          }
+        },
+      );
+      // Do something, all subscribes must be done is this callback
+      // This is needed because this will be executed after a (re)connect
+    };
+
+    client.current.onStompError = function (frame) {
+      // Will be invoked in case of error encountered at Broker
+      // Bad login/passcode typically will cause an error
+      // Complaint brokers will set `message` header with a brief message. Body may contain details.
+      // Compliant brokers will terminate the connection after any error
+      console.log('Broker reported error: ' + frame.headers.message);
+      console.log('Additional details: ' + frame.body);
+    };
+
+    client.current.activate();
   };
 
   const disconnect = () => {
-    client.current.disconnect(function () {
-      console.log('disconnect start...');
-    });
+    client.current.deactivate();
     setConnected(false);
   };
 
   const publish = msg => {
     if (!connected) {
       console.log('# start reconnection...');
-      connect_1();
+      connect_web_socket();
     }
 
     console.log('# start send message...');
     let dd = JSON.stringify({message: msg});
-    client.current.send(`/app/chat/${ROOM_SEQ}`, dd);
+    client.current.send(`/app/chat/send/message/${ROOM_SEQ}`, dd);
     setMessage('');
   };
 
