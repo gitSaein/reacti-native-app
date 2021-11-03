@@ -6,6 +6,7 @@ import ButtonNaver from '../../components/buttons/buttonNaver';
 import ButtonKakao from '../../components/buttons/buttonKakao';
 import GreyText from '../../components/text/greyText';
 import HorizontalNationalPhone from '../../components/common/horizontalNationalPhone';
+import * as KakaoLogins from '@react-native-seoul/kakao-login';
 
 const SignIn1 = ({navigation}) => {
   const [selectedInfo, setSelectedInfo] = useState({
@@ -24,6 +25,43 @@ const SignIn1 = ({navigation}) => {
       phoneNo: e,
     }));
   };
+
+  const loginByNaver = () => {};
+
+  const loginByKakao = () => {
+    console.log('   kakaoLogin   ');
+    KakaoLogins.login()
+      .then(result => {
+        console.log(`Login Finished:${JSON.stringify(result)}`);
+        getProfile();
+      })
+      .catch(err => {
+        if (err.code === 'E_CANCELLED_OPERATION') {
+          console.log(`Login Cancelled:${err.message}`);
+        } else {
+          console.log(`Login Failed:${err.code} ${err.message}`);
+        }
+        return false;
+      });
+    return true;
+  };
+
+  const getProfile = () => {
+    console.log('   kakaoProfile   ');
+    KakaoLogins.getProfile()
+      .then(result => {
+        if (result) {
+          let re = JSON.stringify(result);
+          console.log(`Get Profile Finished:${re}`);
+        }
+        // 이후 result.id를 활용해서 로그인 로직을 구현해주세용
+      })
+      .catch(err => {
+        console.error('Get Profile Failed');
+        console.error(err);
+      });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Header1 title={'로그인/ 회원가입'} />
@@ -44,8 +82,8 @@ const SignIn1 = ({navigation}) => {
         <GreyText text={'OR'} />
       </View>
       <View style={styles.others}>
-        <ButtonKakao text={'카카오로 시작하기'} />
-        <ButtonNaver text={'네이버로 시작하기'} />
+        <ButtonKakao text={'카카오로 시작하기'} onPress={loginByKakao} />
+        <ButtonNaver text={'네이버로 시작하기'} onPress={loginByNaver} />
       </View>
     </SafeAreaView>
   );
@@ -56,7 +94,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start', //세로
     alignItems: 'center', //가로
-    paddingTop: StatusBar.currentHeight,
     backgroundColor: 'white',
   },
   form: {

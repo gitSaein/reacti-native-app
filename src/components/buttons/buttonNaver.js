@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
-const buttonNaver = ({text}) => {
+const buttonNaver = ({text, onPress}) => {
   return (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
       <Image
         style={styles.image}
         source={require('../../assets/images/login/naver_login_small.png')}

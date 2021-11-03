@@ -91,8 +91,18 @@ const chatDetail = ({route, navigation}) => {
     }
 
     console.log('# start send message...');
-    let dd = JSON.stringify({message: msg});
-    client.current.send(`/app/chat/send/message/${ROOM_SEQ}`, dd);
+    let dd = JSON.stringify({
+      roomIdx: 1,
+      messageType: 'C',
+      senderIdx: 1,
+      message: msg,
+    });
+
+    client.current.publish({
+      destination: `/exchange/message.topic/message.room.${ROOM_SEQ}`,
+      body: 'd',
+      headers: {priority: '9'},
+    });
     setMessage('');
   };
 
