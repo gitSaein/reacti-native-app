@@ -125,13 +125,13 @@ const community = ({route, navigation}) => {
         region={location}>
         {marks.map((mark, index) => {
           return (
-            <Marker key={index} coordinate={mark.coordinate}>
-              <TouchableOpacity
-                style={styles.markerWrap}
-                onPress={() => {
-                  console.log('ojoj');
-                  onPressMark(mark.coordinate);
-                }}>
+            <Marker
+              key={index}
+              coordinate={mark.coordinate}
+              onPress={() => {
+                onPressMark(mark.coordinate);
+              }}>
+              <View style={styles.markerWrap}>
                 <View style={[styles.ring]} />
                 <Text style={styles.marks}>
                   {
@@ -143,7 +143,7 @@ const community = ({route, navigation}) => {
                     }).length
                   }
                 </Text>
-              </TouchableOpacity>
+              </View>
             </Marker>
           );
         })}
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   container: {
     height: height,
     width: width,
-    paddingTop: StatusBar.currentHeight,
+    paddingTop: StatusBar.currentHeight + 10,
   },
   map: {
     ...StyleSheet.absoluteFillObject,

@@ -3,12 +3,12 @@ import {View, StyleSheet, StatusBar, ScrollView, Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {SliderBox} from 'react-native-image-slider-box';
 
-import Header from '../../components/header/headerPurpleLeftSetting.js';
-import FeedBottomLayout from '../../components/layout/feedBottomLayout';
-import CommendInfo from '../../components/common/commendInfo';
-import InputMessageSender from '../../components/input/inputMessageSender';
+import Header from '../../../components/header/headerPurpleLeftSetting.js';
+import FeedBottomLayout from '../../../components/layout/feedBottomLayout';
+import CommendInfo from '../../../components/common/commendInfo';
+import InputMessageSender from '../../../components/input/inputMessageSender';
 
-const photoDetail = ({route}) => {
+const postDetail = ({route}) => {
   console.log(route);
   const navigation = useNavigation();
   const images = {
@@ -24,35 +24,35 @@ const photoDetail = ({route}) => {
     {
       userId: 'dd1',
       commend: 'jdslfd',
-      imageUrl: require('../../assets/images/temp/middleProfile.png'),
+      imageUrl: require('../../../assets/images/temp/middleProfile.png'),
       likeCnt: 12,
       createDate: '1hour',
     },
     {
       userId: 'dd2',
       commend: 'jdslfd',
-      imageUrl: require('../../assets/images/temp/middleProfile.png'),
+      imageUrl: require('../../../assets/images/temp/middleProfile.png'),
       likeCnt: 2,
       createDate: '1hour',
     },
     {
       userId: 'dd3',
       commend: 'jdslfd',
-      imageUrl: require('../../assets/images/temp/middleProfile.png'),
+      imageUrl: require('../../../assets/images/temp/middleProfile.png'),
       likeCnt: 1,
       createDate: '1hour',
     },
     {
       userId: 'dd4',
       commend: 'jdslfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdd',
-      imageUrl: require('../../assets/images/temp/middleProfile.png'),
+      imageUrl: require('../../../assets/images/temp/middleProfile.png'),
       likeCnt: 10,
       createDate: '1hour',
     },
     {
       userId: 'dd',
       commend: 'jdslfd',
-      imageUrl: require('../../assets/images/temp/middleProfile.png'),
+      imageUrl: require('../../../assets/images/temp/middleProfile.png'),
       likeCnt: 2,
       createDate: '1hour',
     },
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default photoDetail;
+export default postDetail;

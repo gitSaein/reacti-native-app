@@ -20,7 +20,7 @@ import SignIn1 from './src/views/auth/SignIn1';
 import smsCodeView from './src/views/auth/SmsCodeView';
 import SmsPhoneNumber from './src/views/auth/SmsPhoneNumber';
 import ChatDetail from './src/views/main/chatDetail';
-import PhotoDetail from './src/views/common/photoDetail';
+import PhotoDetail from './src/views/main/sub/postDetail';
 import EditProfile from './src/views/common/editProfileView';
 import CommentView from './src/views/common/commentView';
 
@@ -28,7 +28,7 @@ import Home from './src/views/main/home';
 import Chat from './src/views/main/chat';
 import Community from './src/views/main/community';
 import MyPage from './src/views/main/myPage';
-import Group from './src/views/main/group';
+// import Group from './src/views/main/group';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -46,12 +46,12 @@ const tabButtonRoutes = [
     active: require('./src/assets/images/icon/Notifications.png'),
     inactive: require('./src/assets/images/icon/NotificationsInactive.png'),
   },
-  {
-    name: 'Group',
-    component: Group,
-    active: require('./src/assets/images/icon/Stream.png'),
-    inactive: require('./src/assets/images/icon/StreamInactive.png'),
-  },
+  // {
+  //   name: 'Group',
+  //   component: Group,
+  //   active: require('./src/assets/images/icon/Stream.png'),
+  //   inactive: require('./src/assets/images/icon/StreamInactive.png'),
+  // },
   {
     name: 'Chat',
     component: Chat,

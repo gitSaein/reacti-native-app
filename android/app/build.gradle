@@ -193,12 +193,20 @@ android {
 
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
 }
 
 dependencies {
     compile project(':@react-native-community_cameraroll')
     compile project(':react-native-vector-icons')
 
+    implementation project(':react-native-seoul-naver-login')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules

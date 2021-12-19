@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, SafeAreaView, StyleSheet, StatusBar} from 'react-native';
+import {View, SafeAreaView, StyleSheet, Platform} from 'react-native';
 import Header1 from '../../components/header/header1.js';
 import Button1 from '../../components/buttons/button1';
 import ButtonNaver from '../../components/buttons/buttonNaver';
@@ -7,12 +7,22 @@ import ButtonKakao from '../../components/buttons/buttonKakao';
 import GreyText from '../../components/text/greyText';
 import HorizontalNationalPhone from '../../components/common/horizontalNationalPhone';
 import * as KakaoLogins from '@react-native-seoul/kakao-login';
+import {NaverLogin, getProfile} from '@react-native-seoul/naver-login';
 
 const SignIn1 = ({navigation}) => {
   const [selectedInfo, setSelectedInfo] = useState({
     nationalCode: '',
     phoneNo: '',
   });
+  const [naverToken, setNaverToken] = React.useState(null);
+
+  const initials = androidKeys;
+
+  const androidKeys = {
+    kConsumerKey: 'QDfgX5Q0thVWm_osgXY_',
+    kConsumerSecret: '65V5VmfxYR',
+    kServiceAppName: 'MyNativeApp2021_1',
+  };
   const onValueChange = value => {
     setSelectedInfo(prevState => ({
       ...prevState,
@@ -26,7 +36,35 @@ const SignIn1 = ({navigation}) => {
     }));
   };
 
-  const loginByNaver = () => {};
+  const loginByNaver = props => {
+    console.log('################1###############');
+    return new Promise((resolve, reject) => {
+      console.log('################2###############');
+
+      NaverLogin.login(props, (err, token) => {
+        console.log('################3###############');
+
+        console.log(`\n\n  Token is fetched  :: ${token} \n\n`);
+        setNaverToken(token);
+        if (err) {
+          reject(err);
+          return;
+        }
+        console.log('################4###############');
+        resolve(token);
+      });
+    });
+  };
+
+  const getUserProfile = async () => {
+    console.log('###############################');
+    const profileResult = await getProfile(naverToken.accessToken);
+    if (profileResult.resultcode === '024') {
+      console.error('로그인 실패', profileResult.message);
+    } else {
+      console.log('profileResult', profileResult);
+    }
+  };
 
   const loginByKakao = () => {
     console.log('   kakaoLogin   ');
@@ -83,7 +121,10 @@ const SignIn1 = ({navigation}) => {
       </View>
       <View style={styles.others}>
         <ButtonKakao text={'카카오로 시작하기'} onPress={loginByKakao} />
-        <ButtonNaver text={'네이버로 시작하기'} onPress={loginByNaver} />
+        <ButtonNaver
+          text={'네이버로 시작하기'}
+          onPress={() => loginByNaver(initials)}
+        />
       </View>
     </SafeAreaView>
   );

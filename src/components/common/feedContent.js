@@ -7,6 +7,7 @@ import GreyCropProfileTitle from '../text/greyCropProfileTitle';
 import Content from '../text/content';
 import ButtonWhiteMoreHorizontal from '../buttons/buttonWhiteMoreHorizontal';
 import FeedBottomLayout from '../layout/feedBottomLayout';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 const feedContent = ({item, onPress}) => {
   const navigation = useNavigation();
   const [visible, setVisible] = React.useState(false);
@@ -33,17 +34,20 @@ const feedContent = ({item, onPress}) => {
       </View>
       {/* **************** */}
       {/* text */}
-      <View style={{height: 30, marginTop: 10}}>
-        <Content text={item.contents} />
-      </View>
-      {/* **************** */}
-      {/* photo */}
-      <View style={{alignItems: 'center'}}>
-        <Image
-          style={{height: 170, borderRadius: 16}}
-          source={require('../../assets/images/temp/feed.png')}
-        />
-      </View>
+      <TouchableOpacity onPress={onPress}>
+        <View style={{height: 30, marginTop: 10}}>
+          <Content text={item.contents} />
+        </View>
+        {/* **************** */}
+        {/* photo */}
+        <View style={{alignItems: 'center'}}>
+          <Image
+            style={{height: 170, borderRadius: 16}}
+            source={require('../../assets/images/temp/feed.png')}
+          />
+        </View>
+      </TouchableOpacity>
+
       <View style={{paddingTop: 10}}>
         <FeedBottomLayout
           likeCnt={4}

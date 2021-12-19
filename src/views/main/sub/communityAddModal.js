@@ -8,6 +8,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   View,
+  StatusBar,
 } from 'react-native';
 import Modal from 'react-native-modal';
 
@@ -56,7 +57,6 @@ const communityAddModal = ({isOpen, setIsOpen, saveContent}) => {
       });
   };
   useEffect(() => {
-    console.log('category - - - - ');
     setContents({
       ...contents,
       category: category.filter(item => item.select === true),
@@ -187,9 +187,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'flex-end',
     alignSelf: 'center',
-
     alignItems: 'center',
     width: '100%',
+    paddingTop: StatusBar.currentHeight + 10,
+
     padding: 10,
   },
   textTitle: {
